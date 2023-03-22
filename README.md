@@ -99,7 +99,7 @@ This news application provides a comprehensive news experience for users while o
 
 
 
- ### Object Model Diagram:-
+ ### Object Model Diagram
 
 
 
@@ -107,7 +107,7 @@ This news application provides a comprehensive news experience for users while o
 ![Trender drawio](https://user-images.githubusercontent.com/42668979/226991426-906ee09b-543e-4aa8-a84b-d838ccc3d5a2.png)
 
 
-### External APIs:
+### External APIs
 
 https://newsdata.io/  <br>
 https://platform.openai.com/ <br>
