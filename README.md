@@ -13,6 +13,8 @@ The analytics dashboard provides insights on website traffic and user behavior, 
 This news application provides a comprehensive news experience for users while offering powerful management tools for the admin.
 
 
+ ### Project Milestones and User Stories
+
 <table>
   <thead>
     <tr>
