@@ -1,22 +1,6 @@
 
-### Base repo for assignment 8
--------------------------------------------------
+## Trendr - Stay ahead of the news 
 
- ### Instructions to use the repo
-
-- You can clone the repo by using HTTP: 
-
-https://github.com/neu-mis-info-6150-spring-2023/final-project-group-web_weavers.git
-
-OR set up the SSH Key using: 
-
-git@github.com:neu-mis-info-6150-spring-2023/final-project-group-web_weavers.git
-
-Commands to use: 
-
-git clone `<use HTTP Link or SSH Link>`
-
------------------------------------------------------
 
  ### Project Description: Trendr
 
@@ -120,3 +104,28 @@ This news application provides a comprehensive news experience for users while o
 
 ![Trender drawio](https://user-images.githubusercontent.com/42668979/226991426-906ee09b-543e-4aa8-a84b-d838ccc3d5a2.png)
 
+
+### External APIs:
+
+https://newsdata.io/  <br>
+https://platform.openai.com/ <br>
+https://stripe.com/docs/payments <br>
+https://razorpay.com/docs/#home-payments
+
+-------------------------------------------------
+
+ ### Instructions to use the repo
+
+- You can clone the repo by using HTTP: 
+
+https://github.com/neu-mis-info-6150-spring-2023/final-project-group-web_weavers.git
+
+OR set up the SSH Key using: 
+
+git@github.com:neu-mis-info-6150-spring-2023/final-project-group-web_weavers.git
+
+Commands to use: 
+
+git clone `<use HTTP Link or SSH Link>`
+
+-----------------------------------------------------
