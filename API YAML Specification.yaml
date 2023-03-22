@@ -1,0 +1,684 @@
+openapi: 3.0.0
+info:
+  title: News Summary Feed API for Trendr
+  version: 1.0.0
+  description: An API for managing news articles, social interactions, preferences, and subscriptions
+paths:
+  /users:
+    post:
+        summary: Create a new user
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/User"
+        responses:
+            "201":
+                description: User created successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+    get:
+        summary: Retrieve all user
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/User"
+  /users/{user_id}:
+    get:
+      summary: Retrieve a specific user by ID
+      parameters:
+        - name: user_id
+          in: path
+          description: ID of the user to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+    put:
+      summary: Update an existing user by ID
+      parameters:
+        - name: user_id
+          in: path
+          description: ID of the user to update
+          required: true
+          schema:
+            type: integer
+        - name: user
+          in: query
+          description: User object to update
+          required: true
+          schema:
+            $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+  /preferences:
+    get:
+      summary: Retrieve a list of all news category preferences
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Preference"
+    post:
+      summary: Create a new news category preference
+      requestBody:
+        description: Preference object to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Preference"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preference"
+  /preferences/{preference_id}:
+    put:
+      summary: Update an existing news category preference by ID
+      parameters:
+        - name: preference_id
+          in: path
+          description: ID of the preference to update
+          required: true
+          schema:
+            type: integer
+        - name: preference
+          in: query
+          description: Preference object to update
+          required: true
+          schema:
+            $ref: "#/components/schemas/Preference"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preference"
+        "404":
+          description: Preference not found
+  /news:
+    get:
+      summary: Retrieve a list of all news articles
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/News"
+    post:
+      summary: Create a new news article
+      requestBody:
+        description: News object to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/News"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/News"
+  /news/{news_id}:
+    get:
+      summary: Retrieve a specific news article by ID
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+        '404':
+          description: News article not found
+    put:
+      summary: Update an existing news article by ID
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to update
+          required: true
+          schema:
+            type: integer
+        - name: news
+          in: query
+          description: News object to update
+          required: true
+          schema:
+            $ref: '#/components/schemas/News'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/News'
+        '404':
+          description: News article not found
+    delete:
+      summary: Delete a specific news article by ID
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: News article not found    
+  /news/{news_id}/like:
+    post:
+      summary: Add a "like" to a specific news article by ID
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to like
+          required: true
+          schema:
+            type: integer
+        - name: user_id
+          in: query
+          description: ID of the user who liked the article
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocialInteraction'
+        '404':
+          description: News article not found
+  /news/{news_id}/comment:
+    post:
+      summary: Add a comment to a specific news article by ID
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to comment on
+          required: true
+          schema:
+            type: integer
+        - name: comment
+          in: query
+          description: Comment object to create
+          required: true
+          schema:
+            $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '404':
+          description: News article not found
+  /news/{news_id}/share:
+    post:
+      summary: Share a specific news article by ID to external social media
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to share
+          required: true
+          schema:
+            type: integer
+        - name: social_media
+          in: query
+          description: Social media platform to share the article on
+          required: true
+          schema:
+            $ref: '#/components/schemas/SocialMediaShare'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: News article not found
+  /news/{news_id}/poll:
+    post:
+      summary: Submit a poll response for a specific news article by ID
+      parameters:
+        - name: news_id
+          in: path
+          description: ID of the news article to submit the poll response for
+          required: true
+          schema:
+            type: integer
+        - name: poll_response
+          in: query
+          description: Poll response object to create
+          required: true
+          schema:
+            $ref: '#/components/schemas/PollResponse'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollResponse'
+        '404':
+          description: News article not found
+  /subscription/{user_id}:
+    get:
+        summary: Retrieve a specific user's subscription information
+        parameters:
+            - name: user_id
+              in: path
+              description: ID of the user whose subscription to retrieve
+              required: true
+              schema:
+                  type: string
+        responses:
+            "200":
+                description: Subscription details
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            items:
+                                $ref: "#/components/schemas/Subscription"
+    post:
+        summary: Add a new subscription for a specific user
+        parameters:
+            - name: user_id
+              in: path
+              description: ID of the user to add a subscription for
+              required: true
+              schema:
+                  type: string
+            - name: subscription_id
+              in: query
+              description: ID of the subscription
+              required: true
+              schema:
+                  type: string
+        responses:
+            "201":
+                description: Bookmark added successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Subscription"
+  /subscription:
+    post:
+        summary: Create a new subscription
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/SubscriptionInput"
+        responses:
+            "201":
+                description: Subscription created successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Subscription"
+    get:
+        summary: Retrieve all subscriptions
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Subscription"
+  /subscription/{subscription_id}:
+    put:
+        summary: Update an existing subscription by ID
+        parameters:
+            - name: subscription_id
+              in: path
+              description: ID of the subscription to update
+              required: true
+              schema:
+                  type: string
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Subscription"
+    delete:
+        summary: Delete a specific subscription by ID
+        parameters:
+            - name: subscription_id
+              in: path
+              description: ID of the subscription to delete
+              required: true
+              schema:
+                  type: string
+        responses:
+            "204":
+                description: Subscription deleted successfully
+  /bookmarks/{user_id}:
+    get:
+        summary: Retrieve a specific user's bookmarked news articles
+        parameters:
+            - name: user_id
+              in: path
+              description: ID of the user whose bookmarks to retrieve
+              required: true
+              schema:
+                  type: string
+        responses:
+            "200":
+                description: List of bookmarks
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Bookmark"
+    post:
+        summary: Add a new bookmark for a specific user and news article
+        parameters:
+            - name: user_id
+              in: path
+              description: ID of the user to add a bookmark for
+              required: true
+              schema:
+                  type: string
+            - name: article_id
+              in: query
+              description: ID of the article to bookmark
+              required: true
+              schema:
+                  type: string
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/BookmarkInput"
+        responses:
+            "201":
+                description: Bookmark added successfully
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Bookmark"
+  /bookmarks/{bookmark_id}:
+    delete:
+        summary: Delete a specific bookmark by ID
+        parameters:
+            - name: bookmark_id
+              in: path
+              description: ID of the bookmark to delete
+              required: true
+              schema:
+                  type: string
+        responses:
+            "204":
+                description: Bookmark deleted successfully                
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the person
+          example: 123
+        name:
+          type: string
+          description: Name of the person
+          example: John Doe
+        email:
+          type: string
+          description: Email of the person
+          example: john.doe@example.com
+        password:
+          type: string
+          description: Password of the person
+          example: password123
+      required:
+        - name
+        - email
+        - password
+
+    
+    User:
+      allOf:
+        - $ref: "#/components/schemas/Person"
+        - type: object
+          properties:
+            preferences:
+              type: array
+              description: User's preferences for news categories
+              items:
+                $ref: "#/components/schemas/Preference"
+
+    Preference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the preference
+          example: 1
+        name:
+          type: string
+          description: Name of the preference
+          example: Sports
+
+    News:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the news article
+          example: 1
+        title:
+          type: string
+          description: Title of the news article
+          example: Breaking News
+        content:
+          type: string
+          description: Content of the news article
+          example: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+        author:
+          type: string
+          description: Author of the news article
+          example: John Doe
+        category:
+          type: string
+          description: Category of the news article
+          example: Politics
+        likes:
+          type: integer
+          description: Number of likes on the news article
+          example: 50
+        comments:
+          type: array
+          description: List of comments on the news article
+          items:
+            $ref: "#/components/schemas/Comment"
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the comment
+          example: 1
+        content:
+          type: string
+          description: Content of the comment
+          example: "Great article!"
+        author:
+          type: string
+          description: Author of the comment
+          example: Jane Doe
+
+
+    Subscription:
+        type: object
+        properties:
+            user_id:
+                type: string
+                description: Id of User
+                example: "123"
+            subscription_id:
+                type: string
+                description: Subscription ID
+                example: "Sub1"
+            subscription_details:
+                type: string
+                description: Details of Subscription
+                example: "Tier1"
+        required:
+            - user_id
+            - subscription_id
+            - subscription_details
+    SubscriptionInput:
+        type: object
+        properties:
+            user_id:
+                type: string
+                description: Id of User
+                example: "123"
+            subscription_id:
+                type: string
+                description: Subscription ID
+                example: "Sub1"
+            subscription_details:
+                type: string
+                description: Details of Subscription
+                example: "Tier1"
+        required:
+            - user_id
+            - subscription_id
+            - subscription_details
+
+    Bookmark:
+        type: object
+        properties:
+            id:
+                type: string
+                description: Id of Bookmark
+                example: "435"
+            user_id:
+                type: string
+                description: Id of user
+                example: "123"
+            article_id:
+                type: string
+                description: Id of News Article
+                example: "0098"
+        required:
+            - id
+            - user_id
+            - article_id
+    BookmarkInput:
+        type: object
+        properties:
+            user_id:
+                type: string
+                description: Id of user
+                example: "123"
+            article_id:
+                type: string
+                description: Id of News Article
+                example: "0098"
+        required:
+            - user_id
+            - article_id
+      
+    SocialInteraction:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        news_id:
+          type: integer
+          format: int64
+        action:
+          type: string
+          enum: [like, comment, share, poll_answer]
+    PollResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user_id:
+          type: integer
+          format: int64
+        response:
+          type: string
+    SocialMediaShare:
+        type: object
+        required:
+          - platform
+          - url
+        properties:
+          platform:
+            type: string
+            enum: [twitter, facebook, linkedin, instagram]
+            description: The social media platform where the content will be shared
+            example: twitter
+          url:
+            type: string
+            description: The URL of the shared content
+            example: https://example.com/news/article/123
+          message:
+            type: string
+            description: An optional message to include with the shared content
+            example: Check out this article!
