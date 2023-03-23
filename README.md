@@ -66,11 +66,11 @@ This news application provides a comprehensive news experience for users while o
     <tr>
       <td rowspan="2">Milestone 4: Subscription Management and Paid Subscribers</td>
       <td>As a user, I want to be able to enroll and manage my app subscription.</td>
-      <td>Shubhi</td>
+      <td>Anshul</td>
     </tr>
     <tr>
       <td>As an admin, I want to be able to view paid subscribers.</td>
-      <td>Shubhi</td>
+      <td>Anshul</td>
     </tr>
     <tr>
       <td rowspan="3">Milestone 5: Admin Features and User Management</td>
@@ -88,11 +88,11 @@ This news application provides a comprehensive news experience for users while o
     <tr>
       <td rowspan="2">Milestone 6: Moderation and Analytics Dashboard</td>
       <td>As a moderator, I want to be able to delete comments and block users.</td>
-      <td>Anshul</td>
+      <td>Arpita</td>
     </tr>
     <tr>
       <td>As an admin, I want to be able to view an analytics dashboard to track website traffic and user behavior.</td>
-      <td>Shubhi</td>
+      <td>Arpita</td>
     </tr>
   </tbody>
 </table>
