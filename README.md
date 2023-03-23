@@ -88,7 +88,7 @@ This news application provides a comprehensive news experience for users while o
     <tr>
       <td rowspan="2">Milestone 6: Moderation and Analytics Dashboard</td>
       <td>As a moderator, I want to be able to delete comments and block users.</td>
-      <td>Anshul</td>
+      <td>Arpita</td>
     </tr>
     <tr>
       <td>As an admin, I want to be able to view an analytics dashboard to track website traffic and user behavior.</td>
