@@ -1,16 +1,23 @@
 import express from 'express';
-import * as authController from '../controllers/auth-controller.js';
-import * as tokenController from '../controllers/tokenChecker-controller.js';
+import * as googleAuthController from '../controllers/googleAuth-controller.js';
+import * as tokenCheckerController from '../controllers/tokenChecker-controller.js';
+import * as basicAuthController from '../controllers/basicAuth-controller.js';
 
 const Router = express.Router();
 
 Router.route('/google')
-    .get(authController.google)
+    .get(googleAuthController.google)
 
 Router.route('/google/callback')
-    .get(authController.googleCallback)
+    .get(googleAuthController.googleCallback)
 
 Router.route('/getdetails')
-    .get(tokenController.getDetails)
+    .get(tokenCheckerController.getDetails)
+
+Router.route('/signup')
+    .post(basicAuthController.signup)
+
+Router.route('/login')
+    .post(basicAuthController.login)
 
 export default Router;
