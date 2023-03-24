@@ -21,3 +21,6 @@ export const remove = async (id) => {
     return User.findByIdAndRemove(id);
 }
 
+export const findUserByEmail = async (email) => {
+    return User.findOne({ email: email })
+}

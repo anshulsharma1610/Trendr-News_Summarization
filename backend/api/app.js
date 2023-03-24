@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import debug from 'debug';
-import mongoose from 'mongoose';
 import models from './models/index.js';
 import routes from './routes/index.js';
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import passportLocalMongoose from 'passport-local-mongoose';
 
 const userSchema = new mongoose.Schema({
     fname: String,
@@ -36,5 +37,6 @@ userSchema.pre('save', function (next) {
     });
 });
 
+userSchema.plugin(passportLocalMongoose);
 const Users = mongoose.model('User', userSchema);
 export default Users;
