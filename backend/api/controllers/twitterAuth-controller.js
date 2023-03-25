@@ -1,6 +1,6 @@
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
-import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import dotenv from 'dotenv';
 import User from '../models/user.js';
 import * as userService from '../services/user-service.js';
@@ -8,16 +8,17 @@ import * as userService from '../services/user-service.js';
 dotenv.config();
 
 const passportConfig = {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback',
-    passReqToCallback: true,
+    consumerKey: process.env.TWITTER_CLIENT_ID,
+    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+    callbackURL: '/auth/twitter/callback',
+    // userAuthorizationURL: 'https://api.twitter.com/oauth/authenticate?oauth_callback=oob',
+    // accessTokenURL: 'https://api.twitter.com/oauth/access_token?oauth_callback=oob'
+
+
 };
 
-passport.use(User.createStrategy());
-
 passport.use(
-    new GoogleStrategy(
+    new TwitterStrategy(
         passportConfig,
         async (request, accessToken, refreshToken, profile, done) => {
             console.log('herere------------', profile, accessToken);
@@ -36,17 +37,17 @@ passport.use(
     )
 );
 
-export const google = async (req, res, next) => {
+export const twitter = async (req, res, next) => {
     try {
-        await passport.authenticate('google', { scope: ['email', 'profile'] })(req, res, next);
+        await passport.authenticate('twitter', { scope: ['email', 'profile'] })(req, res, next);
     } catch (err) {
         console.log(err);
         next(err);
     }
 }
 
-export const googleCallback = async (req, res, next) => {
-    passport.authenticate('google', async (err, user, info) => {
+export const twitterCallback = async (req, res, next) => {
+    passport.authenticate('twitter', async (err, user, info) => {
         if (err) {
             return next(err);
         }

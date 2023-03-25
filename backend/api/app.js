@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import debug from 'debug';
+import session from 'express-session';
+import passport from 'passport';
 import models from './models/index.js';
 import routes from './routes/index.js';
 
@@ -12,6 +14,17 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+}));
+
+// Initialize passport middleware
+app.use(passport.initialize());
+// Use passport session middleware
+app.use(passport.session());
 
 routes(app);
 
