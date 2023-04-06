@@ -27,10 +27,10 @@ This news application provides a comprehensive news experience for users while o
     <tr>
       <td rowspan="2">Milestone 1: User Authentication and Preferences</td>
       <td>As a user, I want to create an account and log in with a unique username and password.</td>
-      <td>Arpita</td>
+      <td>Anshul</td>
     </tr>
     <tr>
-      <td>As a user, I want to be able to aet and change my preferences for news categories and sources.</td>
+      <td>As a user, I want to be able to get and change my preferences for news categories and sources.</td>
       <td>Arpita</td>
     </tr>
     <tr>
@@ -40,7 +40,7 @@ This news application provides a comprehensive news experience for users while o
     </tr>
      <tr>
       <td>As a user, I want to be able to see top tweets based on my news preference</td>
-      <td>Shubhi</td>
+      <td>Arpita</td>
     </tr>
     <tr>
     <td>As a user, I want to be able to see top news headlines in trending section irrespective of my preferences</td>
@@ -52,7 +52,7 @@ This news application provides a comprehensive news experience for users while o
     </tr>
     <tr>
       <td>As a user, I want to be able to save/bookmark articles.</td>
-      <td>Shubhi</td>
+      <td>Arpita</td>
     </tr>
     <tr>
       <td rowspan="2">Milestone 3: Search and Translation</td>
