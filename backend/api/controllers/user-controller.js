@@ -1,4 +1,5 @@
 import * as userService from '../services/user-service.js';
+import {setSuccessfulResponse,setErrorResponse} from '../util/statusCodes.js';
 
 export const post = async (req, res) => {
     try {
@@ -50,16 +51,4 @@ export const remove = async (req, res) => {
     }
 }
 
-const setSuccessfulResponse = (obj, res) => {
-    res.status(200);
-    res.json(obj);
-}
 
-const setErrorResponse = (err, res) => {
-    res.status(500);
-    res.json({
-        error: {
-            message: err.message
-        }
-    });
-}
