@@ -40,7 +40,9 @@ export const fetchNews = async (queryParams) => {
             url.searchParams.append(key, value);
         }
         // url.searchParams.append('language', 'en');
-        url.searchParams.append('page', nextPage);
+        if (nextPage !== null) {
+            url.searchParams.append('page', nextPage);
+        }
         console.log(url.toString())
         const response = await axios.get(url.toString());
         const data = response.data;
@@ -50,7 +52,7 @@ export const fetchNews = async (queryParams) => {
             article.summary = summary; // Add the summary to the article object
             newsArticles.push(article);
         }
-
+        nextPage = data.nextPage;
     }
 
     // Save the articles to the MongoDB database using the Mongoose model
