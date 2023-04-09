@@ -1,4 +1,4 @@
-import { fetchNews } from '../services/fetchnewsService.js';
+import { fetchNews } from '../services/fetchNews-service.js';
 
 export const getNews = async (req, res) => {
     try {
