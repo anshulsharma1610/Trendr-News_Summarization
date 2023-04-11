@@ -13,7 +13,7 @@ export const post = async (req, res) => {
         // if (!newUser.fname || !newUser.lname || !newUser.mobile || 
         //     !newUser.email || !newUser.password || !newUser.location
         //     || !newUser.image) {
-        //     setbodyMissingError( res);
+        //    return setbodyMissingError( res);
         // }
         const user = await userService.save(newUser);
         setPostSuccessfulResponse(user, res);
@@ -36,7 +36,7 @@ export const getById = async (req, res) => {
         const id = req.params.id;
         const user = await userService.getById(id);
         // if (!user) {
-        //     setnotFound(res);
+        //  return   setnotFound(res);
         // }
         setSuccessfulResponse(user, res);
     } catch (err) {
@@ -51,7 +51,7 @@ export const update = async (req, res) => {
         // if (!newUser.fname || !newUser.lname || !newUser.mobile || 
         //     !newUser.email || !newUser.password || !newUser.location
         //     || !newUser.image) {
-        //     setbodyMissingError( res);
+        //     return setbodyMissingError( res);
         // }
         const updatedUser = await userService.update(id, user);
         // if(!updatedUser){
