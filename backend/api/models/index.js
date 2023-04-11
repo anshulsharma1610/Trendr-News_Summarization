@@ -4,6 +4,7 @@ import Role from './role.js';
 import dotenv from 'dotenv';
 import Prefernces from './prefernce.js';
 import Subscriptions from './subscriptions.js';
+import UserSubscriptions from './userSubscriptons.js';
 
 dotenv.config()
 mongoose.Promise = Promise;
@@ -22,5 +23,6 @@ export default {
     User,
     Role,
     Prefernces,
-    Subscriptions
+    Subscriptions,
+    UserSubscriptions
 };
