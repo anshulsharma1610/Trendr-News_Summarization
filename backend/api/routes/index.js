@@ -5,6 +5,7 @@ import preferenceRouter from './preference-route.js';
 import fetchnewsRouter from './fetchNews-route.js';
 import newsRouter from './news-routes.js';
 import subscriptionsRouter from './subscriptions-route.js';
+import userSubscriptionsRouter from './userSubscriptions-routes.js';
 const route = (app) => {
     app.use('/api/users', userRouter);
     app.use('/api/roles', roleRouter);
@@ -12,8 +13,10 @@ const route = (app) => {
     app.use('/api/preferences', preferenceRouter);
 
     app.use('/api/fetchnews', fetchnewsRouter);
-    app.use('/api/news', newsRouter)
-    app.use('/api/subscriptions', subscriptionsRouter)
+    app.use('/api/news', newsRouter);
+    app.use('/api/subscriptions', subscriptionsRouter);
+    app.use('/api/usersubscriptions', userSubscriptionsRouter);
+
 
 
 }
