@@ -1,4 +1,4 @@
-import Subscriptions from '../models/subscriptions';
+import Subscriptions from '../models/subscriptions.js';
 
 export const save = async (newSubscription) => {
     const subscriptions = new Subscriptions(newSubscription);
@@ -15,5 +15,9 @@ export const update = async (id, updatedSubscription) => {
 
 export const remove = async (id) => {
     return Subscriptions.findByIdAndRemove(id);
+}
+
+export const getById = async (id)=>{
+    return Subscriptions.findById(id);
 }
 
