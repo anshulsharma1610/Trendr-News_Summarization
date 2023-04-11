@@ -55,7 +55,7 @@ export const update = async (req, res) => {
         // }
         const updatedUser = await userService.update(id, user);
         // if(!updatedUser){
-        //     setnotFound(res); 
+        //    return setnotFound(res); 
         // }
         setSuccessfulResponse(updatedUser, res);
     } catch (err) {
@@ -68,7 +68,7 @@ export const remove = async (req, res) => {
         const id = req.query.id;
         const removedUser = await userService.remove(id);
         // if(!removedUser){
-        //     setnotFound(res);
+        //     return setnotFound(res);
         // }
         setSuccessfulResponse(removedUser, res);
     } catch (err) {

@@ -11,7 +11,10 @@ export const setPostSuccessfulResponse = (obj, res) => {
 
 export const setbodyMissingError = (res) => {
     return res.status(400).json({
-        message: 'Fields are missing, all fields are required'
+        error: {
+            message: 'Fields are missing, all fields are required'
+        }
+
     });
 }
 
