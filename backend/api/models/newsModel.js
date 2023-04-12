@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 
 // Define a schema for comments
 const CommentSchema = new mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectId,
+    /* Implementation for UserId or UserName required */
+    // userId: mongoose.Schema.Types.ObjectId,
     content: String,
     timestamp: Date,
 });
