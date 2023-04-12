@@ -1,6 +1,5 @@
 import config from 'config';
 import { createSlice } from '@reduxjs/toolkit';
-import * as actionTypes from '../actions';
 
 const initialState = {
     user: {
@@ -27,6 +26,5 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { userReducer } = userSlice.actions;
-
+export const { addUser, removeUser } = userSlice.actions;
 export default userSlice.reducer;
