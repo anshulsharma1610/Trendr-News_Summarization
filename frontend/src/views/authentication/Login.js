@@ -47,7 +47,7 @@ const Login = () => {
                                                     <Typography
                                                         color={theme.palette.secondary.main}
                                                         gutterBottom
-                                                        variant={matchDownSM ? 'h6' : 'h6'}
+                                                        variant={matchDownSM ? 'h4' : 'h3'}
                                                     >
                                                         Hi, Welcome Back
                                                     </Typography>
