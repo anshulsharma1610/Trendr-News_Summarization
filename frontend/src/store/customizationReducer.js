@@ -62,28 +62,30 @@ export const customizationSlice = createSlice({
     initialState,
     reducers: {
         customizationReducer: (state, action) => {
+            console.log('-------state action in slice', state, action.payload)
             let id;
-            switch (action.type) {
+            switch (action.payload.type) {
                 case actionTypes.MENU_OPEN:
-                    id = action.id;
+                    id = action.payload.id;
                     return {
                         ...state,
                         isOpen: [id]
                     };
                 case actionTypes.SET_MENU:
+                    console.log('-------state action in SET_MENU', state, action.payload)
                     return {
                         ...state,
-                        opened: action.opened
+                        opened: action.payload.opened
                     };
                 case actionTypes.SET_FONT_FAMILY:
                     return {
                         ...state,
-                        fontFamily: action.fontFamily
+                        fontFamily: action.payload.fontFamily
                     };
                 case actionTypes.SET_BORDER_RADIUS:
                     return {
                         ...state,
-                        borderRadius: action.borderRadius
+                        borderRadius: action.payload.borderRadius
                     };
                 default:
                     return state;

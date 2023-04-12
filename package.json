@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "eslint-plugin-flow": "^2.29.1"
+  }
+}
