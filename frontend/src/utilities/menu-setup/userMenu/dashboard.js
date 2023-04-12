@@ -25,6 +25,14 @@ const dashboard = {
             url: '/login',
             icon: icons.IconDashboard,
             breadcrumbs: false
+        },
+        {
+            id: 'regisyer',
+            title: 'Anshul',
+            type: 'item',
+            url: '/anshul',
+            icon: icons.IconDashboard,
+            breadcrumbs: false
         }
     ]
 };

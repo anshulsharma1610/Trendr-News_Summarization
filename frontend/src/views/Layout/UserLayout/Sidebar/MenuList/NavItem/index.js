@@ -9,7 +9,7 @@ import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, u
 
 // project imports
 import { MENU_OPEN, SET_MENU } from 'store/actions';
-import { customizationReducer } from 'store/customizationReducer';
+import { customizationReducer } from 'store/reducers/customizationReducer';
 
 // assets
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';

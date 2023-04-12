@@ -15,6 +15,10 @@ const MainRoutes = {
         {
             path: '/',
             element: <HelloWorld />
+        },
+        {
+            path: '/anshul',
+            element: <HelloWorld />
         }
     ]
 };

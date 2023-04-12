@@ -7,7 +7,7 @@ import { ButtonBase } from '@mui/material';
 // project imports
 import config from 'config';
 import { MENU_OPEN } from 'store/actions';
-import { customizationReducer } from 'store/customizationReducer';
+import { customizationReducer } from 'store/reducers/customizationReducer';
 
 // ==============================|| MAIN LOGO ||============================== //
 

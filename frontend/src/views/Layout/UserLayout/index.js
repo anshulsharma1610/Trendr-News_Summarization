@@ -11,7 +11,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import navigation from 'utilities/menu-setup/userMenu';
 import { drawerWidth } from 'store/constant';
-import { customizationReducer } from 'store/customizationReducer';
+import { customizationReducer } from 'store/reducers/customizationReducer';
 import { SET_MENU } from 'store/actions';
 
 // assets

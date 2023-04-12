@@ -26,7 +26,7 @@ import SubCard from 'ui-component/cards/SubCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { SET_BORDER_RADIUS, SET_FONT_FAMILY } from 'store/actions';
 import { gridSpacing } from 'store/constant';
-import { customizationReducer } from 'store/customizationReducer';
+import { customizationReducer } from 'store/reducers/customizationReducer';
 
 // concat 'px'
 function valueText(value) {
