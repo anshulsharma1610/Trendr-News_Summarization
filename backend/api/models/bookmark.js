@@ -2,7 +2,8 @@ import mongoose, { now } from "mongoose";
 const bookmarkSchema = new mongoose.Schema({
       userId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User'
+          ref: 'User',
+          required:true
       },
       title: {
         type: String,
