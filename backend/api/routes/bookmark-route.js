@@ -13,6 +13,3 @@ Router.route('/:id')
     .get(bookmarkController.getBookmarkByarticleId);
 
 export default Router;
-
-//getBookmarksForCurrentUser
-//getBookmarkByarticleId

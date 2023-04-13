@@ -27,13 +27,14 @@ const dashboard = {
             breadcrumbs: false
         },
         {
-            id: 'regisyer',
-            title: 'Anshul',
+            id: 'trendingnews',
+            title: 'TrendingNews',
             type: 'item',
-            url: '/anshul',
+            url: '/shubhi',
             icon: icons.IconDashboard,
             breadcrumbs: false
-        }
+        },
+
     ]
 };
 

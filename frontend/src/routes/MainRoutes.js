@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
+import TrendingNews from 'views/TrendingNews';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 
@@ -19,6 +20,10 @@ const MainRoutes = {
         {
             path: '/anshul',
             element: <HelloWorld />
+        },
+        {
+            path: '/shubhi',
+            element: <TrendingNews />
         }
     ]
 };
