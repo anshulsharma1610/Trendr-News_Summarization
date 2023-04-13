@@ -17,11 +17,12 @@ const MainRoutes = {
         {
             path: '/',
             element: <HelloWorld />
-        },
-        {
-            path: '/prefernces',
-            element: <Prefernces />
         }
+        // ,
+        // {
+        //     path: '/prefernces',
+        //     element: <Prefernces />
+        // }
         
     ]
 };
