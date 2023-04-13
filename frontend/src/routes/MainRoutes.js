@@ -24,7 +24,12 @@ const MainRoutes = {
         {
             path: '/shubhi',
             element: <TrendingNews />
+        },
+        {
+            path: '/prefernces',
+            element: <Prefernces />
         }
+
     ]
 };
 
