@@ -11,8 +11,13 @@ const getAllPrefernce=()=>{
     return axios.get(API_URL + "preferences")
     }
 
+ const updatePrefernce=(id, body)=>{
+    console.log("body -----> ",body);
+    return axios.put(API_URL + "users/"+ id, body )
+    }
+
 const userService = {
-    getPublicContent, getAllPrefernce
+    getPublicContent, getAllPrefernce, updatePrefernce
 };
 
 

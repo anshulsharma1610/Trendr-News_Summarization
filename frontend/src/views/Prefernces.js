@@ -20,6 +20,7 @@ import { useEffect } from "react";
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(1.3),
 }));
+const id="64387b335855ff1fede9af0a";
 
 export default function ChipsArray() {
   const [chipData, setChipData] = React.useState([]);
@@ -32,6 +33,8 @@ export default function ChipsArray() {
     setChipData(response.data);
   };
 
+ 
+
 const [selectedChips, setSelectedChips] = React.useState([]);
 
 const handleClick = (chip) => () => {
@@ -42,8 +45,16 @@ const handleClick = (chip) => () => {
 };
 
 const handleSavePreferences = () => {
-  console.log(selectedChips);
+  console.log("selectedChips",transformJSONBody(selectedChips));
+  userService.updatePrefernce(id,transformJSONBody(selectedChips));
+
 };
+
+function transformJSONBody(body) {
+    const transformedBody = body.map(item => item._id);
+  
+    return {'preferences' : transformedBody};
+  }
 
   return (
     <Paper
