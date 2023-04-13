@@ -15,7 +15,11 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-    }
+    },
+    preferences:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Prefernces'
+    }]
 });
 
 userSchema.pre('save', function (next) {

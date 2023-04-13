@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
+import Prefernces from 'views/Prefernces';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 
