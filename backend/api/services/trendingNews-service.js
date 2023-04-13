@@ -10,7 +10,7 @@ const BASE_URL = 'https://newsdata.io/api/1/news';
 export const fetchTrendingNews = async (queryParams) => {
     const newsArticles = [];
     let nextPage = null;
-    for (let i = 0, j = 0; j < 10 && i < 3; i++) {
+    for (let i = 0, j = 0; j < 10 && i < 5; i++) {
         const url = new URL(BASE_URL);
         url.searchParams.append('apikey', API_KEY);
         // Append each query parameter from the client's request to the Newsdata.io API request
