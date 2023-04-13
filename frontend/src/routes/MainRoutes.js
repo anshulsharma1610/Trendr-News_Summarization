@@ -22,7 +22,7 @@ const MainRoutes = {
             element: <HelloWorld />
         },
         {
-            path: '/shubhi',
+            path: '/trendingnews',
             element: <TrendingNews />
         }
     ]
