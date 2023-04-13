@@ -2,7 +2,7 @@ import TrendingNews from '../models/trendingNews.js';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 
-const API_KEY = 'pub_20431b6fb48c01a5ae7cc60463fb47d7345c8';
+const API_KEY = 'pub_2046797795d847124b089a7a1a55cbfdbfdb3';
 const BASE_URL = 'https://newsdata.io/api/1/news';
 // OpenAI API configuration
 
