@@ -86,8 +86,12 @@ export const likeArticle = async (req, res) => {
 export const addComment = async (req, res) => {
     try {
         const articleId = req.params.id;
-        const comment = req.body;
-        const article = await addCommentToNewsArticle(articleId, comment);
+        /* Implementation for UserId or UserName required */
+        // const { userId, content } = req.body;
+        const content = req.body;
+        console.log(content)
+        //const article = await addCommentToNewsArticle(articleId, userId, content);
+        const article = await addCommentToNewsArticle(articleId, content.comment);
         if (!article) {
             return res.status(404).json({ message: 'Article not found' });
         }

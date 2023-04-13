@@ -3,6 +3,8 @@ import User from './user.js';
 import Role from './role.js';
 import dotenv from 'dotenv';
 import Prefernces from './prefernce.js';
+import Subscriptions from './subscriptions.js';
+import UserSubscriptions from './userSubscriptons.js';
 
 dotenv.config()
 mongoose.Promise = Promise;
@@ -20,5 +22,7 @@ mongoose.connect(url, {
 export default {
     User,
     Role,
-    Prefernces
+    Prefernces,
+    Subscriptions,
+    UserSubscriptions
 };

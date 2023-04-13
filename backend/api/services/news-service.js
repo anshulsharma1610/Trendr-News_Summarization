@@ -31,12 +31,14 @@ export const likeNewsArticleById = async (id) => {
     return article;
 };
 
-export const addCommentToNewsArticle = async (id, comment) => {
-    const article = await NewsArticleModel.findById(id);
+export const addCommentToNewsArticle = async (articleId, content) => {
+    /* Implementation for UserId or UserName required */
+    const article = await NewsArticleModel.findById(articleId);
     if (!article) {
         return null;
     }
-    article.comments.push(comment);
+    const timestamp = new Date();
+    article.comments.push({ content, timestamp });
     await article.save();
     return article;
 };
