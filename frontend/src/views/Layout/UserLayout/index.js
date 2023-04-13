@@ -11,7 +11,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import navigation from 'utilities/menu-setup/userMenu';
 import { drawerWidth } from 'store/constant';
-import { customizationReducer } from 'store/reducers/customizationReducer';
+import { customize } from 'store/slices/customizationSlice';
 import { SET_MENU } from 'store/actions';
 
 // assets
@@ -71,7 +71,7 @@ const MainLayout = () => {
     const dispatch = useDispatch();
     const handleLeftDrawerToggle = () => {
         // dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
-        dispatch(customizationReducer({ type: SET_MENU, opened: !leftDrawerOpened }))
+        dispatch(customize({ type: SET_MENU, opened: !leftDrawerOpened }))
     };
 
     return (

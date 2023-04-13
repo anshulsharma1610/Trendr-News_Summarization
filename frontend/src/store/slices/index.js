@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
 // reducer import
-import customizationReducer from './customizationReducer';
-import userReducer from './userReducer';
+import customizationReducer from './customizationSlice';
+import userReducer from './authSlice';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 

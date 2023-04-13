@@ -14,7 +14,7 @@ export const customizationSlice = createSlice({
     name: 'customization',
     initialState,
     reducers: {
-        customizationReducer: (state, action) => {
+        customize: (state, action) => {
             console.log('-------state action in slice', state, action.payload)
             let id;
             switch (action.payload.type) {
@@ -48,6 +48,6 @@ export const customizationSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { customizationReducer } = customizationSlice.actions;
+export const { customize } = customizationSlice.actions;
 
 export default customizationSlice.reducer;

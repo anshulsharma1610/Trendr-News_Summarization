@@ -10,13 +10,7 @@ import Wrapper from './AuthWrapper';
 import AuthCardWrapper from './AuthCardWrapper';
 import LoginForm from './LoginForm';
 
-// assets
-
-// ================================|| AUTH3 - LOGIN ||================================ //
-// const Wrapper = styled('div')(({ theme }) => ({
-//     backgroundColor: theme.palette.primary.light,
-//     minHeight: '100vh'
-// }));
+// ================================|| AUTH - LOGIN ||================================ //
 
 const Login = () => {
     const theme = useTheme();

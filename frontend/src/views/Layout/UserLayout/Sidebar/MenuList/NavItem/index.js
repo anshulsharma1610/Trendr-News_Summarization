@@ -9,7 +9,7 @@ import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, u
 
 // project imports
 import { MENU_OPEN, SET_MENU } from 'store/actions';
-import { customizationReducer } from 'store/reducers/customizationReducer';
+import { customize } from 'store/slices/customizationSlice';
 
 // assets
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
@@ -48,8 +48,8 @@ const NavItem = ({ item, level }) => {
     }
 
     const itemHandler = (id) => {
-        dispatch(customizationReducer({ type: MENU_OPEN, id }));
-        if (matchesSM) dispatch(customizationReducer({ type: SET_MENU, opened: false }));
+        dispatch(customize({ type: MENU_OPEN, id }));
+        if (matchesSM) dispatch(customize({ type: SET_MENU, opened: false }));
     };
 
     // active menu item on page load
@@ -59,7 +59,7 @@ const NavItem = ({ item, level }) => {
             .split('/')
             .findIndex((id) => id === item.id);
         if (currentIndex > -1) {
-            dispatch(customizationReducer({ type: MENU_OPEN, id: item.id }));
+            dispatch(customize({ type: MENU_OPEN, id: item.id }));
         }
         // eslint-disable-next-line
     }, []);
