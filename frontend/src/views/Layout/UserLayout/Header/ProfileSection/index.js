@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -33,9 +32,10 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 // project imports
 import MainCard from 'components/cards/MainCard';
 import Transitions from 'components/extended/Transitions';
-
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
+import { logout } from "store/slices/authSlice";
+import { clearMessage } from "store/slices/messageSlice";
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -53,9 +53,39 @@ const ProfileSection = () => {
      * anchorRef is used on different componets and specifying one type leads to other components throwing an error
      * */
     const anchorRef = useRef(null);
-    const handleLogout = async () => {
-        console.log('Logout');
+
+    const { message } = useSelector((state) => state.message);
+    const [loading, setLoading] = useState(false);
+    const { isLoggedIn } = useSelector((state) => {
+        console.log('---state here at login', state);
+        return state.user.isLoggedIn;
+    });
+    const dispatch = useDispatch();
+    let username = "You"
+    if (isLoggedIn) username = useSelector((state) => state.user.user.user.email);
+
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [dispatch]);
+
+    const handleLogout = (formValue) => {
+        console.log('-----at logout');
+        setLoading(true);
+
+        dispatch(logout())
+            .unwrap()
+            .then(() => {
+                navigate("/");
+                // window.location.reload();
+            })
+            .catch(() => {
+                setLoading(false);
+            });
     };
+
+    const handleLogin = () => {
+        navigate("/login");
+    }
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -156,7 +186,7 @@ const ProfileSection = () => {
                                             <Stack direction="row" spacing={0.5} alignItems="center">
                                                 <Typography variant="h4">Good Morning,</Typography>
                                                 <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                    Johne Doe
+                                                    {username}
                                                 </Typography>
                                             </Stack>
                                         </Stack>
@@ -233,16 +263,32 @@ const ProfileSection = () => {
                                                     </ListItemIcon>
                                                     <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
                                                 </ListItemButton>
-                                                <ListItemButton
-                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
-                                                    selected={selectedIndex === 4}
-                                                    onClick={handleLogout}
-                                                >
-                                                    <ListItemIcon>
-                                                        <IconLogout stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
-                                                </ListItemButton>
+                                                {
+                                                    isLoggedIn &&
+                                                    <ListItemButton
+                                                        sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                        selected={selectedIndex === 4}
+                                                        onClick={handleLogout}
+                                                    >
+                                                        <ListItemIcon>
+                                                            <IconLogout stroke={1.5} size="1.3rem" />
+                                                        </ListItemIcon>
+                                                        <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
+                                                    </ListItemButton>
+                                                }
+                                                {
+                                                    !isLoggedIn &&
+                                                    <ListItemButton
+                                                        sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                        selected={selectedIndex === 4}
+                                                        onClick={handleLogin}
+                                                    >
+                                                        <ListItemIcon>
+                                                            <IconLogout stroke={1.5} size="1.3rem" />
+                                                        </ListItemIcon>
+                                                        <ListItemText primary={<Typography variant="body2">Login</Typography>} />
+                                                    </ListItemButton>
+                                                }
                                             </List>
                                         </Box>
                                     </PerfectScrollbar>

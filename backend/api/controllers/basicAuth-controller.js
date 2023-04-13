@@ -29,8 +29,8 @@ export const login = async (req, res, next) => {
         }
         const token = jwt.sign({ user: { "email": user.email }, id: user._id }, process.env.JWT_SECRET);
         console.log('token', token);
-        res.redirect('/api/users');
-        // res.status(200).json({ token: token });
+        // res.redirect('/api/users');
+        res.status(200).json({ user, token: token });
     } catch (err) {
         console.log(err);
         next(err);

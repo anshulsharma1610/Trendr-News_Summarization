@@ -11,7 +11,7 @@ import RegisterForm from './RegisterForm';
 
 // assets
 
-// ===============================|| AUTH3 - REGISTER ||=============================== //
+// ===============================|| AUTH - REGISTER ||=============================== //
 
 const Register = () => {
     const theme = useTheme();

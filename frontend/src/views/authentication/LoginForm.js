@@ -1,5 +1,8 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import React, { useState, useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -34,18 +37,32 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
+import { login } from "store/slices/authSlice";
+import { clearMessage } from "store/slices/messageSlice";
+// ============================||  LOGIN ||============================ //
 
-// ============================|| FIREBASE - LOGIN ||============================ //
-
-const FirebaseLogin = ({ ...others }) => {
+const Login = ({ ...others }) => {
+    let navigate = useNavigate();
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const customization = useSelector((state) => state.customization);
     const [checked, setChecked] = useState(true);
 
+    const { message } = useSelector((state) => state.message);
+    const [loading, setLoading] = useState(false);
+    const { isLoggedIn } = useSelector((state) => {
+        console.log('---state here at login', state);
+        return state.user.isLoggedIn;
+    });
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [dispatch]);
+
     const googleHandler = async () => {
-        console.error('Login');
+        console.log('Login');
     };
 
     const [showPassword, setShowPassword] = useState(false);
@@ -56,6 +73,26 @@ const FirebaseLogin = ({ ...others }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const handleLogin = (formValue) => {
+        console.log('------form vals', formValue);
+        const { email, password } = formValue;
+        setLoading(true);
+
+        dispatch(login({ email, password }))
+            .unwrap()
+            .then(() => {
+                navigate("/");
+                // window.location.reload();
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    };
+
+    if (isLoggedIn) {
+        return <Navigate to="/" />;
+    }
 
     return (
         <>
@@ -120,8 +157,8 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Formik
                 initialValues={{
-                    email: 'info@codedthemes.com',
-                    password: '123456',
+                    email: '',
+                    password: '',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
@@ -133,6 +170,7 @@ const FirebaseLogin = ({ ...others }) => {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
+                            handleLogin(values);
                         }
                     } catch (err) {
                         console.error(err);
@@ -239,9 +277,9 @@ const FirebaseLogin = ({ ...others }) => {
                         </Box>
                     </form>
                 )}
-            </Formik>
+            </Formik >
         </>
     );
 };
 
-export default FirebaseLogin;
+export default Login;
