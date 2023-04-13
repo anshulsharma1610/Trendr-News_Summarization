@@ -88,6 +88,7 @@ export const addComment = async (req, res) => {
         const articleId = req.params.id;
         /* Implementation for UserId or UserName required */
         // const { userId, content } = req.body;
+        //test comment
         const content = req.body;
         console.log(content)
         //const article = await addCommentToNewsArticle(articleId, userId, content);
