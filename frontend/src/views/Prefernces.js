@@ -13,36 +13,48 @@ import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import ComputerIcon from '@mui/icons-material/Computer';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PublicIcon from '@mui/icons-material/Public';
-import { Button } from '@mui/material';
+import { Button, Grid ,Box} from '@mui/material';
+import userService from 'services/userService.js';
+import { useEffect } from "react";
 
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(1.3),
 }));
+const id="64387b335855ff1fede9af0a";
 
 export default function ChipsArray() {
-  const [chipData, setChipData] = React.useState([
-    { key: 0, label: 'Business' },
-    { key: 1, label: 'Entertainment' },
-    { key: 2, label: 'Environment' },
-    { key: 3, label: 'Food' },
-    { key: 4, label: 'Health' },
-    { key: 5, label: 'Politics' },
-    { key: 6, label: 'Science' },
-    { key: 7, label: 'Sports' },
-    { key: 8, label: 'Technology' },
-    { key: 9, label: 'Toursim' },
-    { key: 10, label: 'World' }
-  ]);
+  const [chipData, setChipData] = React.useState([]);
+  useEffect(() => {
+    getAllPrefernces(); 
+  }, []);
 
-  const handleDelete = (chipToDelete) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+  const getAllPrefernces = async () => {
+    let response = await userService.getAllPrefernce();
+    setChipData(response.data);
   };
 
+ 
 
-  const handleSavePreferences = () => {
-    const labels = chipData.map((chip) => chip.label);
-    console.log(labels);
-  };
+const [selectedChips, setSelectedChips] = React.useState([]);
+
+const handleClick = (chip) => () => {
+  const newSelectedChips = selectedChips.includes(chip)
+    ? selectedChips.filter((c) => c !== chip)
+    : [...selectedChips, chip];
+  setSelectedChips(newSelectedChips);
+};
+
+const handleSavePreferences = () => {
+  console.log("selectedChips",transformJSONBody(selectedChips));
+  userService.updatePrefernce(id,transformJSONBody(selectedChips));
+
+};
+
+function transformJSONBody(body) {
+    const transformedBody = body.map(item => item._id);
+  
+    return {'preferences' : transformedBody};
+  }
 
   return (
     <Paper
@@ -58,38 +70,48 @@ export default function ChipsArray() {
     >
       {chipData.map((data) => {
         let icon;
-
-        if (data.label === 'Business') {
+        if (data.prefernceName === 'Business') {
           icon = <BusinessCenterIcon />;
         }
-        if (data.label === 'Entertainment') {
+        if (data.prefernceName
+            === 'Entertainment') {
             icon = <MovieFilterIcon />;
           }
-          if (data.label === 'Environment') {
+          if (data.prefernceName
+            === 'Environment') {
             icon = <WaterIcon />;
           }
-          if (data.label === 'Food') {
+          if (data.prefernceName
+            === 'Food') {
             icon = <FastfoodIcon />;
           }
-          if (data.label === 'Health') {
+          if (data.prefernceName
+            === 'Health') {
             icon = <HealthAndSafetyIcon />;
           }
-          if (data.label === 'Politics') {
+          if (data.prefernceName
+            === 'Politics') {
             icon = <PeopleOutlineIcon />;
           }
-          if (data.label === 'Science') {
+          if (data.prefernceName
+            === 'Science') {
             icon = <ScienceIcon />;
+            label: "Science"
           }
-          if (data.label === 'Sports') {
+          if (data.prefernceName
+            === 'Sports') {
             icon = <SportsBasketballIcon />;
           }
-          if (data.label === 'Technology') {
+          if (data.prefernceName
+            === 'Technology') {
             icon = <ComputerIcon />;
           }
-          if (data.label === 'Toursim') {
+          if (data.prefernceName
+            === 'Toursim') {
             icon = <TravelExploreIcon />;
           }
-          if (data.label === 'World') {
+          if (data.prefernceName
+            === 'World') {
             icon = <PublicIcon />;
           }
          
@@ -98,21 +120,28 @@ export default function ChipsArray() {
           <ListItem key={data.key}>
             <Chip
               icon={icon}
-              label={data.label}
-              variant="outlined" color="info"
-              onDelete={data.label === 'React' ? undefined : handleDelete(data)}
-            />
+              label={data.prefernceName
+              }
+              variant= {selectedChips.includes(data) ? 'filled' : 'outlined'}
+              color={selectedChips.includes(data) ? 'primary' : 'info'}
+              onClick={handleClick(data)}
+              />
               
           </ListItem>
         
           
         );
       })}
-  <Button variant="outlined" onClick={handleSavePreferences}>
+     
+  <br/>
+
+
+    <Button variant="outlined" onClick={handleSavePreferences}>
         Save 
       </Button>
 
+
     </Paper>
-    
+  
   );
-}
+    }
