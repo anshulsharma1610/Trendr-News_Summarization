@@ -27,6 +27,14 @@ const dashboard = {
             breadcrumbs: false
         },
         {
+            id: 'register',
+            title: 'Register',
+            type: 'item',
+            url: '/register',
+            icon: icons.IconDashboard,
+            breadcrumbs: false
+        },
+        {
             id: 'trendingnews',
             title: 'TrendingNews',
             type: 'item',
