@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -35,15 +35,35 @@ import AnimateButton from 'components/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import { clearMessage } from "store/slices/messageSlice";
+import { register } from "store/slices/authSlice";
+import { Navigate, useNavigate } from "react-router-dom";
+
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
 const FirebaseRegister = ({ ...others }) => {
+    let navigate = useNavigate();
     const theme = useTheme();
     const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const customization = useSelector((state) => state.customization);
     const [showPassword, setShowPassword] = useState(false);
     const [checked, setChecked] = useState(true);
+
+
+    const [successful, setSuccessful] = useState(false);
+
+    const { message } = useSelector((state) => state.message);
+    const { isLoggedIn } = useSelector((state) => {
+        console.log('---state here at login', state);
+        return state.user.isLoggedIn;
+    });
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(clearMessage());
+    }, [dispatch]);
+
 
     const [strength, setStrength] = useState(0);
     const [level, setLevel] = useState();
@@ -59,6 +79,27 @@ const FirebaseRegister = ({ ...others }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const handleRegister = (formValue) => {
+        const { fname, lname, email, password } = formValue;
+
+        setSuccessful(false);
+
+        dispatch(register({ fname, lname, email, password }))
+            .unwrap()
+            .then(() => {
+                setSuccessful(true);
+                navigate("/");
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    };
+
+    if (isLoggedIn) {
+        return <Navigate to="/" />;
+    }
+
 
     const changePassword = (value) => {
         // const temp = strengthIndicator(value);
@@ -125,6 +166,8 @@ const FirebaseRegister = ({ ...others }) => {
 
             <Formik
                 initialValues={{
+                    fname: '',
+                    lname: '',
                     email: '',
                     password: '',
                     submit: null
@@ -138,6 +181,7 @@ const FirebaseRegister = ({ ...others }) => {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
                             setSubmitting(false);
+                            handleRegister(values);
                         }
                     } catch (err) {
                         console.error(err);
@@ -159,6 +203,8 @@ const FirebaseRegister = ({ ...others }) => {
                                     margin="normal"
                                     name="fname"
                                     type="text"
+                                    onChange={handleChange}
+                                    value={values.fname}
                                     defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
                                 />
@@ -170,6 +216,8 @@ const FirebaseRegister = ({ ...others }) => {
                                     margin="normal"
                                     name="lname"
                                     type="text"
+                                    onChange={handleChange}
+                                    value={values.lname}
                                     defaultValue=""
                                     sx={{ ...theme.typography.customInput }}
                                 />
