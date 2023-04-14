@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     location: String,
+    phone: String,
     roleId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Role'
@@ -20,6 +21,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Prefernces'
     }]
+   
 });
 
 userSchema.pre('save', function (next) {
