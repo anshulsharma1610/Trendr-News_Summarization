@@ -6,10 +6,11 @@ const Router = express.Router();
 Router.route('/')
     .get(userController.get)
     .post(userController.post)
-    .put(userController.update)
-    .delete(userController.remove)
+    
 
 Router.route('/:id')
     .get(userController.getById)
+    .put(userController.update)
+    .delete(userController.remove);
 
 export default Router;

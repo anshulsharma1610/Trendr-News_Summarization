@@ -46,7 +46,7 @@ export const getById = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const id = req.body.id;
+        const id =  req.params.id;
         const user = req.body;
         // if (!newUser.fname || !newUser.lname || !newUser.mobile || 
         //     !newUser.email || !newUser.password || !newUser.location
@@ -65,7 +65,7 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
     try {
-        const id = req.query.id;
+        const id = req.params.id;
         const removedUser = await userService.remove(id);
         // if(!removedUser){
         //     return setnotFound(res);

@@ -38,7 +38,7 @@ const dashboard = {
             id: 'trendingnews',
             title: 'TrendingNews',
             type: 'item',
-            url: '/shubhi',
+            url: '/trendingnews',
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
