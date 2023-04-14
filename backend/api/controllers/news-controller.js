@@ -86,13 +86,8 @@ export const likeArticle = async (req, res) => {
 export const addComment = async (req, res) => {
     try {
         const articleId = req.params.id;
-        /* Implementation for UserId or UserName required */
-        // const { userId, content } = req.body;
-        //test comment
-        const content = req.body;
-        console.log(content)
-        //const article = await addCommentToNewsArticle(articleId, userId, content);
-        const article = await addCommentToNewsArticle(articleId, content.comment);
+        const commentObj = req.body; // Get the entire comment object from the request body
+        const article = await addCommentToNewsArticle(articleId, commentObj); // Pass the entire comment object
         if (!article) {
             return res.status(404).json({ message: 'Article not found' });
         }
