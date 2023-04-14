@@ -47,30 +47,32 @@ export const login = createAsyncThunk(
     }
 );
 
+export const googleLogin = createAsyncThunk(
+    "auth/googleLogin",
+    async (thunkAPI) => {
+        try {
+            const data = await AuthService.googleLogin();
+
+            thunkAPI.dispatch(setMessage(data.message));
+
+            return { user: data };
+        } catch (error) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            thunkAPI.dispatch(setMessage(message));
+            return thunkAPI.rejectWithValue();
+        }
+    }
+);
+
+
 export const logout = createAsyncThunk("auth/logout", async () => {
     await AuthService.logout();
 });
-
-// create a logout and clear state and localstorage
-// export const logout = createAsyncThunk(
-//     "auth/logout",
-//     async (thunkAPI) => {
-//         try {
-//             await AuthService.logout();
-//             thunkAPI.dispatch(setMessage("Logout successful"));
-//             return thunkAPI.fulfillWithValue();
-//         } catch (error) {
-//             const message =
-//                 (error.response &&
-//                     error.response.data &&
-//                     error.response.data.message) ||
-//                 error.message ||
-//                 error.toString();
-//             thunkAPI.dispatch(setMessage(message));
-//             return thunkAPI.rejectWithValue();
-//         }
-//     }
-// );
 
 
 const initialState = user
@@ -96,8 +98,15 @@ const authSlice = createSlice({
             state.isLoggedIn = false;
             state.user = null;
         },
+        [googleLogin.fulfilled]: (state, action) => {
+            state.isLoggedIn = true;
+            state.user = action.payload.user;
+        },
+        [googleLogin.rejected]: (state, action) => {
+            state.isLoggedIn = false;
+            state.user = null;
+        },
         [logout.fulfilled]: (state, action) => {
-
             state.isLoggedIn = false;
             state.user = null;
         },
