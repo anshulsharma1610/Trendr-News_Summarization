@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import MainCard from 'components/cards/MainCard';
-import { getAlluser } from './fetch.js';
+import { getAlluser } from '../fetch.js';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
-const AdminDashboard = () => {
+const UserTable = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -26,9 +26,7 @@ const AdminDashboard = () => {
     .catch(error => console.error(error));
   };
   
-
   return (
-    <div>
   <div>
       <h1 style={{ textAlign: 'left' }}>USER</h1>
       <TableContainer component={Paper}>
@@ -52,33 +50,8 @@ const AdminDashboard = () => {
         </Table>
       </TableContainer>
 </div>
-
-  <div>
-     <h1 style={{ textAlign: 'left' }}>NEWS</h1>
-     <TableContainer component={Paper}>
-       <Table>
-         <TableHead>
-           <TableRow>
-             <TableCell>Email</TableCell>
-             <TableCell>Actions</TableCell>
-           </TableRow>
-         </TableHead>
-         <TableBody>
-           {userData && userData.map(user => (
-             <TableRow key={user._id}>
-               <TableCell>{user.email}</TableCell>
-               <TableCell>
-                 <button onClick={() => handleDelete(user._id)}>Delete</button>
-               </TableCell>
-             </TableRow>
-           ))}
-         </TableBody>
-       </Table>
-     </TableContainer>
-     </div>
-</div>
-
   );
 };
 
-export default AdminDashboard;
+export default UserTable;
+

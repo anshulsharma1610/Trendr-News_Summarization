@@ -5,7 +5,7 @@ import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
 import Prefernces from 'views/Prefernces';
-import AdminDashboard from 'views/AdminDashboard';
+import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 
@@ -33,7 +33,7 @@ const MainRoutes = {
         },
         {
             path: '/admincrud',
-            element: <AdminDashboard />
+            element: <AdminCRUD />
         }
 
     ]
