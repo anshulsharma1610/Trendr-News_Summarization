@@ -1,4 +1,7 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Box,
   Button,
@@ -10,18 +13,37 @@ import {
   TextField,
   Unstable_Grid2 as Grid
 } from '@mui/material';
+import userService
+ from 'services/userService';
 
-
+ //const id="643879915855ff1fede9af06";
 
 export const AccountProfileDetails = () => {
-  const [values, setValues] = useState({
-    firstName: 'Anika',
-    lastName: 'Visser',
-    email: 'demo@devias.io',
-    phone: '',
-    state: 'los-angeles',
-    country: 'USA'
+  const  isLoggedIn  = useSelector((state) => {
+    return state.user.isLoggedIn;
   });
+  const dispatch = useDispatch();
+  let id ;
+  if (isLoggedIn) id = useSelector((state) => state.user.user.user._id);
+  
+  const getUserData = async () => {
+    let response = await userService.getUserDetail(id);
+    setValues(response.data);
+    return response.data;
+  };
+
+  const [values, setValues] = React.useState([]);
+
+  useEffect(() => {
+    getUserData(); 
+  }, []);
+
+  const updateUserDetails= async()=>{
+    let response = await userService.updateUser(id,values);
+    setValues(response.data);
+    window.location.reload();
+
+  }
 
   const handleChange = useCallback(
     (event) => {
@@ -39,7 +61,6 @@ export const AccountProfileDetails = () => {
     },
     []
   );
-
   return (
     <form
       autoComplete="off"
@@ -63,12 +84,12 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  helperText="Please specify the first name"
-                  label="First name"
-                  name="firstName"
+                  helperText="First name"
+                  // label="First name"
+                  fname="firstName"
                   onChange={handleChange}
                   required
-                  value={values.firstName}
+                  value={values.fname}
                 />
               </Grid>
               <Grid
@@ -77,11 +98,13 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  label="Last name"
-                  name="lastName"
+                  helperText="Last name"
+
+                 // label="Last Name"
+                  lname="lastName"
                   onChange={handleChange}
                   required
-                  value={values.lastName}
+                  value={values.lname}
                 />
               </Grid>
               <Grid
@@ -90,7 +113,9 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  label="Email Address"
+                  helperText="Email id"
+
+                  // label="Email Address"
                   name="email"
                   onChange={handleChange}
                   required
@@ -103,19 +128,21 @@ export const AccountProfileDetails = () => {
               >
                 <TextField
                   fullWidth
-                  label="Phone Number"
+                  helperText="Phone Number"
+
+                  // label="Phone Number"
                   name="phone"
                   onChange={handleChange}
                   type="number"
                   value={values.phone}
                 />
               </Grid>
-              <Grid
+              {/* <Grid
                 xs={12}
                 md={6}
               >
                 
-              </Grid>
+              </Grid> */}
               <Grid
                 xs={12}
                 md={6}
@@ -127,7 +154,7 @@ export const AccountProfileDetails = () => {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
-          <Button variant="contained">
+          <Button variant="contained"  onClick={() => updateUserDetails()}>
             Save details
           </Button>
         </CardActions>
@@ -135,3 +162,4 @@ export const AccountProfileDetails = () => {
     </form>
   );
 };
+

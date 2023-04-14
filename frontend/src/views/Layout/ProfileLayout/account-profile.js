@@ -9,17 +9,36 @@ import {
   Typography
 } from '@mui/material';
 
-const user = {
-  avatar: '/assets/avatars/avatar-anika-visser.png',
-  city: 'Los Angeles',
-  country: 'USA',
-  jobTitle: 'Senior Developer',
-  name: 'Anika Visser',
-  timezone: 'GTM-7'
-};
+import { useCallback, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import userService from 'services/userService';
+import * as React from 'react';
 
-export const AccountProfiles = () => (
-  <Card>
+
+
+
+ export const AccountProfiles = () => {
+
+  const isLoggedIn  = useSelector((state) => {
+    return state.user.isLoggedIn;
+  });
+  const dispatch = useDispatch();
+  let id ;
+  if (isLoggedIn) id = useSelector((state) => state.user.user.user._id);
+  
+  const getUserData = async () => {
+  
+    let response = await userService.getUserDetail(id);
+    setValues(response.data);
+    return response.data;
+  };
+  useEffect(() => {
+    getUserData(); 
+  }, []);
+  
+  const [user, setValues] = React.useState([]);
+  
+  return <Card>
     <CardContent>
       <Box
         sx={{
@@ -40,30 +59,26 @@ export const AccountProfiles = () => (
           gutterBottom
           variant="h5"
         >
-          {user.name}
+          {user.fname +" " +user.lname}
         </Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          {user.city} {user.country}
+          {user.city} {user.phone}
         </Typography>
         <Typography
           color="text.secondary"
           variant="body2"
         >
-          {user.timezone}
+          {user.email}
         </Typography>
       </Box>
     </CardContent>
     <Divider />
     <CardActions>
-      {/* <Button
-        fullWidth
-        variant="text"
-      >
-        Upload picture
-      </Button> */}
+      
     </CardActions>
   </Card>
-);
+};
+

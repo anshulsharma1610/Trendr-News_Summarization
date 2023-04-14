@@ -12,12 +12,19 @@ const getAllPrefernce=()=>{
     }
 
  const updatePrefernce=(id, body)=>{
-    console.log("body -----> ",body);
     return axios.put(API_URL + "users/"+ id, body )
     }
 
+const getUserDetail=(id)=>{
+    return axios.get(API_URL+"users/"+id);
+}
+const updateUser=(id,  body)=>{
+    console.log("I am here--> body:: ", body,"id--->", id);
+    return axios.put(API_URL+"users/"+id, body);
+}
+
 const userService = {
-    getPublicContent, getAllPrefernce, updatePrefernce
+    getPublicContent, getAllPrefernce, updatePrefernce, getUserDetail, updateUser
 };
 
 
