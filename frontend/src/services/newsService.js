@@ -10,8 +10,14 @@ export const likeNewsArticle = async (articleId) => {
 };
 
 export const commentOnNewsArticle = async (articleId, newComment) => {
-    const response = await axios.post(`${NEWS_API_URL}/${articleId}/comment`, newComment);
-    return response.data;
+    try {
+        const response = await axios.post(`${NEWS_API_URL}/${articleId}/comment`, newComment);
+        return response.data; // Return the updated article
+    } catch
+    (error) {
+        console.error(error);
+        return null;
+    }
 };
 
 export const shareNewsArticle = async (articleId) => {
