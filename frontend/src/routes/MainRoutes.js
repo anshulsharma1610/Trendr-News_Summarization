@@ -7,7 +7,7 @@ import TrendingNews from 'views/TrendingNews';
 import Prefernces from 'views/Prefernces';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
-
+const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -16,7 +16,7 @@ const MainRoutes = {
     children: [
         {
             path: '/',
-            element: <HelloWorld />
+            element: <NewsFeed />
         },
         {
             path: '/anshul',
@@ -26,10 +26,10 @@ const MainRoutes = {
             path: '/trendingnews',
             element: <TrendingNews />
         },
-        {
-            path: '/prefernces',
-            element: <Prefernces />
-        }
+        // {
+        //     path: '/prefernces',
+        //     element: <Prefernces />
+        // }
 
     ]
 };
