@@ -9,7 +9,8 @@ export const signup = async (req, res, next) => {
     try {
         const { email, password, fname, lname } = req.body;
         const user = await userService.save({ email, password, fname, lname });
-        res.status(201).json(user);
+        const token = jwt.sign({ user: { "email": user.email }, id: user._id }, process.env.JWT_SECRET);
+        res.status(201).json({ user, token: token });
     } catch (err) {
         console.log(err);
         next(err);

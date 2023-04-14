@@ -7,11 +7,11 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 export const register = createAsyncThunk(
     "auth/register",
-    async ({ username, email, password }, thunkAPI) => {
+    async ({ fname, lname, email, password }, thunkAPI) => {
         try {
-            const response = await AuthService.register(username, email, password);
-            thunkAPI.dispatch(setMessage(response.data.message));
-            return response.data;
+            const data = await AuthService.register(fname, lname, email, password);
+            thunkAPI.dispatch(setMessage(data.message));
+            return { user: data };
         } catch (error) {
             const message =
                 (error.response &&
@@ -51,6 +51,28 @@ export const logout = createAsyncThunk("auth/logout", async () => {
     await AuthService.logout();
 });
 
+// create a logout and clear state and localstorage
+// export const logout = createAsyncThunk(
+//     "auth/logout",
+//     async (thunkAPI) => {
+//         try {
+//             await AuthService.logout();
+//             thunkAPI.dispatch(setMessage("Logout successful"));
+//             return thunkAPI.fulfillWithValue();
+//         } catch (error) {
+//             const message =
+//                 (error.response &&
+//                     error.response.data &&
+//                     error.response.data.message) ||
+//                 error.message ||
+//                 error.toString();
+//             thunkAPI.dispatch(setMessage(message));
+//             return thunkAPI.rejectWithValue();
+//         }
+//     }
+// );
+
+
 const initialState = user
     ? { isLoggedIn: true, user }
     : { isLoggedIn: false, user: null };
@@ -60,7 +82,8 @@ const authSlice = createSlice({
     initialState,
     extraReducers: {
         [register.fulfilled]: (state, action) => {
-            state.isLoggedIn = false;
+            state.isLoggedIn = true;
+            state.user = action.payload.user;
         },
         [register.rejected]: (state, action) => {
             state.isLoggedIn = false;
@@ -74,6 +97,7 @@ const authSlice = createSlice({
             state.user = null;
         },
         [logout.fulfilled]: (state, action) => {
+
             state.isLoggedIn = false;
             state.user = null;
         },
