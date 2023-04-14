@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -56,32 +56,38 @@ const ProfileSection = () => {
 
     const { message } = useSelector((state) => state.message);
     const [loading, setLoading] = useState(false);
-    const { isLoggedIn } = useSelector((state) => {
+    const isLoggedIn = useSelector((state) => {
         console.log('---state here at login', state);
         return state.user.isLoggedIn;
     });
     const dispatch = useDispatch();
     let username = "You"
+    console.log('----loggedIN?', isLoggedIn)
     if (isLoggedIn) username = useSelector((state) => state.user.user.user.email);
 
-    useEffect(() => {
-        dispatch(clearMessage());
+    // useEffect(() => {
+    //     dispatch(clearMessage());
+    // }, [dispatch]);
+
+    // const handleLogout = (formValue) => {
+    //     console.log('-----at logout');
+    //     setLoading(true);
+
+    //     dispatch(logout())
+    //         .unwrap()
+    //         .then(() => {
+    //             navigate("/");
+    //             // window.location.reload();
+    //         })
+    //         .catch(() => {
+    //             setLoading(false);
+    //         });
+    // };
+
+    const handleLogout = useCallback(() => {
+        dispatch(logout());
+        navigate("/login");
     }, [dispatch]);
-
-    const handleLogout = (formValue) => {
-        console.log('-----at logout');
-        setLoading(true);
-
-        dispatch(logout())
-            .unwrap()
-            .then(() => {
-                navigate("/");
-                // window.location.reload();
-            })
-            .catch(() => {
-                setLoading(false);
-            });
-    };
 
     const handleLogin = () => {
         navigate("/login");
