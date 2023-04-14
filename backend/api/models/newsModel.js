@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 // Define a schema for comments
 const CommentSchema = new mongoose.Schema({
     /* Implementation for UserId or UserName required */
-    // userId: mongoose.Schema.Types.ObjectId,
+    userId: mongoose.Schema.Types.ObjectId,
+    userFullName: String,
     content: String,
     timestamp: Date,
 });

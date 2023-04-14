@@ -1,0 +1,20 @@
+.comment-dialog {
+    .comment-list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .comment-input {
+        margin-top: 16px;
+    }
+
+    .comment-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 16px;
+
+        button {
+            margin-left: 8px;
+        }
+    }
+}
