@@ -4,7 +4,7 @@ import { lazy } from 'react';
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
-import Prefernces from 'views/Prefernces';
+import Preferences from 'views/Preferences';
 import Profile from 'views/Profile';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
@@ -28,12 +28,12 @@ const MainRoutes = {
             element: <TrendingNews />
         },
         {
-            path: '/prefernces',
-            element: <Prefernces />
+            path: '/preferences',
+            element: <Preferences />
         },
         {
             path: '/account',
-            element:<Profile/>
+            element: <Profile />
         }
 
     ]

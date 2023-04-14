@@ -89,7 +89,7 @@ const FirebaseRegister = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 setSuccessful(true);
-                navigate("/");
+                navigate("/preferences");
             })
             .catch(() => {
                 setSuccessful(false);
