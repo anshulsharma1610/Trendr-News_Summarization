@@ -16,13 +16,23 @@ import PublicIcon from '@mui/icons-material/Public';
 import { Button, Grid ,Box} from '@mui/material';
 import userService from 'services/userService.js';
 import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(1.3),
 }));
-const id="64387b335855ff1fede9af0a";
-
+const id="643879915855ff1fede9af06";
+// const { isLoggedIn } = useSelector((state) => {
+//     console.log('---state here at login', state);
+//     return state.user.isLoggedIn;
+// });
+// const dispatch = useDispatch();
+// let username = "You"
+// if (isLoggedIn) username = useSelector((state) => state.user.user.user._id);
+// console.log('---USERNAME----', username);
 export default function ChipsArray() {
+    let navigate = useNavigate();
+
   const [chipData, setChipData] = React.useState([]);
   useEffect(() => {
     getAllPrefernces(); 
@@ -46,8 +56,8 @@ const handleClick = (chip) => () => {
 
 const handleSavePreferences = () => {
   console.log("selectedChips",transformJSONBody(selectedChips));
-  userService.updatePrefernce(id,transformJSONBody(selectedChips));
-
+  userService.updatePrefernce(id, transformJSONBody(selectedChips));
+  navigate("/");
 };
 
 function transformJSONBody(body) {
