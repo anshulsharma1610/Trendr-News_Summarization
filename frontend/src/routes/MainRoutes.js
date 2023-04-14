@@ -5,6 +5,7 @@ import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
 import Prefernces from 'views/Prefernces';
+import Profile from 'views/Profile';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 
@@ -29,6 +30,10 @@ const MainRoutes = {
         {
             path: '/prefernces',
             element: <Prefernces />
+        },
+        {
+            path: '/account',
+            element:<Profile/>
         }
 
     ]
