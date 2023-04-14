@@ -37,7 +37,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
-import { login } from "store/slices/authSlice";
+import { login, googleLogin } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
 // ============================||  LOGIN ||============================ //
 
@@ -62,7 +62,16 @@ const Login = ({ ...others }) => {
     }, [dispatch]);
 
     const googleHandler = async () => {
-        console.log('Login');
+        console.log('Google Login');
+        dispatch(googleLogin())
+            .unwrap()
+            .then((res) => {
+                console.log('res', res)
+                // window.location.reload();
+            })
+            .catch(() => {
+                setLoading(false);
+            });
     };
 
     const [showPassword, setShowPassword] = useState(false);

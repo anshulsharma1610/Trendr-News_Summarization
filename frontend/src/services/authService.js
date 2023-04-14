@@ -34,6 +34,20 @@ const login = (email, password) => {
         });
 };
 
+const googleLogin = () => {
+    return axios
+        .get(API_URL + "google")
+        .then((response) => {
+            console.log('-------------user', response);
+            if (response.data.token) {
+
+                localStorage.setItem("user", JSON.stringify(response.data));
+            }
+
+            return response.data;
+        });
+}
+
 const logout = () => {
     localStorage.removeItem("user");
 };
@@ -42,6 +56,7 @@ const authService = {
     register,
     login,
     logout,
+    googleLogin
 };
 
 export default authService;
