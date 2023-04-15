@@ -31,14 +31,12 @@ export const likeNewsArticleById = async (id) => {
     return article;
 };
 
-export const addCommentToNewsArticle = async (articleId, content) => {
-    /* Implementation for UserId or UserName required */
+export const addCommentToNewsArticle = async (articleId, commentObj) => {
     const article = await NewsArticleModel.findById(articleId);
     if (!article) {
         return null;
     }
-    const timestamp = new Date();
-    article.comments.push({ content, timestamp });
+    article.comments.push(commentObj); // Save the entire comment object
     await article.save();
     return article;
 };
@@ -49,6 +47,26 @@ export const shareNewsArticleById = async (id) => {
         return null;
     }
     article.shares += 1;
+    await article.save();
+    return article;
+};
+
+export const likeOrUnlikeArticle = async (articleId, userId) => {
+    const article = await NewsArticleModel.findById(articleId);
+    if (!article) {
+        return null;
+    }
+    // Check if the user has already liked the article
+    const userIndex = article.likedBy.indexOf(userId);
+    if (userIndex === -1) {
+        // User has not liked the article, so add a like
+        article.likes += 1;
+        article.likedBy.push(userId);
+    } else {
+        // User has already liked the article, so remove the like
+        article.likes -= 1;
+        article.likedBy.splice(userIndex, 1);
+    }
     await article.save();
     return article;
 };

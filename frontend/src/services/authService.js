@@ -2,11 +2,17 @@ import axios from "axios";
 
 const API_URL = process.env.AUTH_API_URL || "http://localhost:8000/auth/";
 
-const register = (username, email, password) => {
+const register = (fname, lname, email, password) => {
     return axios.post(API_URL + "signup", {
-        username,
-        email,
-        password,
+        fname, lname, email, password
+    }).then((response) => {
+        console.log('-------------user', response)
+        if (response.data.token) {
+
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+
+        return response.data;
     });
 };
 
@@ -28,6 +34,20 @@ const login = (email, password) => {
         });
 };
 
+const googleLogin = () => {
+    return axios
+        .get(API_URL + "google")
+        .then((response) => {
+            console.log('-------------user', response);
+            if (response.data.token) {
+
+                localStorage.setItem("user", JSON.stringify(response.data));
+            }
+
+            return response.data;
+        });
+}
+
 const logout = () => {
     localStorage.removeItem("user");
 };
@@ -36,6 +56,7 @@ const authService = {
     register,
     login,
     logout,
+    googleLogin
 };
 
 export default authService;

@@ -6,7 +6,8 @@ import {
     createNewsArticle,
     likeNewsArticleById,
     addCommentToNewsArticle,
-    shareNewsArticleById
+    shareNewsArticleById,
+    likeOrUnlikeArticle
 } from '../services/news-service.js';
 
 export const getNews = async (req, res) => {
@@ -73,7 +74,8 @@ export const createArticle = async (req, res) => {
 export const likeArticle = async (req, res) => {
     try {
         const articleId = req.params.id;
-        const article = await likeNewsArticleById(articleId);
+        const userId = req.body.userId;
+        const article = await likeOrUnlikeArticle(articleId, userId);
         if (!article) {
             return res.status(404).json({ message: 'Article not found' });
         }
@@ -86,13 +88,8 @@ export const likeArticle = async (req, res) => {
 export const addComment = async (req, res) => {
     try {
         const articleId = req.params.id;
-        /* Implementation for UserId or UserName required */
-        // const { userId, content } = req.body;
-        //test comment
-        const content = req.body;
-        console.log(content)
-        //const article = await addCommentToNewsArticle(articleId, userId, content);
-        const article = await addCommentToNewsArticle(articleId, content.comment);
+        const commentObj = req.body; // Get the entire comment object from the request body
+        const article = await addCommentToNewsArticle(articleId, commentObj); // Pass the entire comment object
         if (!article) {
             return res.status(404).json({ message: 'Article not found' });
         }

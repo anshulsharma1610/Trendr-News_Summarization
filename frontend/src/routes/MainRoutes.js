@@ -5,10 +5,14 @@ import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
 import Prefernces from 'views/Prefernces';
+
 import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 
-const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
+import Profile from 'views/Profile';
 
+
+const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
+const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -17,7 +21,7 @@ const MainRoutes = {
     children: [
         {
             path: '/',
-            element: <HelloWorld />
+            element: <NewsFeed />
         },
         {
             path: '/anshul',
@@ -34,6 +38,10 @@ const MainRoutes = {
         {
             path: '/admincrud',
             element: <AdminCRUD />
+        },
+        {
+            path: '/account',
+            element:<Profile/>
         }
 
     ]

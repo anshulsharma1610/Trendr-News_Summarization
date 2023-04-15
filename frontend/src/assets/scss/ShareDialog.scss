@@ -1,0 +1,23 @@
+.share-dialog {
+    .share-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 16px;
+
+        button {
+            cursor: pointer;
+        }
+    }
+
+    .copy-link {
+        display: flex;
+        justify-content: center;
+        margin-top: 16px;
+
+        button {
+            cursor: pointer;
+        }
+    }
+}

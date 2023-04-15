@@ -1,0 +1,57 @@
+.comment-dialog {
+
+    .dialog-title {
+        // Define your custom styles for the DialogTitle here
+        font-weight: bold; // Example: make the title bold
+        font-size: 24px; // Example: set the font size to 24 pixels
+        color: #000000; // Example: set the text color to red
+    }
+
+    .dialog-content {
+        max-height: 500px; // Set the maximum height of the dialog content
+        overflow-y: auto; // Enable scrolling if the content exceeds the maximum height
+    }
+
+    .comment-list {
+        min-width: 400px;
+        max-width: 600px; // Set the maximum width of the dialog content
+        max-height: 400px; // Set the maximum height of the dialog content
+        // overflow-y: auto; // Enable scrolling if the content exceeds the maximum height
+
+        .user-fullname {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+    }
+
+    .comment-input {
+        margin-top: 16px;
+    }
+
+    .comment-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 16px;
+
+        button {
+            margin-left: 8px;
+        }
+    }
+
+    .comment-item {
+        // background-color: #f0f0f0; // Set the desired background color
+        margin-bottom: 0px; // Add some margin between comments
+        // padding: 8px; // Add some padding inside the comment item
+        // border-radius: 14px; // Add border radius for rounded corners (optional)
+        padding-bottom: 0px;
+        padding-top: 0px;
+        width: fit-content;
+
+    }
+
+    .comment-content {
+        background-color: #f0f0f0; // Set the desired background color
+        padding: 18px; // Add some padding inside the comment content
+        border-radius: 14px; // Add border radius for rounded corners (optional)
+    }
+}
