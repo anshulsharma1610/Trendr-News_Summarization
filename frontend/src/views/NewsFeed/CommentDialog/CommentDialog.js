@@ -56,33 +56,39 @@ const CommentDialog = ({ open, onClose, comments, onAddComment }) => {
         <Dialog open={open} onClose={onClose} className="comment-dialog">
             <DialogTitle className="dialog-title">Comments</DialogTitle>
             <DialogContent className="dialog-content">
-                <List className="comment-list">
-                    {localComments.map((comment, index) => (
-                        <ListItem key={index} className="comment-item">
-                            <ListItemText
-                                primary={
-                                    <Typography // Display the user's full name
-                                        component="span"
-                                        variant="subtitle1"
-                                        className="user-fullname">
-                                        {comment.userFullName}
-                                    </Typography>
-                                }
-                                secondary={
-                                    <>
-                                        <Typography component="span" variant="body2" color="textPrimary">
-                                            {comment.content} {/* Display the comment content */}
+                {localComments.length === 0 ? (
+                    // Display the message if there are no comments
+                    <Typography variant="body1" align="center" className="comment-content">
+                        Be the first to comment
+                    </Typography>
+                ) : (
+                    <List className="comment-list">
+                        {localComments.map((comment, index) => (
+                            <ListItem key={index} className="comment-item">
+                                <ListItemText
+                                    primary={
+                                        <Typography // Display the user's full name
+                                            component="span"
+                                            variant="subtitle1"
+                                            className="user-fullname">
+                                            {comment.userFullName}
                                         </Typography>
-                                        <br />
-                                        {new Date(comment.timestamp).toLocaleString()} {/* Display the timestamp */}
-                                    </>
-                                }
-                                className="comment-content"
-                            />
-                        </ListItem>
-                    ))}
-                </List>
-
+                                    }
+                                    secondary={
+                                        <>
+                                            <Typography component="span" variant="body2" color="textPrimary">
+                                                {comment.content} {/* Display the comment content */}
+                                            </Typography>
+                                            <br />
+                                            {new Date(comment.timestamp).toLocaleString()} {/* Display the timestamp */}
+                                        </>
+                                    }
+                                    className="comment-content"
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
+                )}
             </DialogContent>
             <DialogActions className="comment-actions">
                 <Box display="flex" flexDirection="column" width="100%">

@@ -1,4 +1,13 @@
 .share-dialog {
+
+    .share-title {
+        // Custom styles for the ShareTitle
+        font-weight: bold;
+        font-size: 22px;
+        color: #000000;
+        padding-left: 35%;
+    }
+
     .share-buttons {
         display: flex;
         flex-wrap: wrap;
