@@ -2,7 +2,7 @@ import axios from 'axios';
 import NewsArticleModel from '../models/newsModel.js';
 import { Configuration, OpenAIApi } from 'openai';
 
-const API_KEY = 'pub_204717690f1e4792cb753f7bcb2b49ee70c77';
+const API_KEY = 'pub_20028c388105d1882197cdfae7a95bcbc6ab8';
 const BASE_URL = 'https://newsdata.io/api/1/news';
 // OpenAI API configuration
 const configuration = new Configuration({
