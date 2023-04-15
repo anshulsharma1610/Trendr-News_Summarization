@@ -12,10 +12,26 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import {TablePagination} from '@mui/material';
+import MainCard from 'components/cards/MainCard';
+
+
+
+
 
 function Row(props) {
     const  row  = props.row;
     const [open, setOpen] = React.useState(false);
+
+
+    const handleRowDelete = (id) => {
+         props.delete(id);
+    };
+
+    const handleRowUpdate = (row) => {
+      props.update(row);
+ };
+  //handleRowUpdate
   
     return (
       <React.Fragment>
@@ -33,28 +49,31 @@ function Row(props) {
             {row.title}
           </TableCell>
           <TableCell align="right">
-            <button>Update</button>
+            <button onClick={()=>handleRowUpdate(row)}>Update</button>
           </TableCell>
           <TableCell align="right">
-            <button>Delete</button>
+            <button onClick={()=>handleRowDelete(row._id)}>Delete</button>
           </TableCell>
-
+          {/* {props.delete(row.id)} */}
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
-                {/* <Typography variant="h6" gutterBottom component="div">
-                  Description
-                </Typography> */}
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
                       <TableCell>Description</TableCell>
+                      <TableCell align="left">{row.description}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Link</TableCell>
+                      <TableCell align="left">{row.link}</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                  <TableCell align="left">{row.description}</TableCell>
+                  <TableCell><b>Summary</b></TableCell>
+                      <TableCell align="left"><b>{row.summary}</b></TableCell>
                   </TableBody>
                 </Table>
               </Box>
@@ -64,5 +83,4 @@ function Row(props) {
       </React.Fragment>
     );
   }
-
   export default Row;
