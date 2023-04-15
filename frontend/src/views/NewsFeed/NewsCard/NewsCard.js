@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CommentDialog from '../CommentDialog/CommentDialog.js';
 import ShareDialog from '../ShareDialog/ShareDialog.js';
 import {
@@ -10,22 +11,38 @@ import {
     Box,
     Link,
 } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import CommentIcon from '@mui/icons-material/Comment';
+import ShareIcon from '@mui/icons-material/Share';
 import '../../../assets/scss/NewsCard.scss'
 import {
-    likeNewsArticle,
+    likeOrUnlikeArticle,
     commentOnNewsArticle,
     shareNewsArticle,
 } from '../../../services/newsService.js';
 const NewsCard = ({ article }) => {
+    const isLoggedIn = useSelector((state) => {
+        return state.user.isLoggedIn;
+    });
+    const dispatch = useDispatch();
+    let userId;
+    if (isLoggedIn) {
+        userId = useSelector((state) => state.user.user.user._id);
+    }
     const [commentDialogOpen, setCommentDialogOpen] = useState(false);
     const [shareDialogOpen, setShareDialogOpen] = useState(false);
     const [likes, setLikes] = useState(article.likes);
     const [comments, setComments] = useState(article.comments);
     const [shares, setShares] = useState(article.shares);
+    const [isLiked, setIsLiked] = useState(article.likedBy.includes(userId));
 
     const handleLike = async () => {
-        setLikes((prevLikes) => prevLikes + 1);
-        await likeNewsArticle(article._id);
+        const updatedArticle = await likeOrUnlikeArticle(article._id, userId);
+        if (updatedArticle) {
+            setLikes(updatedArticle.likes);
+            setIsLiked(updatedArticle.likedBy.includes(userId));
+        }
     };
 
     const handleAddComment = async (newCommentObj) => {
@@ -56,11 +73,19 @@ const NewsCard = ({ article }) => {
                 </Typography>
             </CardContent>
             <CardActions className="card-actions">
-                <Button onClick={handleLike}>Like ({likes})</Button>
-                <Button onClick={() => setCommentDialogOpen(true)}>
-                    Comment ({comments.length})
+                <Button onClick={handleLike}>
+                    {isLiked ? (
+                        <FavoriteIcon color="error" /> // Filled heart icon
+                    ) : (
+                        <FavoriteBorderIcon /> // Outlined heart icon
+                    )}
+                    <span className="card-action-text">Like ({likes})</span>
                 </Button>
-                <Button onClick={() => setShareDialogOpen(true)}>Share</Button>
+                <Button onClick={() => setCommentDialogOpen(true)}>
+                    <CommentIcon />
+                    <span className="card-action-text">Comment ({comments.length}) </span>
+                </Button>
+                <Button onClick={() => setShareDialogOpen(true)}><ShareIcon /> <span className="card-action-text"> Share </span></Button>
             </CardActions>
             <CommentDialog
                 open={commentDialogOpen}

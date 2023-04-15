@@ -5,8 +5,9 @@ export const fetchNews = async () => {
     return response.data;
 };
 
-export const likeNewsArticle = async (articleId) => {
-    await axios.post(`${NEWS_API_URL}/${articleId}/like`);
+export const likeOrUnlikeArticle = async (articleId, userId) => {
+    const response = await axios.post(`${NEWS_API_URL}/${articleId}/like`, { userId });
+    return response.data;
 };
 
 export const commentOnNewsArticle = async (articleId, newComment) => {

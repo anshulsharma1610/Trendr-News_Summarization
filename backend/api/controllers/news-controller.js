@@ -6,7 +6,8 @@ import {
     createNewsArticle,
     likeNewsArticleById,
     addCommentToNewsArticle,
-    shareNewsArticleById
+    shareNewsArticleById,
+    likeOrUnlikeArticle
 } from '../services/news-service.js';
 
 export const getNews = async (req, res) => {
@@ -73,7 +74,8 @@ export const createArticle = async (req, res) => {
 export const likeArticle = async (req, res) => {
     try {
         const articleId = req.params.id;
-        const article = await likeNewsArticleById(articleId);
+        const userId = req.body.userId;
+        const article = await likeOrUnlikeArticle(articleId, userId);
         if (!article) {
             return res.status(404).json({ message: 'Article not found' });
         }
