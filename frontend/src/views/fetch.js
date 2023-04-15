@@ -3,3 +3,17 @@ export const getTopNews = async () => {
   const data = await response.json();
   return data;
 };
+
+
+export const getAlluser = async () => {
+  const response = await fetch("http://localhost:8000/api/users");
+  const data = await response.json();
+  return data;
+};
+
+
+export const getAllnews = async () => {
+  const response = await fetch("http://localhost:8000/api/news");
+  const data = await response.json();
+  return data;
+};
