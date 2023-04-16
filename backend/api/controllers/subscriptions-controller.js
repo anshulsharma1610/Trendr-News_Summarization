@@ -10,8 +10,8 @@ import {
 export const post = async (req, res) => {
     try {
         const newSubscription = req.body;
-        if (!newSubscription.subTitle || !newSubscription.subDetails ||
-            !newSubscription.subTenureDays || !newSubscription.subPrice) {
+        if (!newSubscription.title || !newSubscription.desc ||
+            !newSubscription.tenureDays || !newSubscription.price || !newSubscription.features) {
             return setbodyMissingError(res);
         }
         const subscription = await subscriptionService.save(newSubscription);

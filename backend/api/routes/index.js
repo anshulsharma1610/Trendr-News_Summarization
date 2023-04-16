@@ -5,9 +5,11 @@ import preferenceRouter from './preference-route.js';
 import fetchnewsRouter from './fetchNews-route.js';
 import newsRouter from './news-routes.js';
 import bookmarkRouter from './bookmark-route.js';
-import trendingNews from './trendingNews-route.js';
-import twitter from './twitter-route.js';
-
+import trendingNewsRouter from './trendingNews-route.js';
+import twitterRouter from './twitter-route.js';
+import checkoutRouter from './checkout-route.js';
+import subscriptionRouter from './subscriptions-route.js';
+import userSubscriptionsRouter from './userSubscriptions-route.js';
 
 const route = (app) => {
     app.use('/api/users', userRouter);
@@ -17,8 +19,11 @@ const route = (app) => {
     app.use('/api/fetchnews', fetchnewsRouter);
     app.use('/api/bookmark', bookmarkRouter);
     app.use('/api/news', newsRouter);
-    app.use('/api/trends', trendingNews);
-    app.use('/api/twitter', twitter);
+    app.use('/api/trends', trendingNewsRouter);
+    app.use('/api/twitter', twitterRouter);
+    app.use('/api/checkout', checkoutRouter);
+    app.use('/api/subscriptions', subscriptionRouter);
+    app.use('/api/usersubscriptions', userSubscriptionsRouter);
 }
 
 export default route;

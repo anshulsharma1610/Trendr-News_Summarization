@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
 const subscriptionsSchema = new mongoose.Schema({
-    subTitle: String,
-    subDetails: String,
-    subTenureDays: Number,
-    subPrice: Number
+    title: String,
+    desc: String,
+    features: Array,
+    tenureDays: Number,
+    price: Number
 });
 
 const Subscriptions = mongoose.model('Subscriptions', subscriptionsSchema);
