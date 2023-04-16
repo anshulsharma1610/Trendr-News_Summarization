@@ -5,10 +5,14 @@ import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
 import Prefernces from 'views/Prefernces';
-
 import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
-
 import Profile from 'views/Profile';
+import Checkout from 'views/Checkout/SubscriptionPlans/SubscriptionPlans';
+import Success from 'views/Checkout/Success';
+import Cancel from 'views/Checkout/Cancel';
+import NotFound from 'components/NotFound';
+import { Navigate } from 'react-router-dom';
+import { Check } from '@mui/icons-material';
 
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
@@ -41,7 +45,27 @@ const MainRoutes = {
         },
         {
             path: '/account',
-            element:<Profile/>
+            element: <Profile />
+        },
+        {
+            path: '/checkout',
+            element: <Checkout />
+        },
+        {
+            path: '/success',
+            element: <Success />
+        },
+        {
+            path: '/cancel',
+            element: <Cancel />
+        },
+        {
+            path: '/404',
+            element: <NotFound />
+        },
+        {
+            path: '*',
+            element: <Navigate to="/404" />
         }
 
     ]

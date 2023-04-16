@@ -7,7 +7,7 @@ import newsRouter from './news-routes.js';
 import bookmarkRouter from './bookmark-route.js';
 import trendingNews from './trendingNews-route.js';
 import twitter from './twitter-route.js';
-
+import checkout from './checkout-route.js';
 
 const route = (app) => {
     app.use('/api/users', userRouter);
@@ -19,6 +19,7 @@ const route = (app) => {
     app.use('/api/news', newsRouter);
     app.use('/api/trends', trendingNews);
     app.use('/api/twitter', twitter);
+    app.use('/api/checkout', checkout);
 }
 
 export default route;
