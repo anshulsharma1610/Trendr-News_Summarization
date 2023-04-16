@@ -68,20 +68,34 @@ const NewsTable = () => {
     setModalOpen(true);
   };
 
-  const updateNews = () =>{
-    console.log(updatedNews);
-    fetch(`http://localhost:8000/api/news/${updatedNews._id}`, {
-      method: 'PUT',
-      body: JSON.stringify(updatedNews)
-    })
-      .then((response) => {
-        if (response.ok) {
-          alert('News has been updated.');
-         setNewsData(newsData.filter((news) => news._id != updatedNews._id));
+  const updateNews = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/news/${updatedNews._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedNews)
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update news');
+      }
+      
+      alert('News has been updated.');
+      
+      setNewsData(prevNewsData => prevNewsData.map(news => {
+        if (news._id === updatedNews._id) {
+          return updatedNews;
         }
-      })
-      .catch((error) => console.error(error));
+        return news;
+      }));
+    } catch (error) {
+      console.error(error);
+      alert('Failed to update news');
+    }
   }
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -138,7 +152,6 @@ const NewsTable = () => {
 </Box>
       </Modal>
         <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>News Details
-        <button>+</button>
         </h1>
           <TableContainer component={Paper} style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}}>
           <Table aria-label="collapsible table">
