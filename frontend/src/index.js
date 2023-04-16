@@ -13,6 +13,9 @@ import { store } from 'store';
 import 'assets/scss/style.scss';
 import config from './config';
 
+// import dotenv from 'dotenv';
+// dotenv.config();
+
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');

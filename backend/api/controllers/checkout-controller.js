@@ -7,8 +7,6 @@ import {
 } from '../util/statusCodes.js';
 import * as userService from '../services/user-service.js';
 import stripe from 'stripe';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -25,7 +23,7 @@ export const post = async (req, res) => {
                     },
                     unit_amount: product.price * 100,
                 },
-                quantity: product.quantity,
+                quantity: 1,
             },
         ],
         mode: "payment",

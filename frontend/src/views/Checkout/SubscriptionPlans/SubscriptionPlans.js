@@ -56,7 +56,7 @@ function SubscriptionPlans() {
         <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
             {plans.map(plan => (
                 <StripePayment
-                    key={plan.id}
+                    key={plan._id}
                     product={plan}
                     makePayment={() => handleMakePayment(plan)}
                 />
