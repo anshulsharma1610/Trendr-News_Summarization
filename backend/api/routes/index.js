@@ -10,6 +10,7 @@ import twitterRouter from './twitter-route.js';
 import checkoutRouter from './checkout-route.js';
 import subscriptionRouter from './subscriptions-route.js';
 import userSubscriptionsRouter from './userSubscriptions-route.js';
+import analyticsRouter from './analytics-route.js';
 
 const route = (app) => {
     app.use('/api/users', userRouter);
@@ -24,6 +25,7 @@ const route = (app) => {
     app.use('/api/checkout', checkoutRouter);
     app.use('/api/subscriptions', subscriptionRouter);
     app.use('/api/usersubscriptions', userSubscriptionsRouter);
+    app.use('/api/analytics', analyticsRouter);
 }
 
 export default route;
