@@ -50,7 +50,6 @@ const NewsTable = () => {
   }, []);
 
   const handleDelete = (id) => {
-    console.log(id);
     // Implement logic for deleting news with specified ID
     fetch(`http://localhost:8000/api/news/${id}`, {
       method: 'DELETE',
@@ -61,11 +60,10 @@ const NewsTable = () => {
           setNewsData(newsData.filter((news) => news._id !== id));
         }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error)); 
   };
 
   const handleUpdate = (data) => {
-    console.log(data);
     setUpdatedNews(data);
     setModalOpen(true);
   };
@@ -79,7 +77,7 @@ const NewsTable = () => {
       .then((response) => {
         if (response.ok) {
           alert('News has been updated.');
-        //  setNewsData(newsData.filter((news) => news._id !== id));
+         setNewsData(newsData.filter((news) => news._id != updatedNews._id));
         }
       })
       .catch((error) => console.error(error));
@@ -93,13 +91,11 @@ const NewsTable = () => {
     setPage(0);
   };
 
-  //const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
   const handleUpdateChange = (event)=>{
     event.preventDefault();
     console.log(event.target.id);
     const newData = Object.assign({},updatedNews);
-    console.log(newData);
     if(event.target.id=='title_id'){
       newData.title=event.target.value;
     }
@@ -115,7 +111,7 @@ const NewsTable = () => {
     setUpdatedNews(newData);
 
   }
-  return (
+  return ( 
     <>
       <Modal
         open={modalOpen}
@@ -123,102 +119,55 @@ const NewsTable = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         >
-        <Box sx={style}>
+<Box sx={style}>
        <div>
-       <TextField fullWidth id="title_id" label="Title" variant="standard" value={updatedNews.title} onChange={handleUpdateChange}/>
-
+              <TextField fullWidth id="title_id" label="Title" variant="standard" value={updatedNews.title} onChange={handleUpdateChange}/>
        </div>
        <div>
-       <TextField fullWidth id="link_id" label="Link" variant="standard" value={updatedNews.link} onChange={handleUpdateChange}/>
-
+              <TextField fullWidth id="link_id" label="Link" variant="standard" value={updatedNews.link} onChange={handleUpdateChange}/>
        </div>
-      
        <FormLabel>Summary</FormLabel>
        <div>
-       <TextareaAutosize id="summary_id" style={{width:'400px'}} label="Summary" variant="standard" value={updatedNews.summary} onChange={handleUpdateChange}/>
-
+              <TextareaAutosize id="summary_id" style={{width:'400px'}} label="Summary" variant="standard" value={updatedNews.summary} onChange={handleUpdateChange}/>
        </div>
        <FormLabel>Description</FormLabel>
        <div>
-        
-       <TextareaAutosize id="description_id"  style={{width:'400px'}} label="Description" variant="standard" value={updatedNews.description} onChange={handleUpdateChange}/>
-
+              <TextareaAutosize id="description_id"  style={{width:'400px'}} label="Description" variant="standard" value={updatedNews.description} onChange={handleUpdateChange}/>
        </div>
-       
-        
         <Button onClick={updateNews}>Update Data</Button>
-
-        </Box>
+</Box>
       </Modal>
-      <h1>News</h1>
-        <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>Title</TableCell>
-              <TableCell style={{ textAlign: 'right' }}>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {newsData && newsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row,id) => (
-              <Row key={id} row={row} delete={handleDelete} update={handleUpdate}/> 
-            ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-            rowsPerPageOptions={[5, 10, 20]}
-            component="div"
-            count={newsData ? newsData.length : 0}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-      </TableContainer>
-    </>
+        <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>News Details
+        <button>+</button>
+        </h1>
+          <TableContainer component={Paper} style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}}>
+          <Table aria-label="collapsible table">
+            <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20'}}>
+              <TableRow style={{ fontSize: '50px'}}>
+                <TableCell/>
+                <TableCell><b>Title</b></TableCell>
+                <TableCell style={{ textAlign: 'right' }}>Update</TableCell>
+                <TableCell style={{ textAlign: 'right' }}>Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {newsData && newsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row,id) => (
+                <Row key={id} row={row} delete={handleDelete} update={handleUpdate}/> 
+              ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+              rowsPerPageOptions={[5, 10, 20]}
+              component="div"
+              count={newsData ? newsData.length : 0}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </TableContainer>
+      </>
  
-    
-//     <div>
-//       <h1 style={{ textAlign: 'left' }}>News</h1>
-//       <TableContainer component={Paper}>
-//         <Table>
-//           <TableHead>
-//             <TableRow>
-//               <TableCell>Title</TableCell>
-//               <TableCell>Actions</TableCell>
-//             </TableRow>
-//           </TableHead>
-//           <TableBody>
-//             {newsData &&
-//               newsData
-//                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-//                 .map((news) => (
-//                   <TableRow key={news._id}>
-//                     <TableCell>{news.title}</TableCell>
-//                     <TableCell>
-//                       <button onClick={() => handleDelete(news._id)}>Delete</button>
-//                       <button onClick={() => handleUpdate(news._id)}>Update</button>
-//                       <button onClick={() => setExpandedRow(expandedRow === news._id ? null : news._id)}>Expand</button>
-//                     </TableCell>
-//                     <Collapse in={expandedRow === news._id} timeout="auto" unmountOnExit>
-//                           <div>{news.description}</div>
-//                         </Collapse>
-//                   </TableRow>
-//                 ))}
-//           </TableBody>
-//         </Table>
-//         <TablePagination
-//           rowsPerPageOptions={[5, 10, 20]}
-//           component="div"
-//           count={newsData ? newsData.length : 0}
-//           rowsPerPage={rowsPerPage}
-//           page={page}
-//           onPageChange={handleChangePage}
-//           onRowsPerPageChange={handleChangeRowsPerPage}
-//         />
-//       </TableContainer>
-//     </div>
   );
 };
 
