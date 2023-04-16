@@ -1,32 +1,24 @@
 import Bookmark from "../models/bookmark.js";
+import NewsArticleModel from "../models/newsModel.js";
 
-export const save = async (bookmarkInput) => {
-    const bookmark =  new Bookmark(bookmarkInput);
-    return bookmark.save();
-}
 
-export const put = async (id, updatedBookmark) => {
-    const bookmark = await Bookmark
-    bookmark.findByIdAndUpdate(id, updatedBookmark).exec();
-    const newBookmark= await get(id);
-return newBookmark;
-}
+export const toggleBookmark = async (userId, articleId) => {
+    console.log("Inside service")
+    const bookmark = await Bookmark.findOne({ userId, articleId });
+    if (bookmark) {
+        // If the bookmark exists, remove it
+        await Bookmark.deleteOne({ _id: bookmark._id });
+        await NewsArticleModel.findByIdAndUpdate(articleId, { $pull: { bookmarkedBy: userId } });
+        return { bookmarkAdded: false };
+    } else {
+        // If the bookmark does not exist, add it
+        await Bookmark.create({ userId, articleId });
+        await NewsArticleModel.findByIdAndUpdate(articleId, { $push: { bookmarkedBy: userId } });
+        return { bookmarkAdded: true };
+    }
+};
 
-export const getbookmarkByUserID = async (userId) => {
-    const bookmark = await Bookmark.find({ user: userId });
-    return bookmark;
-}
-
-export const remove = async (id) => {
-    const bookmark = await Bookmark.findByIdAndDelete(id).exec();
-    return bookmark;  
-} 
-export const search = async (params) => {
-    const bookmark = Bookmark.find().exec();
-    return bookmark;
-}
-
-export const getBookmarkById = async (id) => {
-    return await Bookmark.findById(id);
-}
-
+export const getUserBookmarks = async (userId) => {
+    const bookmarks = await Bookmark.find({ userId }).populate('articleId');
+    return bookmarks;
+};
