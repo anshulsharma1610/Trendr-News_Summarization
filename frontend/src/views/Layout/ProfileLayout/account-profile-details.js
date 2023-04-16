@@ -70,16 +70,16 @@ export const AccountProfileDetails = () => {
       <Card>
         <CardHeader
           subheader="Update Your Details"
-          title="Profile"
+          // title="Profile"
         />
         <CardContent sx={{ pt: 0 }}>
-          <Box sx={{ m: -1.5 }}>
+          <Box sx={{ m: -3.5 }}>
             <Grid
               container
-              spacing={3}
+              spacing={1.5}
             >
               <Grid
-                xs={12}
+                xs={10}
                 md={6}
               >
                 <TextField
@@ -93,7 +93,7 @@ export const AccountProfileDetails = () => {
                 />
               </Grid>
               <Grid
-                xs={12}
+                xs={8}
                 md={6}
               >
                 <TextField
@@ -108,7 +108,7 @@ export const AccountProfileDetails = () => {
                 />
               </Grid>
               <Grid
-                xs={12}
+                xs={10}
                 md={6}
               >
                 <TextField
@@ -123,7 +123,7 @@ export const AccountProfileDetails = () => {
                 />
               </Grid>
               <Grid
-                xs={12}
+                xs={10}
                 md={6}
               >
                 <TextField
@@ -143,16 +143,16 @@ export const AccountProfileDetails = () => {
               >
                 
               </Grid> */}
-              <Grid
+              {/* <Grid
                 xs={12}
                 md={6}
               >
                
-              </Grid>
+              </Grid> */}
             </Grid>
           </Box>
         </CardContent>
-        <Divider />
+        {/* <Divider /> */}
         <CardActions sx={{ justifyContent: 'flex-end' }}>
           <Button variant="contained"  onClick={() => updateUserDetails()}>
             Save details
