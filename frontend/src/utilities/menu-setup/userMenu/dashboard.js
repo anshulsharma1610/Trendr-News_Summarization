@@ -42,7 +42,14 @@ const dashboard = {
             icon: icons.IconDashboard,
             breadcrumbs: false
         },
-
+        {
+            id: 'AdminDashboard',
+            title: 'AdminDashboard',
+            type: 'item',
+            url: '/admincrud',
+            icon: icons.IconDashboard,
+            breadcrumbs: false
+        }
     ]
 };
 

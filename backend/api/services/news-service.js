@@ -50,3 +50,23 @@ export const shareNewsArticleById = async (id) => {
     await article.save();
     return article;
 };
+
+export const likeOrUnlikeArticle = async (articleId, userId) => {
+    const article = await NewsArticleModel.findById(articleId);
+    if (!article) {
+        return null;
+    }
+    // Check if the user has already liked the article
+    const userIndex = article.likedBy.indexOf(userId);
+    if (userIndex === -1) {
+        // User has not liked the article, so add a like
+        article.likes += 1;
+        article.likedBy.push(userId);
+    } else {
+        // User has already liked the article, so remove the like
+        article.likes -= 1;
+        article.likedBy.splice(userIndex, 1);
+    }
+    await article.save();
+    return article;
+};
