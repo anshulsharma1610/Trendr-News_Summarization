@@ -17,3 +17,9 @@ export const getAllnews = async () => {
   const data = await response.json();
   return data;
 };
+
+export const updateNewsById = async (id) => {
+  const response = await fetch(`http://localhost:8000/api/fetchnews/${id}`);
+  const data = await response.json();
+  return data;
+};

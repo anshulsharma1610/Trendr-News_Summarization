@@ -14,73 +14,81 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {TablePagination} from '@mui/material';
 import MainCard from 'components/cards/MainCard';
-
-
-
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Row(props) {
-    const  row  = props.row;
-    const [open, setOpen] = React.useState(false);
+  const row = props.row;
+  const [open, setOpen] = React.useState(false);
 
+  const handleRowDelete = (id) => {
+    props.delete(id);
+  };
 
-    const handleRowDelete = (id) => {
-         props.delete(id);
-    };
+  const handleRowUpdate = (row) => {
+    props.update(row);
+  };
 
-    const handleRowUpdate = (row) => {
-      props.update(row);
- };
-  //handleRowUpdate
-  
-    return (
-      <React.Fragment>
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="row">
-            {row.title}
-          </TableCell>
-          <TableCell align="right">
-            <button onClick={()=>handleRowUpdate(row)}>Update</button>
-          </TableCell>
-          <TableCell align="right">
-            <button onClick={()=>handleRowDelete(row._id)}>Delete</button>
-          </TableCell>
-          {/* {props.delete(row.id)} */}
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Description</TableCell>
-                      <TableCell align="left">{row.description}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>Link</TableCell>
-                      <TableCell align="left">{row.link}</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                  <TableCell><b>Summary</b></TableCell>
-                      <TableCell align="left"><b>{row.summary}</b></TableCell>
-                  </TableBody>
-                </Table>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </React.Fragment>
-    );
-  }
-  export default Row;
+  return (
+    <React.Fragment>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.title}
+        </TableCell>
+        <TableCell align="right">
+          <IconButton aria-label="update" onClick={() => handleRowUpdate(row)}>
+            <EditIcon />
+          </IconButton>
+        </TableCell>
+        <TableCell align="right">
+          <IconButton
+          aria-label="delete"
+          className="delete-button"
+            onClick={() => handleRowDelete(row._id)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Table size="small" aria-label="purchases" sx={{ fontSize: 25 }}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Description</TableCell>
+                    <TableCell align="left">{row.description}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Link</TableCell>
+                    <TableCell align="left">{row.link}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <Typography variant="subtitle1">
+                        <b>Summary</b>
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left">{row.summary}</TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+}
+
+export default Row;
