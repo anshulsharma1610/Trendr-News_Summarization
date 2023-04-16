@@ -32,6 +32,6 @@ export const toggleBookmark = async (articleId, userId) => {
 };
 
 export const getUserBookmarks = async (userId) => {
-    const response = await axios.get(`${BOOKMARK_API_URL}`, { params: { userId } });
+    const response = await axios.get(`${BOOKMARK_API_URL}/${userId}`);
     return response.data;
 };

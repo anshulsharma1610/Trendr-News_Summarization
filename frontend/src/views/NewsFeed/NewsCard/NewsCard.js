@@ -18,6 +18,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import '../../../assets/scss/NewsCard.scss'
+import '../../../assets/scss/NewsCardStyles.scss'
 import {
     likeOrUnlikeArticle,
     commentOnNewsArticle,
