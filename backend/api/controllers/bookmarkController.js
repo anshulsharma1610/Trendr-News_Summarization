@@ -19,6 +19,7 @@ export const getAllUserBookmarks = async (req, res) => {
     try {
         const userId = req.params.id;
         const bookmarks = await getUserBookmarks(userId);
+        console.log(bookmarks)
         setSuccessfulResponse(bookmarks, res);
     } catch (error) {
         return setErrorResponse(res, error);

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getUserBookmarks } from '../../../src/services/newsService';
 import NewsCard from 'views/NewsFeed/NewsCard/NewsCard';
 import '../../assets/scss/NewsCard.scss'
+import '../../assets/scss/NewsCardStyles.scss'
 import '../../assets/scss/NewsFeed.scss'
 const Bookmarks = () => {
     const [bookmarkedArticles, setBookmarkedArticles] = useState([]);

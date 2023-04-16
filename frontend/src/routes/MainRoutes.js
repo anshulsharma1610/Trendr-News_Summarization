@@ -10,7 +10,6 @@ import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 
 import Profile from 'views/Profile';
 
-
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
 // ==============================|| MAIN ROUTING ||============================== //

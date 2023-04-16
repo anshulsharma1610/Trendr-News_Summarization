@@ -5,6 +5,7 @@ import {
     deleteNewsArticleById,
     createNewsArticle,
     likeNewsArticleById,
+    likeOrUnlikeArticle,
     addCommentToNewsArticle,
     shareNewsArticleById,
 } from '../services/news-service.js';
