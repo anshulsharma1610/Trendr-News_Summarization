@@ -6,6 +6,7 @@ import fetchnewsRouter from './fetchNews-route.js';
 import newsRouter from './news-routes.js';
 import bookmarkRouter from './bookmark-route.js';
 import trendingNews from './trendingNews-route.js';
+import twitter from './twitter-route.js';
 
 
 const route = (app) => {
@@ -17,6 +18,7 @@ const route = (app) => {
     app.use('/api/bookmark', bookmarkRouter);
     app.use('/api/news', newsRouter);
     app.use('/api/trends', trendingNews);
+    app.use('/api/twitter', twitter);
 }
 
 export default route;
