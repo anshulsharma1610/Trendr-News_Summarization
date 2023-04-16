@@ -6,4 +6,7 @@ const Router = express.Router();
 Router.route('/')
     .post(checkoutController.post)
 
+Router.route('/status')
+    .post(checkoutController.checkstatus)
+
 export default Router;

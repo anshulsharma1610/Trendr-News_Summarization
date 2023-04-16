@@ -2,9 +2,17 @@ import { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Box } from '@mui/material';
 import StripePayment from './PlansCard';
+import { useSelector, useDispatch } from 'react-redux';
 
 function SubscriptionPlans() {
     const [plans, setPlans] = useState([]);
+    const isLoggedIn = useSelector((state) => {
+        console.log('---state here at checkout', state);
+        return state.user.isLoggedIn;
+    });
+    const dispatch = useDispatch();
+    let user;
+    if (isLoggedIn) user = useSelector((state) => state.user.user.user);
 
     useEffect(() => {
         const fetchPlans = async () => {
@@ -26,6 +34,15 @@ function SubscriptionPlans() {
     }, []);
 
     const handleMakePayment = async (product) => {
+        product = {
+            name: product.title,
+            price: product.price,
+            description: product.desc,
+            productOwner: "Trendr",
+            quantity: 1,
+            user: user
+        }
+        console.log('----- product', product)
         const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
         const body = { product };
         const headers = {

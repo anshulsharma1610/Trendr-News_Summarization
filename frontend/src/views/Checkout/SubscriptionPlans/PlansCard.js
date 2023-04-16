@@ -36,9 +36,10 @@ function StripePayment({ product, makePayment }) {
                 </Typography>
             </CardContent>
             <CardActions sx={{ justifyContent: 'center' }}>
-                <Button size="large" variant="contained" onClick={makePayment}>
+                <Button size="large" variant="contained" onClick={() => makePayment(product)}>
                     Pay Now
                 </Button>
+
             </CardActions>
         </Card>
     );
