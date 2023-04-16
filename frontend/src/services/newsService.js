@@ -1,5 +1,6 @@
 import axios from "axios";
 const NEWS_API_URL = "http://localhost:8000/api/news"
+const BOOKMARK_API_URL = "http://localhost:8000/api/bookmark";
 export const fetchNews = async () => {
     const response = await axios.get(NEWS_API_URL);
     return response.data;
@@ -25,4 +26,12 @@ export const shareNewsArticle = async (articleId) => {
     await axios.post(`${NEWS_API_URL}/${articleId}/share`);
 };
 
-// Define other service request functions here if needed
+export const toggleBookmark = async (articleId, userId) => {
+    const response = await axios.post(`${BOOKMARK_API_URL}`, { articleId, userId });
+    return response.data;
+};
+
+export const getUserBookmarks = async (userId) => {
+    const response = await axios.get(`${BOOKMARK_API_URL}`, { params: { userId } });
+    return response.data;
+};

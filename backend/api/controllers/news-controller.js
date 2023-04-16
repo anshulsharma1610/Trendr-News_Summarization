@@ -7,7 +7,6 @@ import {
     likeNewsArticleById,
     addCommentToNewsArticle,
     shareNewsArticleById,
-    likeOrUnlikeArticle
 } from '../services/news-service.js';
 
 export const getNews = async (req, res) => {

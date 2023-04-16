@@ -1,27 +1,16 @@
-import mongoose, { now } from "mongoose";
+import mongoose from "mongoose";
 const bookmarkSchema = new mongoose.Schema({
-      userId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
-          required:true
-      },
-      title: {
-        type: String,
-        required: true
-      },
-      url: {
-        type: String,
-        required: true
-      },
-      description: {
-        type: String,
-        required: false
-      },
-      dateCreated: {
-        type: Date,
-        default: Date.now
-      }
-    }
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  articleId: { // Add a reference to the article ID
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'NewsArticle', // Assuming the article model is named 'Article'
+    required: true
+  }
+}, { collection: 'bookmarks' }
 );
 
 const Bookmark = mongoose.model('Bookmark', bookmarkSchema);
