@@ -14,6 +14,6 @@ const Router = express.Router();
 
 
 Router.post('/', bookmarkController.toggleBookmarks);
-Router.get('/', bookmarkController.getAllUserBookmarks);
+Router.get('/:id', bookmarkController.getAllUserBookmarks);
 export default Router;
 

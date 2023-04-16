@@ -5,11 +5,10 @@ import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
 import Prefernces from 'views/Prefernces';
-
+import Bookmarks from 'views/Bookmarks/Bookmarks';
 import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 
 import Profile from 'views/Profile';
-
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
@@ -32,6 +31,10 @@ const MainRoutes = {
             element: <TrendingNews />
         },
         {
+            path: '/bookmarks',
+            element: <Bookmarks />
+        },
+        {
             path: '/prefernces',
             element: <Prefernces />
         },
@@ -41,7 +44,7 @@ const MainRoutes = {
         },
         {
             path: '/account',
-            element:<Profile/>
+            element: <Profile />
         }
 
     ]

@@ -7,7 +7,7 @@ const bookmarkSchema = new mongoose.Schema({
   },
   articleId: { // Add a reference to the article ID
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'NewsArticle', // Assuming the article model is named 'Article'
+    ref: 'NewsArticle', // Assuming the article model is named 'NewsArticle'
     required: true
   }
 }, { collection: 'bookmarks' }

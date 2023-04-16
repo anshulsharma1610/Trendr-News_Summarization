@@ -19,6 +19,7 @@ export const toggleBookmark = async (userId, articleId) => {
 };
 
 export const getUserBookmarks = async (userId) => {
+    console.log(userId)
     const bookmarks = await Bookmark.find({ userId }).populate('articleId');
     return bookmarks;
 };
