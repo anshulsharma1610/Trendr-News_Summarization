@@ -4,16 +4,18 @@ const userSubscriptionsSchema = new mongoose.Schema({
     userId: String,
     subId: String,
     price: Number,
-    createdAt: Date,
+    createdAt: {
+        type: Date,
+        // default: Date.now
+    },
     validTill: Date
 });
 
 // before save calculate validTill date from current date and incoming parameter tenureDays
 userSubscriptionsSchema.pre('save', function (next) {
-    const currentDate = new Date();
-    this.createdAt = currentDate;
-    console.log('------pre save hook in subs', this.createdAt)
-    this.validTill = new Date(currentDate.setDate(currentDate.getDate() + this.tenureDays));
+    // this.validTill = new Date().setDate(new Date().getDate() + 30);
+    // console.log('===valid', this.validTill)
+    // this.validTill = new Date(currentDate.setDate(currentDate.getDate() + this.tenureDays));
     next();
 });
 

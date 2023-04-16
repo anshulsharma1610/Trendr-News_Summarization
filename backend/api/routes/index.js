@@ -9,7 +9,7 @@ import trendingNewsRouter from './trendingNews-route.js';
 import twitterRouter from './twitter-route.js';
 import checkoutRouter from './checkout-route.js';
 import subscriptionRouter from './subscriptions-route.js';
-import userSubscriptionsRouter from '../models/userSubscriptons-route.js';
+import userSubscriptionsRouter from './userSubscriptions-route.js';
 
 const route = (app) => {
     app.use('/api/users', userRouter);

@@ -10,8 +10,7 @@ import {
 export const post = async (req, res) => {
     try {
         const newUserSubscription = req.body;
-        if (!newUserSubscription.userId || !newUserSubscription.subId ||
-            !newUserSubscription.createdAt || !newUserSubscription.validTill) {
+        if (!newUserSubscription.userId || !newUserSubscription.subId || !newUserSubscription.price) {
             return setbodyMissingError(res);
         }
         const userSubscription = await userSubscriptionService.save(newUserSubscription);

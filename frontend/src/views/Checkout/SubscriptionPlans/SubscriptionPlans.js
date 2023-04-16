@@ -39,6 +39,7 @@ function SubscriptionPlans() {
             price: product.price,
             productId: product._id,
             description: product.desc,
+            productTenure: product.tenureDays,
             productOwner: "Trendr",
             quantity: 1,
             user: user
