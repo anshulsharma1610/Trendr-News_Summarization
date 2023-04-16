@@ -12,6 +12,7 @@ const userSubscriptionsSchema = new mongoose.Schema({
 userSubscriptionsSchema.pre('save', function (next) {
     const currentDate = new Date();
     this.createdAt = currentDate;
+    console.log('------pre save hook in subs', this.createdAt)
     this.validTill = new Date(currentDate.setDate(currentDate.getDate() + this.tenureDays));
     next();
 });

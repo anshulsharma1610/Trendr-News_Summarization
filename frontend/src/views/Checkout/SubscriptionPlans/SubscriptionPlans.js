@@ -37,6 +37,7 @@ function SubscriptionPlans() {
         product = {
             name: product.title,
             price: product.price,
+            productId: product._id,
             description: product.desc,
             productOwner: "Trendr",
             quantity: 1,
