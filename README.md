@@ -130,4 +130,5 @@ Commands to use:
 
 git clone `<use HTTP Link or SSH Link>`
 
+To run Stripe Webhook throught Stripe CLI on local: stripe listen --forward-to localhost:4242/webhook 
 -----------------------------------------------------
