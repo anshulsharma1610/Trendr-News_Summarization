@@ -15,11 +15,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
+import BookmarkIcon from '@mui/icons-material/Bookmark'
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import '../../../assets/scss/NewsCard.scss'
 import {
     likeOrUnlikeArticle,
     commentOnNewsArticle,
     shareNewsArticle,
+    // bookmarkNewsArticle,
+    // unbookmarkNewsArticle,
+    // bookmarkOrUnbookmarkArticle,
+    toggleBookmark
 } from '../../../services/newsService.js';
 const NewsCard = ({ article }) => {
     const isLoggedIn = useSelector((state) => {
@@ -36,6 +42,8 @@ const NewsCard = ({ article }) => {
     const [comments, setComments] = useState(article.comments);
     const [shares, setShares] = useState(article.shares);
     const [isLiked, setIsLiked] = useState(article.likedBy.includes(userId));
+    //const [bookmarked, setBookmarked] = useState(false); // Initial state of bookmark
+    const [bookmarked, setBookmarked] = useState(article.bookmarkedBy.includes(userId));
 
     const handleLike = async () => {
         const updatedArticle = await likeOrUnlikeArticle(article._id, userId);
@@ -44,6 +52,18 @@ const NewsCard = ({ article }) => {
             setIsLiked(updatedArticle.likedBy.includes(userId));
         }
     };
+
+    const handleBookmark = async () => {
+        const result = await toggleBookmark(article._id, userId);
+        setBookmarked(result.bookmarkAdded);
+    };
+
+    // const handleBookmark = async () => {
+    //     const updatedArticle = await bookmarkOrUnbookmarkArticle(article._id, userId);
+    //     if (updatedArticle) {
+    //         setBookmarked(updatedArticle.likedBy.includes(userId));
+    //     }
+    // };
 
     const handleAddComment = async (newCommentObj) => {
         const updatedArticle = await commentOnNewsArticle(article._id, newCommentObj);
@@ -86,6 +106,9 @@ const NewsCard = ({ article }) => {
                     <span className="card-action-text">Comment ({comments.length}) </span>
                 </Button>
                 <Button onClick={() => setShareDialogOpen(true)}><ShareIcon /> <span className="card-action-text"> Share </span></Button>
+                <Button onClick={handleBookmark}>
+                    {bookmarked ? <BookmarkIcon /> : <BookmarkBorderIcon />}
+                </Button>
             </CardActions>
             <CommentDialog
                 open={commentDialogOpen}
