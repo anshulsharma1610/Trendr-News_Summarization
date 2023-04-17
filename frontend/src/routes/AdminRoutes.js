@@ -7,7 +7,6 @@ import NotFound from 'components/NotFound';
 import { Navigate } from 'react-router-dom';
 
 const Dashboard = Loadable(lazy(() => import('views/AdminDashboard/Dashboard')));
-const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
