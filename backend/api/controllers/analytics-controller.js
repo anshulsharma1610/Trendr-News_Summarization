@@ -36,6 +36,9 @@ const analyticsCard = async () => {
     const previousCountSales = await userSubscriptionService.countSales(currentYear, previousMonth);
     const percentIncreaseSales = calculatePercentIncrease(previousCountSales, currentCountSales);
 
+    const totalNews = await newsService.totalNews();
+    const totalSocials = await newsService.totalSocials();
+
     const result = {
         userCount: {
             currentUserCount, previousUserCount, percentIncreaseUser
@@ -48,7 +51,10 @@ const analyticsCard = async () => {
         },
         salesCount: {
             currentCountSales, previousCountSales, percentIncreaseSales
-        }
+        },
+        totalNews,
+        totalLikes: totalSocials[0].totalLikes,
+        totalComments: totalSocials[0].totalComments
     }
 
     return result;
@@ -59,12 +65,35 @@ const coloumnChart = async () => {
     return result;
 }
 
+const prevPurchases = async () => {
+    const result = await userSubscriptionService.getLast5();
+    return result;
+}
+
+const getMonthlySales = async () => {
+    const result = await userSubscriptionService.getMonthlySales();
+    return result;
+}
+
+const ordersVsSubs = async () => {
+    const result = await userSubscriptionService.ordersVsSubs();
+    return result;
+}
+
+const getSalesAndGrowth = async () => {
+    const result = await userSubscriptionService.getSalesAndGrowth();
+    return result;
+}
+
 export const get = async (req, res) => {
     const result = [];
     result.push(
         { analyticsCard: await analyticsCard() },
-        { coloumnChart: await coloumnChart() }
+        { coloumnChart: await coloumnChart() },
+        { prevPurchases: await prevPurchases() },
+        { monthlySales: await getMonthlySales() },
+        { pieChart: await ordersVsSubs() },
+        { getSalesAndGrowth: await getSalesAndGrowth() }
     );
     res.json(result);
-
 }

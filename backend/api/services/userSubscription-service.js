@@ -98,5 +98,137 @@ export const salesBySubId = async () => {
             }
         }
     ]);
-    return result
+    return result;
 }
+
+export const getLast5 = async () => {
+    const result = UserSubscriptions.find().sort({ createdAt: -1 }).limit(5);
+    return result;
+}
+
+export const getMonthlySales = async () => {
+    const currentDate = new Date();
+    const sixMonthsAgoDate = new Date();
+    sixMonthsAgoDate.setMonth(currentDate.getMonth() - 6);
+
+    const result = await UserSubscriptions.aggregate([
+        {
+            $match: {
+                createdAt: {
+                    $gte: sixMonthsAgoDate,
+                    $lt: currentDate
+                }
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    month: { $month: '$createdAt' },
+                    year: { $year: '$createdAt' }
+                },
+                totalSales: { $sum: '$price' }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                month: '$_id.month',
+                year: '$_id.year',
+                totalSales: '$totalSales'
+            }
+        }
+    ]);
+    return result;
+}
+
+export const ordersVsSubs = async () => {
+    const pipeline = [
+        {
+            $group: {
+                _id: "$subId",
+                count: { $sum: 1 }
+            }
+        },
+        {
+            $group: {
+                _id: null,
+                total: { $sum: "$count" },
+                subCounts: {
+                    $push: {
+                        subId: "$_id",
+                        count: "$count"
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                subCounts: {
+                    $map: {
+                        input: "$subCounts",
+                        as: "subCount",
+                        in: {
+                            subId: "$$subCount.subId",
+                            count: "$$subCount.count",
+                            percentage: { $multiply: [{ $divide: ["$$subCount.count", "$total"] }, 100] }
+                        }
+                    }
+                }
+            }
+        }
+    ];
+
+    const result = await UserSubscriptions.aggregate(pipeline);
+    return result[0].subCounts;
+}
+
+export const getSalesAndGrowth = async () => {
+    const currentDate = new Date();
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+    const salesByMonth = await UserSubscriptions.aggregate([
+        {
+            $match: {
+                createdAt: {
+                    $gte: sixMonthsAgo,
+                    $lte: currentDate,
+                },
+            },
+        },
+        {
+            $group: {
+                _id: {
+                    month: { $month: '$createdAt' },
+                    year: { $year: '$createdAt' },
+                },
+                totalSales: { $sum: '$price' },
+            },
+        },
+        {
+            $group: {
+                _id: { month: '$_id.month', year: '$_id.year' },
+                totalSales: { $sum: '$totalSales' },
+            },
+        },
+        {
+            $sort: { '_id.year': 1, '_id.month': 1 },
+        },
+    ]);
+
+    const growthByMonth = [];
+
+    for (let i = 1; i < salesByMonth.length; i++) {
+        const currentSales = salesByMonth[i].totalSales;
+        const previousSales = salesByMonth[i - 1].totalSales;
+        const growth = ((currentSales - previousSales) / previousSales) * 100;
+
+        growthByMonth.push({
+            month: `${salesByMonth[i]._id.month}/${salesByMonth[i]._id.year}`,
+            growth: growth.toFixed(2),
+        });
+    }
+
+    return { salesByMonth, growthByMonth };
+};
