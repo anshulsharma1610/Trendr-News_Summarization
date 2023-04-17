@@ -5,11 +5,12 @@ import {
     updateArticleById,
     deleteArticleById,
     createArticle,
-    likeArticle, addComment, shareArticle
+    likeArticle, addComment, shareArticle, searchNewsArticles
 } from '../controllers/news-controller.js';
 
 const router = express.Router();
 
+router.get('/search', searchNewsArticles);
 // CRUD operations on newsarticles 
 router.get('/', getNews); // Fetch all articles
 router.get('/:id', getArticleById); // Retrieve a specific article by ID

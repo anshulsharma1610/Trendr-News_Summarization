@@ -8,6 +8,7 @@ import Prefernces from 'views/Prefernces';
 import Bookmarks from 'views/Bookmarks/Bookmarks';
 import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 import Profile from 'views/Profile';
+import SearchResults from 'views/Search/SearchResults';
 import Checkout from 'views/Checkout/SubscriptionPlans/SubscriptionPlans';
 import Success from 'views/Checkout/Success';
 import Cancel from 'views/Checkout/Cancel';
@@ -71,11 +72,16 @@ const MainRoutes = {
         {
             path: '*',
             element: <Navigate to="/404" />
-        },{
-            path:'/admincrud/preferences',
-            element: <AdminPreferences/>
+        },
+        {
+            path: '/admincrud/preferences',
+            element: <AdminPreferences />
 
-        }
+        },
+        {
+            path: '/search',
+            element: <SearchResults />
+        },
 
     ]
 };
