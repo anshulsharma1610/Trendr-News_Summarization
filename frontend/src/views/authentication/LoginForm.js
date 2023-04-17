@@ -61,18 +61,20 @@ const Login = ({ ...others }) => {
         dispatch(clearMessage());
     }, [dispatch]);
 
-    const googleHandler = async () => {
-        console.log('Google Login');
+    // handle googleHandler oauth login
+    const googleHandler = () => {
         dispatch(googleLogin())
             .unwrap()
-            .then((res) => {
-                console.log('res', res)
+            .then(() => {
+                console.log('----------')
+                navigate("/");
                 // window.location.reload();
             })
             .catch(() => {
                 setLoading(false);
             });
     };
+
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -91,6 +93,7 @@ const Login = ({ ...others }) => {
         dispatch(login({ email, password }))
             .unwrap()
             .then(() => {
+                console.log('----------')
                 navigate("/");
                 // window.location.reload();
             })

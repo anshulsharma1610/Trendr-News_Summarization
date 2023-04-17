@@ -89,7 +89,7 @@ const FirebaseRegister = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 setSuccessful(true);
-                navigate("/");
+                navigate("/preferences");
             })
             .catch(() => {
                 setSuccessful(false);
@@ -300,7 +300,7 @@ const FirebaseRegister = ({ ...others }) => {
                             </FormControl>
                         )}
 
-                        <Grid container alignItems="center" justifyContent="space-between">
+                        {/* <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item>
                                 <FormControlLabel
                                     control={
@@ -321,7 +321,7 @@ const FirebaseRegister = ({ ...others }) => {
                                     }
                                 />
                             </Grid>
-                        </Grid>
+                        </Grid> */}
                         {errors.submit && (
                             <Box sx={{ mt: 3 }}>
                                 <FormHelperText error>{errors.submit}</FormHelperText>

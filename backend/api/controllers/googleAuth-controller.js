@@ -26,7 +26,7 @@ passport.use(
                 if (existingUser) {
                     return done(null, existingUser);
                 }
-                const user = await userService.save({ email: profile._json.email, fname: profile.displayName });
+                const user = await userService.save({ email: profile._json.email, fname: profile.name.givenName, lname: profile.name.familyName });
                 return done(null, user);
             } catch (err) {
                 console.log(err);
@@ -38,14 +38,24 @@ passport.use(
 
 export const google = async (req, res, next) => {
     try {
+        console.log('------before google')
         await passport.authenticate('google', { scope: ['email', 'profile'] })(req, res, next);
+        console.log('------after google');
     } catch (err) {
         console.log(err);
         next(err);
     }
 }
 
+// export const googleCallback = async (req, res, next) => {
+//     passport.authenticate("google", {
+//         successRedirect: "http://localhost:3000",
+//         failureRedirect: "/login/failed",
+//     })
+// }
+
 export const googleCallback = async (req, res, next) => {
+    console.log('------before google callback')
     passport.authenticate('google', async (err, user, info) => {
         if (err) {
             return next(err);
@@ -58,8 +68,14 @@ export const googleCallback = async (req, res, next) => {
             console.log('User found:', user);
             const token = jwt.sign({ user: { "email": user.email }, id: user._id }, process.env.JWT_SECRET);
             console.log('token', token);
-            res.redirect('/api/users');
-            // res.status(200).json({ token: token });
+            // res.redirect('/');
+            // console.log('------after google', res)
+            // res.status(200).json({ user, token: token });
+            var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
+            responseHTML = responseHTML.replace('%value%', JSON.stringify({
+                user, token: token
+            }));
+            res.status(200).send(responseHTML);
         } catch (err) {
             console.log(err);
             next(err);
