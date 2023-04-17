@@ -18,6 +18,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 
 
@@ -74,7 +76,7 @@ export default function AdminPreferences() {
 
     return ( <><div>
         <Button variant="contained" onClick={handleClickOpen}>
-          Add
+          Add Preferences
         </Button>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Preferences</DialogTitle>
@@ -100,14 +102,14 @@ export default function AdminPreferences() {
           </DialogActions>
         </Dialog>
       </div>
-        <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>Preferences
-        </h1>
+        {/* <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>Preferences
+        </h1> */}
           <TableContainer component={Paper} style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}}>
           <Table>
             <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20'}}>
               <TableRow style={{ fontSize: '50px'}}>
                 <TableCell/>
-                <TableCell><b>Title</b></TableCell>
+                <TableCell><b>Preferences</b></TableCell>
                 <TableCell style={{ textAlign: 'right' }}></TableCell>
                 <TableCell style={{ textAlign: 'right' }}>Delete</TableCell>
               </TableRow>
@@ -120,7 +122,7 @@ export default function AdminPreferences() {
                 <TableCell>{row.prefernceName}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>{row.content}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>
-                  <button onClick={() => deletePreferences(row._id)}>Delete</button>
+                  <Button startIcon={<DeleteIcon />}  variant="contained"onClick={() => deletePreferences(row._id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
