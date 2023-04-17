@@ -14,6 +14,7 @@ import Cancel from 'views/Checkout/Cancel';
 import NotFound from 'components/NotFound';
 import { Navigate } from 'react-router-dom';
 import { Check } from '@mui/icons-material';
+import AdminPreferences from 'views/AdminDashboard/AdminPreference';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
@@ -70,6 +71,10 @@ const MainRoutes = {
         {
             path: '*',
             element: <Navigate to="/404" />
+        },{
+            path:'/admincrud/preferences',
+            element: <AdminPreferences/>
+
         }
 
     ]
