@@ -4,7 +4,7 @@ import { lazy } from 'react';
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
-import Prefernces from 'views/Prefernces';
+import Preferences from 'views/Preferences';
 import Bookmarks from 'views/Bookmarks/Bookmarks';
 import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 import Profile from 'views/Profile';
@@ -38,12 +38,12 @@ const MainRoutes = {
             element: <TrendingNews />
         },
         {
-            path: '/bookmarks',
-            element: <Bookmarks />
+            path: '/preferences',
+            element: <Preferences />
         },
         {
-            path: '/prefernces',
-            element: <Prefernces />
+            path: '/bookmarks',
+            element: <Bookmarks />
         },
         {
             path: '/admincrud',

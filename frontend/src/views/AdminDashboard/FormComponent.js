@@ -1,62 +1,125 @@
 import React, { useState } from 'react';
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  Button,
+  TextField,
+  Box
+} from '@mui/material';
+import { addNews } from '../fetch.js';
+import axios from "axios";
+
+const NEWS_API_URL = "http://localhost:8000/api/news"
+
+
 
 const FormComponent = () => {
-  const [showForm, setShowForm] = useState(false);
-
-  const handleDropdownClick = () => {
-    setShowForm(!showForm);
+  // const [showForm, setShowForm] = useState(false);
+  const [formData,setFormData] = useState({
+    title:'',
+    keywords:'',
+    creator: '',
+    video_url:'',
+    image_url:'',
+    category:'',
+    content:'',
+    summary:''
+  })
+  
+  const handleOnChange = (event)=>{
+    event.preventDefault();
+    const id = event.target.id;
+    const updateData = {...formData};
+    updateData[id] = event.target.value;
+    setFormData(updateData);
+  }
+  const handleOnSubmit = async (event)=>{
+    event.preventDefault();
+    const data = JSON.stringify(formData);
+    const resp = await axios.post(NEWS_API_URL,formData);
+    console.log(resp.data);
+    console.log(data);
   }
 
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+      marginTop:'10px'
+    },
+    form: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      width: '50%',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+    },
+    textfield:{
+      marginTop:'10px'
+    },
+    btn:{
+      alignItems:'center',
+      justifyContent:'center',
+      textAlign:'center',
+      marginTop:'10px'
+    }
+  };
+
   return (
-    <>
-      <div onClick={handleDropdownClick}>Add form</div>
-      {showForm && (
-        <form>
-        <label htmlFor="title">Title:</label>
-        <input type="text" id="title" name="title"  />
+    <div style={styles.container}>
+    <Box
+      sx={{
+        width: 800,
+        maxWidth: '100%',
+      }}
+    >
+      <h1 style={{textAlign:'center', marginBottom:'50px'}}>ADD NEWS</h1>
+      <div style={styles.textfield}>
+          <TextField  style={{width:'250px'}} label="Title" id="title" onChange={handleOnChange} value={formData.title}/>
+          <TextField style={{marginLeft:'10px',width:'540px'}} label="Link" id="link" onChange={handleOnChange} value={formData.link}/>
+      </div>
 
-        <label htmlFor="link">Link:</label>
-        <input type="text" id="link" name="link"  />
+      <div style={styles.textfield}>
+          <TextField style={{width:'250px'}}  label="Creator" id="creator" onChange={handleOnChange} value={formData.creator} />
+          <TextField style={{marginLeft:'10px',width:'540px'}} label="Image URL" id="Image_URL"  onChange={handleOnChange} value={formData.Image_URL}/> 
+      </div>
 
-        <label htmlFor="keywords">Keywords (comma-separated):</label>
-        <input type="text" id="keywords" name="keywords" />
+      <div style={styles.textfield}>
+          <TextField style={{ width:'260px'}} label="category" id="category" onChange={handleOnChange} value={formData.category}/>  
+          <TextField style={{ marginLeft:'10px', width:'250px'}} label="country" id="country" onChange={handleOnChange} value={formData.country}/>     
+          <TextField style={{marginLeft:'10px', width:'270px'}} label="Source" id="source_id" onChange={handleOnChange} value={formData.source_id}/>    
+      </div>
+      
+      <div style={styles.textfield}>
+  <TextField
+    fullWidth
+    label="PubDate"
+    type="date"
+    id="pubDate"
+    onChange={handleOnChange}
+    value={formData.pubDate || new Date().toISOString().slice(0, 10)}
+  />
+</div>
 
-        <label htmlFor="creator">Creator (comma-separated):</label>
-        <input type="text" id="creator" name="creator"  />
+      <div style={styles.textfield}>
+          <TextField fullWidth  inputProps={{ style: { height: "100px"},
+    }} label="Summary" id="summary" onChange={handleOnChange} value={formData.summary}/>    
+      </div>
 
-        <label htmlFor="video_url">Video URL:</label>
-        <input type="text" id="video_url" name="video_url" />
+      <div style={styles.btn}>
+          <Button variant="contained" onClick={handleOnSubmit}>Submit</Button>
+      </div>
 
-        <label htmlFor="description">Description:</label>
-        <textarea id="description" name="description"></textarea>
+    </Box>
+  
+    </div>
+  )}
 
-        <label htmlFor="content">Content:</label>
-        <textarea id="content" name="content"></textarea>
-
-        <label htmlFor="pubDate">Publication Date:</label>
-        <input type="text" id="pubDate" name="pubDate"/>
-
-        <label htmlFor="image_url">Image URL:</label>
-        <input type="text" id="image_url" name="image_url"/>
-
-        <label htmlFor="source_id">Source ID:</label>
-        <input type="text" id="source_id" name="source_id" />
-
-        <label htmlFor="category">Category (comma-separated):</label>
-        <input type="text" id="category" name="category"  />
-
-        <label htmlFor="country">Country (comma-separated):</label>
-        <input type="text" id="country" name="country" />
-
-
-       <label htmlFor="summary">Summary:</label>
-       <textarea id="summary" name="summary"></textarea>
-
-      <button type="submit">Submit</button>
-  </form>
-      )}
-    </>
-  );
-}
 
 export default FormComponent;
