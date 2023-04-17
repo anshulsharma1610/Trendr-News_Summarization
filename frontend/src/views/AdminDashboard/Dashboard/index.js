@@ -26,6 +26,8 @@ import OrdersPieChart from './OrdersPieChart';
 import RecentPurchases from './RecentPurchases';
 import SalesLineChart from './SalesLineChart';
 import AnalyticEcommerce from './AnalyticsCard';
+import { useEffect } from 'react';
+import { getAnalytics } from 'services/adminService';
 
 // avatar style
 const avatarSX = {
@@ -63,8 +65,20 @@ const status = [
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const Dashboard = () => {
+    const [analytics, setAnalytics] = useState([]);
+
+    useEffect(() => {
+        const fetchAnalytics = async () => {
+            const data = await getAnalytics();
+            setAnalytics(data);
+        };
+        fetchAnalytics();
+    }, []);
+
     const [value, setValue] = useState('today');
     const [slot, setSlot] = useState('week');
+
+    console.log('----anal', analytics);
 
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
