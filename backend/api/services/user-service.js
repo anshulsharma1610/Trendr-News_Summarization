@@ -24,3 +24,13 @@ export const remove = async (id) => {
 export const findUserByEmail = async (email) => {
     return User.findOne({ email: email })
 }
+
+export const countAll = async (currentYear, month) => {
+    const count = await User.count({
+        createdAt: {
+            $gte: new Date(currentYear, month - 1, 1),
+            $lt: new Date(currentYear, month, 1)
+        }
+    });
+    return count != null ? count : 0;
+}

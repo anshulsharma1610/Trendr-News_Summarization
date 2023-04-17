@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 // material-ui
 import { Box, Chip, Grid, Stack, Typography } from '@mui/material';
+import { IconTrendingUp, IconTrendingDown } from '@tabler/icons';
 
 // project import
 import MainCard from 'components/cards/MainCard';
@@ -27,8 +28,8 @@ const AnalyticEcommerce = ({ color, title, count, percentage, isLoss, extra }) =
                             color={color}
                             icon={
                                 <>
-                                    {!isLoss}
-                                    {isLoss}
+                                    {!isLoss && <IconTrendingUp style={{ fontSize: '0.75rem', color: 'inherit' }} />}
+                                    {isLoss && <IconTrendingDown style={{ fontSize: '0.75rem', color: 'inherit' }} />}
                                 </>
                             }
                             label={`${percentage}%`}

@@ -20,7 +20,11 @@ const userSchema = new mongoose.Schema({
     preferences: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Prefernces'
-    }]
+    }],
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 userSchema.pre('save', function (next) {
