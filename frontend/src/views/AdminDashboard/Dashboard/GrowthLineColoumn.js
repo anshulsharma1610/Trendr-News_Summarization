@@ -5,90 +5,36 @@ import { styled, useTheme } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 
 const columnChartOptions = {
-    chart: {
-        height: 350,
-        type: "line",
-        stacked: false
-    },
-    dataLabels: {
-        enabled: false
-    },
-    colors: ["#FF1654", "#247BA0"],
-    series: [
-        {
-            name: "Series A",
-            data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+    options: {
+        chart: {
+            height: 350,
+            type: 'line',
         },
-        {
-            name: "Series B",
-            data: [20, 29, 37, 36, 44, 45, 50, 58]
-        }
-    ],
-    stroke: {
-        width: [4, 4]
-    },
-    plotOptions: {
-        bar: {
-            columnWidth: "20%"
-        }
-    },
-    xaxis: {
-        categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
-    },
-    yaxis: [
-        {
-            axisTicks: {
-                show: true
-            },
-            axisBorder: {
-                show: true,
-                color: "#FF1654"
-            },
-            labels: {
-                style: {
-                    colors: "#FF1654"
-                }
-            },
+        stroke: {
+            width: [0, 4]
+        },
+        title: {
+            text: 'Traffic Sources'
+        },
+        dataLabels: {
+            enabled: true,
+            enabledOnSeries: [1]
+        },
+        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+        xaxis: {
+            type: 'datetime'
+        },
+        yaxis: [{
             title: {
-                text: "Series A",
-                style: {
-                    color: "#FF1654"
-                }
-            }
-        },
-        {
+                text: 'Website Blog',
+            },
+        }, {
             opposite: true,
-            axisTicks: {
-                show: true
-            },
-            axisBorder: {
-                show: true,
-                color: "#247BA0"
-            },
-            labels: {
-                style: {
-                    colors: "#247BA0"
-                }
-            },
             title: {
-                text: "Series B",
-                style: {
-                    color: "#247BA0"
-                }
+                text: 'Social Media'
             }
-        }
-    ],
-    tooltip: {
-        shared: false,
-        intersect: true,
-        x: {
-            show: false
-        }
+        },]
     },
-    legend: {
-        horizontalAlign: "left",
-        offsetX: 40
-    }
 };
 
 const GrowthLineColoumn = (props) => {
@@ -103,13 +49,14 @@ const GrowthLineColoumn = (props) => {
 
     const [series] = useState([
         {
-            name: 'Net Profit',
-            data: [180, 90, 135, 114, 120, 145]
+            name: 'Website Blog',
+            type: 'column',
+            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+        }, {
+            name: 'Social Media',
+            type: 'line',
+            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
         },
-        {
-            name: 'Revenue',
-            data: [120, 45, 78, 150, 168, 99]
-        }
     ]);
 
     const [options, setOptions] = useState(columnChartOptions);
@@ -117,40 +64,12 @@ const GrowthLineColoumn = (props) => {
     useEffect(() => {
         setOptions((prevState) => ({
             ...prevState,
-            colors: [warning, primaryMain],
-            xaxis: {
-                labels: {
-                    style: {
-                        colors: [secondary, secondary, secondary, secondary, secondary, secondary]
-                    }
-                }
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        colors: [secondary]
-                    }
-                }
-            },
-            grid: {
-                borderColor: line
-            },
-            tooltip: {
-                theme: 'light'
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'right',
-                labels: {
-                    colors: 'grey.500'
-                }
-            }
         }));
     }, [primary, secondary, line, warning, primaryMain, successDark]);
 
     return (
         <div id="chart">
-            <ReactApexChart options={options} series={series} type="bar" height={430} />
+            <ReactApexChart options={options} series={series} type="line" height={350} />
         </div>
     );
 }
