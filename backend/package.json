@@ -18,15 +18,20 @@
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
         "express-session": "^1.17.3",
+        "i": "^0.3.7",
         "jsonwebtoken": "^9.0.0",
         "mongoose": "^7.0.1",
+        "nodemailer": "^6.9.1",
         "nodemon": "^2.0.21",
+        "npm": "^9.6.4",
         "openai": "^3.2.1",
         "passport": "^0.6.0",
         "passport-facebook": "^3.0.0",
         "passport-google-oauth": "^2.0.0",
         "passport-jwt": "^4.0.1",
         "passport-local-mongoose": "^8.0.0",
-        "passport-twitter": "^1.0.4"
+        "passport-twitter": "^1.0.4",
+        "stripe": "^12.1.1",
+        "twit": "^2.2.11"
     }
 }

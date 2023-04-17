@@ -5,9 +5,10 @@ import {
     deleteNewsArticleById,
     createNewsArticle,
     likeNewsArticleById,
+    likeOrUnlikeArticle,
     addCommentToNewsArticle,
     shareNewsArticleById,
-    likeOrUnlikeArticle
+    searchNews
 } from '../services/news-service.js';
 
 export const getNews = async (req, res) => {
@@ -112,3 +113,19 @@ export const shareArticle = async (req, res) => {
     }
 };
 
+
+// Search news articles based on categories and title keywords
+export const searchNewsArticles = async (req, res) => {
+    try {
+        // Extract the search criteria from the query parameters
+        const { categories, keywords } = req.query;
+
+        // Call the searchNews service to perform the search
+        const newsArticles = await searchNews(categories, keywords);
+
+        // Send the search results as the response
+        res.status(200).json(newsArticles);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

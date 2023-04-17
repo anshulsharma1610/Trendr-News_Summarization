@@ -50,7 +50,7 @@ import * as React from 'react';
         <Avatar
           src={user.avatar}
           sx={{
-            height: 80,
+            height: 70,
             mb: 2,
             width: 80
           }}
@@ -75,7 +75,7 @@ import * as React from 'react';
         </Typography>
       </Box>
     </CardContent>
-    <Divider />
+   
     <CardActions>
       
     </CardActions>

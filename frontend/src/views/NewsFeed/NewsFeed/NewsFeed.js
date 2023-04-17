@@ -3,9 +3,9 @@ import NewsCard from '../NewsCard/NewsCard.js';
 import { fetchNews } from '../../../services/newsService';
 import { Box, CircularProgress } from '@mui/material';
 import '../../../assets/scss/NewsFeed.scss';
+import '../../../assets/scss/NewsCardStyles.scss';
 import TwitterFeed from 'views/Twitter/TwitterFeed.js';
 import MainCard from 'components/cards/MainCard.js';
-
 const NewsFeed = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);

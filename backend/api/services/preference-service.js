@@ -17,3 +17,7 @@ export const remove = async (id) => {
     return Prefernces.findByIdAndRemove(id);
 }
 
+// get by id
+export const getById = async (id) => {
+    return Prefernces.findById(id);
+}

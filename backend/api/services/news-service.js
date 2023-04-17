@@ -70,3 +70,20 @@ export const likeOrUnlikeArticle = async (articleId, userId) => {
     await article.save();
     return article;
 };
+
+// Search news articles based on categories and title keywords
+export const searchNews = async (categories, keywords) => {
+    // Build the search query
+    const searchQuery = {
+        $and: [
+            ...(categories ? [{ category: { $in: categories.split(',') } }] : []),
+            ...(keywords ? [{ title: { $regex: keywords, $options: 'i' } }] : []),
+        ],
+    };
+
+    // Query the database using the Mongoose model
+    const newsArticles = await NewsArticleModel.find(searchQuery);
+    return newsArticles;
+};
+
+

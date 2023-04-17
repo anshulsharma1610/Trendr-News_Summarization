@@ -22,10 +22,18 @@ const updateUser=(id,  body)=>{
     console.log("I am here--> body:: ", body,"id--->", id);
     return axios.put(API_URL+"users/"+id, body);
 }
+const deletePrefernce=(id)=>{
+    return axios.delete(API_URL+"preferences/"+id);
+}
+
+const addPreferences=(body)=>{
+    return axios.post(API_URL+"preferences",body);
+
+}
 
 const userService = {
-    getPublicContent, getAllPrefernce, updatePrefernce, getUserDetail, updateUser
-};
+    getPublicContent, getAllPrefernce, updatePrefernce, getUserDetail, updateUser, deletePrefernce,addPreferences
+, };
 
 
 export default userService

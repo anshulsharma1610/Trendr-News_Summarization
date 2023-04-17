@@ -34,7 +34,7 @@ export const put = async (req, res) => {
         const id = req.params.id;
         const prefrence = req.body;
         const updatedPrefernce = await preferenceService.update(id, prefrence);
-        if(!updatedPrefernce){
+        if (!updatedPrefernce) {
             return setnotFound(res);
         }
         setSuccessfulResponse(updatedPrefernce, res);
@@ -46,14 +46,24 @@ export const put = async (req, res) => {
 export const remove = async (req, res) => {
     try {
         const id = req.params.id;
-        
+
         const removedPrefernce = await preferenceService.remove(id);
-         if(!removedPrefernce){
+        if (!removedPrefernce) {
             console.log("here")
             return setnotFound(res);
         }
         setSuccessfulResponse(removedPrefernce, res);
     } catch (err) {
         setErrorResponse(err, res);
+    }
+}
+
+// get by id
+export const getById = async (id) => {
+    try {
+        const preference = await Preference.findById(id);
+        return preference;
+    } catch (err) {
+        throw err;
     }
 }

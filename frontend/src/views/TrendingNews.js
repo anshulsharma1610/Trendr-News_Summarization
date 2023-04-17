@@ -72,33 +72,6 @@ const TrendingNews = () => {
                 </Grid>
                 </Grid>
               </Card>
-              {/* <MainCard >
-              <Grid container alignItems="center">
-                  <Grid item>
-                    <img
-                      src={item.image_url}
-                      alt={item.title}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Typography
-                      variant="h2"
-                      noWrap
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                    >
-                      {item.pubDate}
-                    </Typography>
-                  </Grid>
-                </Grid> 
-                
-              </MainCard> */}
-
-                
-
               </Link>
             </ListItem>
           ))}

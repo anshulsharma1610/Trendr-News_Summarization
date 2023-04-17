@@ -43,6 +43,14 @@ const dashboard = {
             breadcrumbs: false
         },
         {
+            id: 'bookmarks',
+            title: 'Bookmarks',
+            type: 'item',
+            url: '/bookmarks',
+            icon: icons.IconDashboard,
+            breadcrumbs: false
+        },
+        {
             id: 'AdminDashboard',
             title: 'AdminDashboard',
             type: 'item',
