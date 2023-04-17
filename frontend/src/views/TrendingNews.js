@@ -12,23 +12,23 @@ import Button from '@mui/material/Button';
 
 const TrendingNews = () => {
   const [news, setNews] = useState([]);
-  const sampleData = [
-    {
-      image_url:"https://www.oregonlive.com/resizer/E9mzIBRlsi8KDnTu3eEdAzizrrI=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/OHQFJPFPQJDYTLCSRJTUSGGUOA.jpg",
-      title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
-      pubDate: "Apr. 13, 2023, 9:35 a.m"
-    },
-    {
-      image_url:"https://media.licdn.com/dms/image/D4E03AQEJC4qi9I0yHw/profile-displayphoto-shrink_800_800/0/1667364095773?e=2147483647&v=beta&t=wAuAQmkcffSi16OhF6WCcuW4ZT7YbCk1J4jooC1jV0E",
-      title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
-      pubDate: "Apr. 13, 2023, 9:35 a.m"
-    },
-    {
-      image_url:"https://i1.rgstatic.net/ii/profile.image/422210188910593-1477674161845_Q512/Sai-Kammal-Shetty.jpg",
-      title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
-      pubDate: "Apr. 13, 2023, 9:35 a.m"
-    }
-  ]
+  // const sampleData = [
+  //   {
+  //     image_url:"https://www.oregonlive.com/resizer/E9mzIBRlsi8KDnTu3eEdAzizrrI=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/OHQFJPFPQJDYTLCSRJTUSGGUOA.jpg",
+  //     title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
+  //     pubDate: "Apr. 13, 2023, 9:35 a.m"
+  //   },
+  //   {
+  //     image_url:"https://media.licdn.com/dms/image/D4E03AQEJC4qi9I0yHw/profile-displayphoto-shrink_800_800/0/1667364095773?e=2147483647&v=beta&t=wAuAQmkcffSi16OhF6WCcuW4ZT7YbCk1J4jooC1jV0E",
+  //     title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
+  //     pubDate: "Apr. 13, 2023, 9:35 a.m"
+  //   },
+  //   {
+  //     image_url:"https://i1.rgstatic.net/ii/profile.image/422210188910593-1477674161845_Q512/Sai-Kammal-Shetty.jpg",
+  //     title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
+  //     pubDate: "Apr. 13, 2023, 9:35 a.m"
+  //   }
+  // ]
   useEffect(() => {
     const fetchNewsData = async () => {
       const newsData = await getTopNews();
@@ -58,12 +58,12 @@ const TrendingNews = () => {
                     />
                </Grid>
                <Grid item xs={9}>
-                    <Typography
-                      variant="h2"
-                      noWrap
+               <span style={{fontSize:'20px',fontWeight:'bolder'}}>{item.title}</span>
+                    {/* <Typography
+                      variant="h2" 
                     >
                       {item.title}
-                    </Typography>
+                    </Typography> */}
                     <Typography
                       variant="subtitle1"
                     >
