@@ -146,26 +146,10 @@ const Dashboard = () => {
                     <Grid item>
                         <Typography variant="h5">Sales Report</Typography>
                     </Grid>
-                    <Grid item>
-                        <TextField
-                            id="standard-select-currency"
-                            size="small"
-                            select
-                            value={value}
-                            onChange={(e) => setValue(e.target.value)}
-                            sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
-                        >
-                            {status.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </Grid>
                 </Grid>
-                <MainCard content={true} sx={{ mt: 1.5 }}>
+                <MainCard content={false} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1 }}>
-                        <GrowthLineColoumn slot={slot} />
+                        <GrowthLineColoumn />
                     </Box>
                 </MainCard>
             </Grid>
@@ -173,26 +157,25 @@ const Dashboard = () => {
             <Grid item xs={12} md={5} lg={4}>
                 <Grid sx={{ mt: 1 }} container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Analytics Report</Typography>
+                        <Typography variant="h5">Analytics Report (This Month)</Typography>
                     </Grid>
                     <Grid item />
                 </Grid>
                 <MainCard sx={{ mt: 3 }} content={false}>
                     <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
                         <ListItemButton divider>
-                            <ListItemText primary="Company Finance Growth" />
+                            <ListItemText primary="Total Articles" />
                             <Typography variant="h5">+45.14%</Typography>
                         </ListItemButton>
                         <ListItemButton divider>
-                            <ListItemText primary="Company Expenses Ratio" />
+                            <ListItemText primary="Total Likes" />
                             <Typography variant="h5">0.58%</Typography>
                         </ListItemButton>
                         <ListItemButton>
-                            <ListItemText primary="Business Risk Cases" />
+                            <ListItemText primary="Total Comments" />
                             <Typography variant="h5">Low</Typography>
                         </ListItemButton>
                     </List>
-                    {/* <SalesLineChart /> */}
                 </MainCard>
             </Grid>
 
