@@ -20,14 +20,17 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Button, FormLabel } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { Label } from '@mui/icons-material';
-
+import { CenterFocusStrong, Label } from '@mui/icons-material';
+import { color } from '@mui/system';
+// import TextareaAutosize from '@mui/material';
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
+  width: '60%',
+  textAlign:CenterFocusStrong,
+  height: '80%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -81,8 +84,8 @@ const NewsTable = () => {
       if (!response.ok) {
         throw new Error('Failed to update news');
       }
-      
       alert('News has been updated.');
+      setModalOpen(false);
       
       setNewsData(prevNewsData => prevNewsData.map(news => {
         if (news._id === updatedNews._id) {
@@ -127,30 +130,61 @@ const NewsTable = () => {
   }
   return ( 
     <>
-      <Modal
-        open={modalOpen}
-        onClose={handleModalClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        >
-<Box sx={style}>
-       <div>
-              <TextField fullWidth id="title_id" label="Title" variant="standard" value={updatedNews.title} onChange={handleUpdateChange}/>
-       </div>
-       <div>
-              <TextField fullWidth id="link_id" label="Link" variant="standard" value={updatedNews.link} onChange={handleUpdateChange}/>
-       </div>
-       <FormLabel>Summary</FormLabel>
-       <div>
-              <TextareaAutosize id="summary_id" style={{width:'400px'}} label="Summary" variant="standard" value={updatedNews.summary} onChange={handleUpdateChange}/>
-       </div>
-       <FormLabel>Description</FormLabel>
-       <div>
-              <TextareaAutosize id="description_id"  style={{width:'400px'}} label="Description" variant="standard" value={updatedNews.description} onChange={handleUpdateChange}/>
-       </div>
-        <Button onClick={updateNews}>Update Data</Button>
-</Box>
-      </Modal>
+ <Modal
+  open={modalOpen}
+  onClose={handleModalClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  <Box sx={{
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: '8px',
+    width: '70%',
+    borderColor:'#00abff',
+    overflow: 'auto',
+    height:'80%',
+    textAlign: 'center',
+    border: '1px solid #ccc',
+    fontSize: '50px',
+    transform: 'translate(-50%, -50%)',
+    justifyContent:'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}>
+    <div sx={{ mb: 2 }}>
+    <Typography textAlign="left" style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}>Title</Typography>
+      <TextField fullWidth id="title_id" variant="standard" value={updatedNews.title} onChange={handleUpdateChange} />
+    </div>
+
+    <div sx={{ mb: 2 }}>
+    <Typography style={{color: '#2196f3', fontSize: '16px' ,marginTop:"15px", marginBottom:"15px"}} textAlign="left">Link</Typography>
+      <TextField fullWidth id="link_id" variant="standard" value={updatedNews.link} onChange={handleUpdateChange} />
+    </div>
+
+    <div sx={{ mb: 12 }} style={{marginTop:"10px"}}>
+      <Typography style={{color: '#2196f3', fontSize: '16px',  marginTop:"15px", marginBottom:"15px"}} textAlign="left">Summary</Typography>
+      <TextareaAutosize style={{width:"949px"}}  value={updatedNews.summary} onChange={handleUpdateChange}></TextareaAutosize>
+        </div>
+
+    <div sx={{ mb: 2 }}>
+    <Typography style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}textAlign="left">Description</Typography>
+      <TextField fullWidth id="description_id"  variant="standard" value={updatedNews.description} onChange={handleUpdateChange} />
+    </div>
+
+    <div style={{justifyContent:"center",textAlign:"center", marginTop:"50px"}}>
+    <Button  style={{  margin: '200 auto', backgroundColor: '#2196f3', color: 'white', mb: 2 }} onClick={updateNews}>Update</Button>
+    </div>
+   
+  </Box>
+</Modal>
+
+
         <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>News Details
         </h1>
           <TableContainer component={Paper} style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}}>
