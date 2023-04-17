@@ -27,9 +27,6 @@ const FormComponent = () => {
     summary:''
   })
   
-  //formData.title
-  //formData["title"] === formData.title
-
   const handleOnChange = (event)=>{
     event.preventDefault();
     const id = event.target.id;
@@ -100,11 +97,19 @@ const FormComponent = () => {
       </div>
       
       <div style={styles.textfield}>
-          <TextField fullWidth label="PubDate" type="date" id="pubDate" onChange={handleOnChange} value={formData.pubDate}/>     
-      </div>
-      
+  <TextField
+    fullWidth
+    label="PubDate"
+    type="date"
+    id="pubDate"
+    onChange={handleOnChange}
+    value={formData.pubDate || new Date().toISOString().slice(0, 10)}
+  />
+</div>
+
       <div style={styles.textfield}>
-          <TextField fullWidth style={{height:'100px'}} label="Summary" id="summary" onChange={handleOnChange} value={formData.summary}/>    
+          <TextField fullWidth  inputProps={{ style: { height: "100px"},
+    }} label="Summary" id="summary" onChange={handleOnChange} value={formData.summary}/>    
       </div>
 
       <div style={styles.btn}>
