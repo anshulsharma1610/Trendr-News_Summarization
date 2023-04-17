@@ -20,11 +20,11 @@ import {
 
 // project import
 import MainCard from "components/cards/MainCard";
-// import OrdersTable from './OrdersTable';
-// import IncomeAreaChart from './IncomeAreaChart';
-// import MonthlyBarChart from './MonthlyBarChart';
-// import ReportAreaChart from './ReportAreaChart';
-// import SalesColumnChart from './SalesColumnChart';
+import GrowthLineColoumn from './GrowthLineColoumn';
+import OrdersColoumnChart from './OrdersColoumnChart';
+import OrdersPieChart from './OrdersPieChart';
+import RecentPurchases from './RecentPurchases';
+import SalesLineChart from './SalesLineChart';
 import AnalyticEcommerce from './AnalyticsCard';
 
 // avatar style
@@ -116,7 +116,7 @@ const Dashboard = () => {
                 </Grid>
                 <MainCard content={false} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1, pr: 2 }}>
-                        {/* <IncomeAreaChart slot={slot} /> */}
+                        <GrowthLineColoumn slot={slot} />
                     </Box>
                 </MainCard>
             </Grid>
@@ -136,7 +136,7 @@ const Dashboard = () => {
                             <Typography variant="h3">$7,650</Typography>
                         </Stack>
                     </Box>
-                    {/* <MonthlyBarChart /> */}
+                    <OrdersColoumnChart />
                 </MainCard>
             </Grid>
 
@@ -149,7 +149,7 @@ const Dashboard = () => {
                     <Grid item />
                 </Grid>
                 <MainCard sx={{ mt: 2 }} content={false}>
-                    {/* <OrdersTable /> */}
+                    <RecentPurchases />
                 </MainCard>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
@@ -174,7 +174,7 @@ const Dashboard = () => {
                             <Typography variant="h5">Low</Typography>
                         </ListItemButton>
                     </List>
-                    {/* <ReportAreaChart /> */}
+                    <SalesLineChart />
                 </MainCard>
             </Grid>
 
@@ -208,7 +208,7 @@ const Dashboard = () => {
                         </Typography>
                         <Typography variant="h4">$1560</Typography>
                     </Stack>
-                    {/* <SalesColumnChart /> */}
+                    <OrdersPieChart />
                 </MainCard>
             </Grid>
             <Grid item xs={12} md={5} lg={4}>
