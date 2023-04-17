@@ -91,7 +91,7 @@ const columnChartOptions = {
     }
 };
 
-const OrdersColoumnChart = (props) => {
+const OrderColoumnChart = (props) => {
     const theme = useTheme();
 
     const { primary, secondary } = theme.palette.text;
@@ -155,8 +155,8 @@ const OrdersColoumnChart = (props) => {
     );
 }
 
-OrdersColoumnChart.propTypes = {
+OrderColoumnChart.propTypes = {
 
 };
 
-export default OrdersColoumnChart;
+export default OrderColoumnChart;
