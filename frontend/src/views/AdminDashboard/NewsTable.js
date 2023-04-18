@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import MainCard from 'components/cards/MainCard';
 import { getAllnews } from '../fetch.js';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

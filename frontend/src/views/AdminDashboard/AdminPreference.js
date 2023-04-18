@@ -73,6 +73,7 @@ export default function AdminPreferences() {
             userService.addPreferences({ prefernceName: newPreference });
             setOpen(false);
         };
+        
 
     return ( <><div>
         <Button variant="contained" onClick={handleClickOpen}>
@@ -104,7 +105,7 @@ export default function AdminPreferences() {
       </div>
         {/* <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>Preferences
         </h1> */}
-          <TableContainer component={Paper} style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}}>
+          <TableContainer component={Paper} style={{ marginTop: '50px'}}>
           <Table>
             <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20'}}>
               <TableRow style={{ fontSize: '50px'}}>
