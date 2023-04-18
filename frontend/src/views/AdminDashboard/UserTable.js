@@ -92,7 +92,7 @@ const UserTable = () => {
       <h1 style={{ textAlign: 'center' , marginBottom: '50px', color: 'black'}} margin>USER DETAILS</h1>
       <TableContainer component={Paper}>
         <Table sx={{ maxWidth: '1000px' }}>
-          <TableHead sx={{ backgroundColor: '#bbbbc6', fontSize: '50px', fontWeight: 'bold' }}>
+          <TableHead sx={{backgroundColor: '#EDE7F6',fontSize: '20px' }}>
             <TableRow>
               <TableCell sx={{  padding: '10px', fontSize: '18px' }} align="center" >Email</TableCell>
               <TableCell sx={{ padding: '10px', fontSize: '18px' }} align="center">First Name</TableCell>

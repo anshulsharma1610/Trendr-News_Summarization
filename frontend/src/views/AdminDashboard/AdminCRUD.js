@@ -1,6 +1,7 @@
 import UserTable from "./UserTable";
 import NewsTable from "./NewsTable";
 import FormComponent from "./FormComponent";
+import FormSubscription from "./FormSubscription";
 
 
 const AdminCRUD = () => {
@@ -8,7 +9,7 @@ const AdminCRUD = () => {
     <div style={{ justifyContent: 'center'}}>
         <UserTable/>
         <NewsTable/>
-        {/* <FormComponent/>  */}
+        {/* <FormSubscription/> */}
     </div>
   );
 }
