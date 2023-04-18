@@ -17,7 +17,8 @@ export const remove = async (id) => {
     return Subscriptions.findByIdAndRemove(id);
 }
 
-export const getById = async (id)=>{
-    return Subscriptions.findById(id);
+export const getById = async (id) => {
+    const result = await Subscriptions.findById(id);
+    return result;
 }
 

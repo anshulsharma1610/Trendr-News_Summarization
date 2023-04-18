@@ -21,6 +21,16 @@ export const getById = async (id) => {
     return UserSubscriptions.findById(id);
 }
 
+export const getByUserId = async (id) => {
+    const result = await UserSubscriptions.find({
+        userId: id,
+        validTill: {
+            $gte: Date.now()
+        },
+    }).sort({ createdAt: -1 }).limit(5);
+    return result;
+}
+
 export const activeSubscribers = async (currentYear, month) => {
     const subscriptionCount = await UserSubscriptions.distinct('userId', {
         createdAt: {
