@@ -1,83 +1,90 @@
-
 import React, { useState, useEffect } from 'react';
 import MainCard from 'components/cards/MainCard';
 import { getTopNews } from './fetch.js';
-import { Typography, List, ListItem, Link, Grid } from '@mui/material';
-import './trendingNews.scss';
+import { Typography, List, ListItem, Link, Grid, Box, ListItemAvatar, ListItemText, Avatar } from '@mui/material';
+import 'assets/scss/trendingNews.scss';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
+import { styled, useTheme } from '@mui/material/styles';
+
+const useStyles = styled((theme) => ({
+  root: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
+  listItem: {
+    display: 'flex',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: theme.spacing(2),
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    '&:hover': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+  avatar: {
+    marginRight: theme.spacing(2),
+  },
+}));
 
 const TrendingNews = () => {
+  const theme = useTheme();
   const [news, setNews] = useState([]);
-  // const sampleData = [
-  //   {
-  //     image_url:"https://www.oregonlive.com/resizer/E9mzIBRlsi8KDnTu3eEdAzizrrI=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/OHQFJPFPQJDYTLCSRJTUSGGUOA.jpg",
-  //     title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
-  //     pubDate: "Apr. 13, 2023, 9:35 a.m"
-  //   },
-  //   {
-  //     image_url:"https://media.licdn.com/dms/image/D4E03AQEJC4qi9I0yHw/profile-displayphoto-shrink_800_800/0/1667364095773?e=2147483647&v=beta&t=wAuAQmkcffSi16OhF6WCcuW4ZT7YbCk1J4jooC1jV0E",
-  //     title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
-  //     pubDate: "Apr. 13, 2023, 9:35 a.m"
-  //   },
-  //   {
-  //     image_url:"https://i1.rgstatic.net/ii/profile.image/422210188910593-1477674161845_Q512/Sai-Kammal-Shetty.jpg",
-  //     title: "Damian Lillard says if Portland Trail Blazers can’t make major move,",
-  //     pubDate: "Apr. 13, 2023, 9:35 a.m"
-  //   }
-  // ]
+
   useEffect(() => {
     const fetchNewsData = async () => {
       const newsData = await getTopNews();
       setNews(newsData);
-    //  setNews(sampleData);
     };
- //   setNews(sampleData);
     fetchNewsData();
   }, []);
 
   return (
-    // <MainCard>
-      <div>
-        <Typography variant="h1"  stgutterBottom>
-          Headlines
-        </Typography>
-        <List>
-          {news.map((item) => (
-            <ListItem key={item.link} id="ListItem">
-              <Link href={item.link} target="_blank" rel="noopener noreferrer">
-              <Card sx={{ minWidth: '1100px' }}>
-              <Grid container alignItems="center">
-              <Grid item xs={3}>
-                    <img
-                      src={item.image_url}
-                      alt={item.title}
-                    />
-               </Grid>
-               <Grid item xs={9}>
-               <span style={{fontSize:'20px',fontWeight:'bolder'}}>{item.title}</span>
-                    {/* <Typography
-                      variant="h2" 
-                    >
+    <>
+      <Typography variant="h2" stgutterBottom>
+        Trending Headlines
+      </Typography>
+
+      <List className={theme.root}>
+        {news.map((item, index) => (
+          <MainCard sx={{ mt: 2 }}>
+            <ListItem sx={{ m: -2 }} key={item.link} id="ListItem" className={theme.listItem}>
+              <Link href={item.link} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
+                <ListItemAvatar>
+                  <Avatar
+                    className={theme.avatar}
+                    variant="square"
+                    sx={{ height: 140, width: 160, backgroundColor: 'transparent', borderRadius: 2 }}
+                    src={item.image_url}
+                    alt={item.title}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  sx={{ ml: 2 }}
+                  primary={
+                    <Typography variant="h3" color="textSecondary">
                       {item.title}
-                    </Typography> */}
-                    <Typography
-                      variant="subtitle1"
-                    >
+                    </Typography>
+                  }
+                  secondary={
+                    <Typography variant="caption" color="textSecondary">
                       {item.pubDate}
                     </Typography>
-                </Grid>
-                </Grid>
-              </Card>
+                  }
+                />
               </Link>
             </ListItem>
-          ))}
-        </List>
-      </div>
-   
+          </MainCard>
+        ))}
+        {news.length === 0 && (
+          <Typography variant="h4">No News Found!</Typography>
+        )}
+      </List>
+    </>
   );
 };
 

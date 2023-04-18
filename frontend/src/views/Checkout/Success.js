@@ -7,13 +7,13 @@ function Success() {
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 5 }}>
             <CheckCircleOutline sx={{ fontSize: "5rem", color: "#2ecc71" }} />
             <Typography variant="h4" component="h2" gutterBottom>
-                Thank you for your order!
+                Ohh! You so PRO!
             </Typography>
             <Typography variant="h6" gutterBottom>
-                Your payment was successful.
+                Your payment was successful. Thank you for your purchase of TRENDR PRO!
             </Typography>
             <Typography variant="body1" gutterBottom>
-                We appreciate your business! If you have any questions, please email us at{" "}
+                We appreciate doing business with you! If you have any questions, please email us at{" "}
                 <Link href="mailto:support@trendr.com" underline="hover" color="primary">
                     support@trendr.com
                 </Link>
