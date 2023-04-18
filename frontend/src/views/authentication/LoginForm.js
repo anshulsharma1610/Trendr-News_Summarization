@@ -67,7 +67,8 @@ const Login = ({ ...others }) => {
         dispatch(googleLogin())
             .unwrap()
             .then(() => {
-                console.log('----------')
+                console.log('----------');
+                dispatch(setSnackbar({ message: "Logged in Successfully!" }));
                 navigate("/");
                 // window.location.reload();
             })
@@ -95,7 +96,7 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
-                dispatch(setSnackbar({ message: "Login Success" }));
+                dispatch(setSnackbar({ message: "Logged in Successfully!" }));
                 navigate("/");
                 // window.location.reload();
             })

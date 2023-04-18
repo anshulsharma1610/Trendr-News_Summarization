@@ -38,6 +38,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { clearMessage } from "store/slices/messageSlice";
 import { register, googleLogin } from "store/slices/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
+import { setSnackbar, clearSnackbar } from "store/slices/snackbarSlice";
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -74,6 +75,7 @@ const FirebaseRegister = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
+                dispatch(setSnackbar({ message: "Registered Successfully!" }));
                 navigate("/preferences");
                 // window.location.reload();
             })
@@ -99,6 +101,7 @@ const FirebaseRegister = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 setSuccessful(true);
+                dispatch(setSnackbar({ message: "Registered Successfully!" }));
                 navigate("/preferences");
             })
             .catch(() => {

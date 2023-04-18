@@ -42,7 +42,7 @@ const App = () => {
             <ThemeProvider theme={themes(customization)}>
                 <CssBaseline />
                 {snackbars.open &&
-                    <Snackbar open={snackbars.open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical, horizontal }} >
+                    <Snackbar open={snackbars.open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical, horizontal }} >
                         <Alert onClose={handleClose} severity={snackbars.color} sx={{ width: '100%' }}>
                             {snackbars.message}
                         </Alert>
