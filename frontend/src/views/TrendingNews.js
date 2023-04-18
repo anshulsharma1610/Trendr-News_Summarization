@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MainCard from 'components/cards/MainCard';
 import { getTopNews } from './fetch.js';
 import { Typography, List, ListItem, Link, Grid, Box, ListItemAvatar, ListItemText, Avatar } from '@mui/material';
-import './trendingNews.scss';
+import 'assets/scss/trendingNews.scss';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -58,7 +58,7 @@ const TrendingNews = () => {
                   <Avatar
                     className={theme.avatar}
                     variant="square"
-                    sx={{ height: 140, width: 160, backgroundColor: 'transparent' }}
+                    sx={{ height: 140, width: 160, backgroundColor: 'transparent', borderRadius: 2 }}
                     src={item.image_url}
                     alt={item.title}
                   />

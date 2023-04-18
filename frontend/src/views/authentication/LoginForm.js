@@ -38,7 +38,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Google from 'assets/images/icons/social-google.svg';
 import { login, googleLogin } from "store/slices/authSlice";
-import { clearMessage } from "store/slices/messageSlice";
+import { setMessage, clearMessage } from "store/slices/messageSlice";
+import { setSnackbar, clearSnackbar } from "store/slices/snackbarSlice";
 // ============================||  LOGIN ||============================ //
 
 const Login = ({ ...others }) => {
@@ -93,7 +94,8 @@ const Login = ({ ...others }) => {
         dispatch(login({ email, password }))
             .unwrap()
             .then(() => {
-                console.log('----------')
+                console.log('----------');
+                dispatch(setSnackbar({ message: "Login Success" }));
                 navigate("/");
                 // window.location.reload();
             })

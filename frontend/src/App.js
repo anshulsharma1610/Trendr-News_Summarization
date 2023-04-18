@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSnackbar, clearSnackbar } from 'store/slices/snackbarSlice';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
@@ -22,37 +24,30 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const App = () => {
     const customization = useSelector((state) => state.customization);
-    const [state, setState] = React.useState({
-        open: true,
-        vertical: 'top',
-        horizontal: 'center',
-    });
-    const { vertical, horizontal, open } = state;
+    const snackbars = useSelector((state) => state.snackbar);
+    const dispatch = useDispatch();
 
-    const handleClick = () => {
-        setState({ open: true, ...newState });
-    };
+    const vertical = snackbars.vertical;
+    const horizontal = snackbars.horizontal;
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-
-        setState({ ...state, open: false });
+        dispatch(clearSnackbar());
     };
 
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={themes(customization)}>
                 <CssBaseline />
-                {/* <Button variant="outlined" onClick={handleClick}>
-                    Open success snackbar
-                </Button> */}
-                <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical, horizontal }}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        This is a success message!
-                    </Alert>
-                </Snackbar>
+                {snackbars.open &&
+                    <Snackbar open={snackbars.open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{ vertical, horizontal }} >
+                        <Alert onClose={handleClose} severity={snackbars.color} sx={{ width: '100%' }}>
+                            {snackbars.message}
+                        </Alert>
+                    </Snackbar>
+                }
                 <Routes />
             </ThemeProvider>
         </StyledEngineProvider >
