@@ -1,14 +1,14 @@
 import UserTable from "./UserTable";
 import NewsTable from "./NewsTable";
-// import FormComponent from "./FormComponent";
+import FormComponent from "./FormComponent";
 
 
 const AdminCRUD = () => {
   return (
-    <div>
+    <div style={{ justifyContent: 'center'}}>
         <UserTable/>
         <NewsTable/>
-        {/* <FormComponent/> */}
+        {/* <FormComponent/>  */}
     </div>
   );
 }

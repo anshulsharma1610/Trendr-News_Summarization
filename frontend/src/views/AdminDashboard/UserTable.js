@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
-import MainCard from 'components/cards/MainCard';
 import { getAlluser } from '../fetch.js';
-import { Grid, Paper } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import TablePagination from '@mui/material/TablePagination';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import { blue, red } from '@mui/material/colors';
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  Button,
+  TextField,
+  Box
+} from '@mui/material';
 
 const UserTable = () => {
   const [userData, setUserData] = useState(null);
@@ -32,6 +39,8 @@ const UserTable = () => {
     .catch(error => console.error(error));
   };
 
+  
+
   // Get current users
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -39,38 +48,94 @@ const UserTable = () => {
 
   // Change page
   const handlePageChange = (event, newPage) => {
-    setCurrentPage(newPage);
+    console.log('Page changed to', newPage);
+    setCurrentPage(newPage + 1);
+  };
+  
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+    },
+    Table: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+    },
+    textfield:{
+      marginTop:'10px'
+    },
+    btn:{
+      alignItems:'center',
+      justifyContent:'center',
+      textAlign:'center',
+      marginTop:'10px'
+    }
   };
 
+
   return (
-    <div style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}} >
+    <div style={styles.container}>
+    <Box
+      sx={{
+        width: '1000px',
+        maxWidth: '100%',
+      }}
+    >
+    <div>
       <h1 style={{ textAlign: 'center' , marginBottom: '50px', color: 'black'}} margin>USER DETAILS</h1>
-      <Grid container spacing={2}>
-        {currentUsers && currentUsers.map(user => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={user._id}>
-            <Paper elevation={3} style={{ padding: '20px', borderRadius: '20px' }}>
-              <p><b>Email:</b> {user.email}</p>
-              <p><b>First Name:</b> {user.fname}</p>
-              <p><b>Last Name:</b> {user.lname}</p>
-              <div style={{color:'red'}}>
-              <IconButton aria-label="delete"  onClick={() => handleDelete(user._id)}>
-                <DeleteIcon />
-              </IconButton>
-              </div>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 15, 20]}
-        component="div"
-        count={userData ? userData.length : 0}
-        rowsPerPage={usersPerPage}
-        page={currentPage - 1}
-        onPageChange={handlePageChange}
-      />
-    </div>
+      <TableContainer component={Paper}>
+        <Table sx={{ maxWidth: '1000px' }}>
+          <TableHead sx={{ backgroundColor: '#bbbbc6', fontSize: '50px', fontWeight: 'bold' }}>
+            <TableRow>
+              <TableCell sx={{  padding: '10px', fontSize: '18px' }} align="center" >Email</TableCell>
+              <TableCell sx={{ padding: '10px', fontSize: '18px' }} align="center">First Name</TableCell>
+              <TableCell sx={{  padding: '10px', fontSize: '18px' }} align="center">Last Name</TableCell>
+              <TableCell sx={{ padding: '10px', fontSize: '18px' }} align="center">Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentUsers && currentUsers.map(user => (
+              <TableRow key={user._id} sx={{ '&:last-child td, &:last-child th': { border: 0 }, fontSize: '50px', fontWeight: 'bold' }}>
+                <TableCell sx={{padding: '10px' , width: '25%', fontSize: '15px'}} align="center" >{user.email}</TableCell>
+                <TableCell sx={{ padding: '10px' , width: '25%', fontSize: '15px' }} align="center" >{user.fname}</TableCell>
+                <TableCell sx={{padding: '10px' , width: '25%', fontSize: '15px' }} align="center" >{user.lname}</TableCell>
+                <TableCell sx={{ padding: '10px' , width: '25%', fontSize: '15px' }} align="center">
+                  <IconButton sx={{ padding: '10px' }} aria-label="delete" onClick={() => handleDelete(user._id)}>
+                    <DeleteIcon sx={{ color: red[500] }} />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {userData && (
+  <TablePagination
+    rowsPerPageOptions={[5, 10, 15, 20]}
+    component="div"
+    count={userData.length}
+    rowsPerPage={usersPerPage}
+    page={currentPage - 1}
+    onPageChange={handlePageChange}
+    sx={{ marginTop: '20px' }}
+  />
+)}
+</div>
+</Box>    
+</div>
   );
 };
 
 export default UserTable;
+
+
+
+
+

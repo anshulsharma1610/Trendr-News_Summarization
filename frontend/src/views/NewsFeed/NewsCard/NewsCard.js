@@ -17,7 +17,6 @@ import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import '../../../assets/scss/NewsCard.scss'
 import '../../../assets/scss/NewsCardStyles.scss'
 import {
     likeOrUnlikeArticle,
@@ -28,7 +27,7 @@ import {
     // bookmarkOrUnbookmarkArticle,
     toggleBookmark
 } from '../../../services/newsService.js';
-const NewsCard = ({ article }) => {
+const NewsCard = ({ classname, article }) => {
     const isLoggedIn = useSelector((state) => {
         return state.user.isLoggedIn;
     });
@@ -59,13 +58,6 @@ const NewsCard = ({ article }) => {
         setBookmarked(result.bookmarkAdded);
     };
 
-    // const handleBookmark = async () => {
-    //     const updatedArticle = await bookmarkOrUnbookmarkArticle(article._id, userId);
-    //     if (updatedArticle) {
-    //         setBookmarked(updatedArticle.likedBy.includes(userId));
-    //     }
-    // };
-
     const handleAddComment = async (newCommentObj) => {
         const updatedArticle = await commentOnNewsArticle(article._id, newCommentObj);
         if (updatedArticle) {
@@ -79,9 +71,12 @@ const NewsCard = ({ article }) => {
         setShares((prevShares) => prevShares + 1);
         await shareNewsArticle(article._id);
     };
+    const capitalizeFirstLetter = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
 
     return (
-        <Card className="news-card">
+        <Card className={`news-card ${classname}`}>
             <CardContent className="card-content">
                 {article.image_url && <Box className='imageBox'> <img src={article.image_url} alt={article.title} /></Box>}
                 <Typography variant="h5" component="div" className="title">
@@ -89,6 +84,19 @@ const NewsCard = ({ article }) => {
                         {article.title}
                     </Link>
                 </Typography>
+                <Box className='info-container'>
+                    {/* Display the article's published date */}
+                    <Typography variant="caption" color="text.secondary" className="pubDate">
+                        {article.pubDate}
+                    </Typography>
+                    <Typography variant="caption" color="text.secondary" className="separator">
+                        {' \u2022 '}
+                    </Typography>
+                    {/* Display the article's categories */}
+                    <Typography variant="caption" color="text.secondary" className="categories">
+                        {article.category.map((cat, index) => capitalizeFirstLetter(cat)).join(', ')}
+                    </Typography>
+                </Box>
                 <Typography variant="body2" color="text.secondary" className="summary">
                     {article.summary}
                 </Typography>
@@ -100,11 +108,11 @@ const NewsCard = ({ article }) => {
                     ) : (
                         <FavoriteBorderIcon /> // Outlined heart icon
                     )}
-                    <span className="card-action-text">Like ({likes})</span>
+                    <span className="card-action-text hide-on-mobile">Like ({likes})</span>
                 </Button>
                 <Button onClick={() => setCommentDialogOpen(true)}>
                     <CommentIcon />
-                    <span className="card-action-text">Comment ({comments.length}) </span>
+                    <span className="card-action-text hide-on-mobile">Comment ({comments.length}) </span>
                 </Button>
                 <Button onClick={() => setShareDialogOpen(true)}><ShareIcon /> <span className="card-action-text"> Share </span></Button>
                 <Button onClick={handleBookmark}>

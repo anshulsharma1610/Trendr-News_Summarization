@@ -51,9 +51,17 @@ export const googleLogin = createAsyncThunk(
     "auth/googleLogin",
     async (thunkAPI) => {
         try {
-            const data = await AuthService.googleLogin();
-
-            thunkAPI.dispatch(setMessage(data.message));
+            const data = await AuthService.googleLogin()
+                .then((userData) => {
+                    console.log('User data:', userData);
+                    return userData
+                    // Do something with the user data
+                }).catch((error) => {
+                    console.error('Error:', error);
+                    // Handle the error
+                });
+            console.log("here at succ", data)
+            // await thunkAPI.dispatch(setMessage(data.message));
 
             return { user: data };
         } catch (error) {
@@ -63,6 +71,7 @@ export const googleLogin = createAsyncThunk(
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
+            console.log("here at err", error)
             thunkAPI.dispatch(setMessage(message));
             return thunkAPI.rejectWithValue();
         }

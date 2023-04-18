@@ -70,3 +70,43 @@ export const likeOrUnlikeArticle = async (articleId, userId) => {
     await article.save();
     return article;
 };
+
+// Search news articles based on categories and title keywords
+export const searchNews = async (categories, keywords) => {
+    // Build the search query
+    const searchQuery = {
+        $and: [
+            ...(categories ? [{ category: { $in: categories.split(',') } }] : []),
+            ...(keywords ? [{ title: { $regex: keywords, $options: 'i' } }] : []),
+        ],
+    };
+
+    // Query the database using the Mongoose model
+    const newsArticles = await NewsArticleModel.find(searchQuery);
+    return newsArticles;
+};
+
+export const totalNews = async () => {
+    const result = await NewsArticleModel.countDocuments();
+    return result;
+}
+
+export const totalSocials = async () => {
+    const pipeline = [
+        {
+            $group: {
+                _id: null,
+                totalLikes: { $sum: '$likes' },
+                totalComments: { $sum: { $size: '$comments' } },
+            },
+        },
+    ];
+    const result = NewsArticleModel.aggregate(pipeline)
+        .then((result) => {
+            return result;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    return result;
+}

@@ -4,16 +4,19 @@ import { lazy } from 'react';
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
-import Prefernces from 'views/Prefernces';
+import Preferences from 'views/Preferences';
 import Bookmarks from 'views/Bookmarks/Bookmarks';
 import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
 import Profile from 'views/Profile';
+import SearchResults from 'views/Search/SearchResults';
 import Checkout from 'views/Checkout/SubscriptionPlans/SubscriptionPlans';
 import Success from 'views/Checkout/Success';
 import Cancel from 'views/Checkout/Cancel';
 import NotFound from 'components/NotFound';
 import { Navigate } from 'react-router-dom';
 import { Check } from '@mui/icons-material';
+import AdminPreferences from 'views/AdminDashboard/AdminPreference';
+import AdminSubscription from 'views/AdminDashboard/AdminSubscription';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
@@ -36,12 +39,12 @@ const MainRoutes = {
             element: <TrendingNews />
         },
         {
-            path: '/bookmarks',
-            element: <Bookmarks />
+            path: '/preferences',
+            element: <Preferences />
         },
         {
-            path: '/prefernces',
-            element: <Prefernces />
+            path: '/bookmarks',
+            element: <Bookmarks />
         },
         {
             path: '/admincrud',
@@ -70,8 +73,21 @@ const MainRoutes = {
         {
             path: '*',
             element: <Navigate to="/404" />
-        }
+        },
+        {
+            path: '/admincrud/preferences',
+            element: <AdminPreferences />
 
+        },
+        {
+            path: '/search',
+            element: <SearchResults />
+        },
+        ,
+        {
+            path: '/admincrud/subscription',
+            element: <AdminSubscription />
+        }
     ]
 };
 

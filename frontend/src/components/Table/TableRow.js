@@ -16,6 +16,7 @@ import {TablePagination} from '@mui/material';
 import MainCard from 'components/cards/MainCard';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { blue, red } from '@mui/material/colors';
 
 function Row(props) {
   const row = props.row;
@@ -55,7 +56,7 @@ function Row(props) {
           className="delete-button"
             onClick={() => handleRowDelete(row._id)}
           >
-            <DeleteIcon />
+            <DeleteIcon sx={{ color: red[500] }} />
           </IconButton>
         </TableCell>
       </TableRow>
