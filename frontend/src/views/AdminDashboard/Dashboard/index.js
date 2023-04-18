@@ -26,6 +26,8 @@ import OrdersPieChart from './OrdersPieChart';
 import RecentPurchases from './RecentPurchases';
 import SalesLineChart from './SalesLineChart';
 import AnalyticEcommerce from './AnalyticsCard';
+import { useEffect } from 'react';
+import { getAnalytics } from 'services/adminService';
 
 // avatar style
 const avatarSX = {
@@ -63,8 +65,20 @@ const status = [
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const Dashboard = () => {
+    const [analytics, setAnalytics] = useState([]);
+
+    useEffect(() => {
+        const fetchAnalytics = async () => {
+            const data = await getAnalytics();
+            setAnalytics(data);
+        };
+        fetchAnalytics();
+    }, []);
+
     const [value, setValue] = useState('today');
     const [slot, setSlot] = useState('week');
+
+    console.log('----anal', analytics);
 
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -73,16 +87,31 @@ const Dashboard = () => {
                 <Typography variant="h5">Dashboard</Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Users" count="442" percentage={59.3} extra="35" />
+                <AnalyticEcommerce title="Total Users"
+                    count={analytics && analytics[0].analyticsCard.userCount.currentUserCount}
+                    percentage={59.3}
+                    extra="35" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Subscribers" count="78,250" percentage={70.5} extra="8,900" />
+                <AnalyticEcommerce title="Active Subscribers"
+                    count={analytics && analytics[0].analyticsCard.activeSubscribers.currentCountUnique}
+                    percentage={70.5}
+                    extra="8,900" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Purchases" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
+                <AnalyticEcommerce title="Total Purchases"
+                    count={analytics && analytics[0].analyticsCard.purchaseCount.currentCountAll}
+                    percentage={27.4}
+                    color="warning"
+                    extra="1,943" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
+                <AnalyticEcommerce title="Total Sales"
+                    count={analytics && analytics[0].analyticsCard.salesCount.currentCountSales}
+                    percentage={27.4}
+                    isLoss
+                    color="warning"
+                    extra="$20,395" />
             </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
