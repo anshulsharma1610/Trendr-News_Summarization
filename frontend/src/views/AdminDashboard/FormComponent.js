@@ -9,12 +9,13 @@ import {
 } from '@mui/material';
 import { addNews } from '../fetch.js';
 import axios from "axios";
+import { useEffect } from 'react';
 
 const NEWS_API_URL = "http://localhost:8000/api/news"
 
 
 
-const FormComponent = () => {
+const FormComponent = (props) => {
   // const [showForm, setShowForm] = useState(false);
   const [formData,setFormData] = useState({
     title:'',
@@ -26,7 +27,33 @@ const FormComponent = () => {
     content:'',
     summary:''
   })
-  
+  useEffect(()=>{
+    if(props.isType=='Add'){
+      clearFormData();
+    }
+  },[])
+  useEffect(()=>{
+      console.log(props.updatedNews);
+      clearFormData();
+      const updateData = {...formData};
+      if(props.updatedNews && props.isType=='Update'){
+        setFormData(props.updatedNews);
+      }
+  },[props.updatedNews])
+
+  const clearFormData = () =>{
+    const clData = {
+      title:'',
+      keywords:'',
+      creator: '',
+      video_url:'',
+      image_url:'',
+      category:'',
+      content:'',
+      summary:''
+    }
+    setFormData(clData);
+  }
   const handleOnChange = (event)=>{
     event.preventDefault();
     const id = event.target.id;
@@ -37,19 +64,53 @@ const FormComponent = () => {
   const handleOnSubmit = async (event)=>{
     event.preventDefault();
     const data = JSON.stringify(formData);
-    const resp = await axios.post(NEWS_API_URL,formData);
-    console.log(resp.data);
-    console.log(data);
-  }
+    if(props.isType=='Update'){
+      updateNews();
+    }
+    else if(props.isType=='Add'){
+      const resp = await axios.post(NEWS_API_URL,formData);
+      console.log(resp.data);
+      console.log(data);
+      alert('Added New News');
+      props.afterUpdate(formData);
 
+    }
+  
+    
+  }
+  
+  const updateNews = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/news/${formData._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update news');
+      }
+      alert('News has been updated.');
+//      setModalOpen(false);
+      props.afterUpdate(formData);
+    } catch (error) {
+      console.error(error);
+      alert('Failed to update news');
+    }
+  }
+  const closeModal = ()=>{
+      props.closeModal();
+  }
   const styles = {
     container: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '100vh',
-      marginTop:'10px'
+      // height: '100vh',
+      // marginTop:'10px'
     },
     form: {
       display: 'flex',
@@ -79,7 +140,7 @@ const FormComponent = () => {
         maxWidth: '100%',
       }}
     >
-      <h1 style={{textAlign:'center', marginBottom:'50px'}}>ADD NEWS</h1>
+      <h1 style={{textAlign:'center', marginBottom:'50px'}}>{props.isType} News</h1>
       <div style={styles.textfield}>
           <TextField  style={{width:'250px'}} label="Title" id="title" onChange={handleOnChange} value={formData.title}/>
           <TextField style={{marginLeft:'10px',width:'540px'}} label="Link" id="link" onChange={handleOnChange} value={formData.link}/>
@@ -97,15 +158,8 @@ const FormComponent = () => {
       </div>
       
       <div style={styles.textfield}>
-  <TextField
-    fullWidth
-    label="PubDate"
-    type="date"
-    id="pubDate"
-    onChange={handleOnChange}
-    value={formData.pubDate || new Date().toISOString().slice(0, 10)}
-  />
-</div>
+  <TextField fullWidth label="PubDate" type="date" id="pubDate" onChange={handleOnChange} value={formData.pubDate || new Date().toISOString().slice(0, 10)}/>
+      </div>
 
       <div style={styles.textfield}>
           <TextField fullWidth  inputProps={{ style: { height: "100px"},
@@ -114,6 +168,7 @@ const FormComponent = () => {
 
       <div style={styles.btn}>
           <Button variant="contained" onClick={handleOnSubmit}>Submit</Button>
+          <Button variant="contained" style={{background:'red'}} onClick={closeModal}>Cancel</Button>
       </div>
 
     </Box>
