@@ -22,6 +22,7 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { CenterFocusStrong, Label, PropaneSharp } from '@mui/icons-material';
 import { color } from '@mui/system';
 import FormComponent from './FormComponent.js';
+import { useTheme } from '@mui/material/styles';
 // import TextareaAutosize from '@mui/material';
 const style = {
   position: 'absolute',
@@ -38,6 +39,9 @@ const style = {
 };
 
 const NewsTable = () => {
+
+
+ const theme = useTheme();
   const [newsData, setNewsData] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -106,12 +110,7 @@ const NewsTable = () => {
   }
   const afterUpdate = (formData)=>{
     setModalOpen(false);
-    setNewsData(prevNewsData => prevNewsData.map(news => {
-      if (news._id === formData._id) {
-        return formData;
-      }
-      return news;
-    })); 
+    window.location.reload();
   }
   
   const closeModal = ()=>{
@@ -213,29 +212,6 @@ const NewsTable = () => {
       width: '1000px',
       maxWidth: '100%',
   }}>
-    {/* <div sx={{ mb: 2 }}>
-    <Typography textAlign="left" style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}>Title</Typography>
-      <TextField fullWidth id="title_id" variant="standard" value={updatedNews.title} onChange={handleUpdateChange} />
-    </div>
-
-    <div sx={{ mb: 2 }}>
-    <Typography style={{color: '#2196f3', fontSize: '16px' ,marginTop:"15px", marginBottom:"15px"}} textAlign="left">Link</Typography>
-      <TextField fullWidth id="link_id" variant="standard" value={updatedNews.link} onChange={handleUpdateChange} />
-    </div>
-
-    <div sx={{ mb: 12 }} style={{marginTop:"10px"}}>
-      <Typography style={{color: '#2196f3', fontSize: '16px',  marginTop:"15px", marginBottom:"15px"}} textAlign="left">Summary</Typography>
-      <TextareaAutosize style={{width:"949px"}}  value={updatedNews.summary} onChange={handleUpdateChange}></TextareaAutosize>
-        </div>
-
-    <div sx={{ mb: 2 }}>
-    <Typography style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}textAlign="left">Description</Typography>
-      <TextField fullWidth id="description_id"  variant="standard" value={updatedNews.description} onChange={handleUpdateChange} />
-    </div>
-
-    <div style={{justifyContent:"center",textAlign:"center", marginTop:"50px"}}>
-    <Button  style={{  margin: '200 auto', backgroundColor: '#2196f3', color: 'white', mb: 2 }} onClick={updateNews}>Update</Button>
-    </div> */}
       <div style={styles.container}>
     <Box
       sx={{
@@ -278,23 +254,24 @@ const NewsTable = () => {
     >
     <div>
         <div style={styles.headerStyl}>
-       <span style={{float:'left'}}>
-       <Typography  variant="h4" >News Details </Typography>
-        </span> 
-        <span style={{float:'right'}}>
-        <Button variant='contained' onClick={addNews}>Add News</Button>
-        </span>
+<span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+  <Typography variant="h4" style={{ fontSize:'20px'}}>News Details</Typography>
+  <div style={{ marginLeft: 'auto' }}>
+    <Button variant="contained" style={{ backgroundColor: '#EDE7F6', color: 'black', marginLeft:'800px'}} onClick={addNews}>
+      Add News
+    </Button>
+  </div>
+</span>
         <div style={styles.clear}></div>
         </div>
-
           <TableContainer component={Paper} style={{ width: '1000px', marginTop: '50px'}}>
           <Table aria-label="collapsible table">
-            <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20'}}>
+            <TableHead style= {{ backgroundColor: '#EDE7F6',fontSize: '20px'}}>
               <TableRow style={{ fontSize: '50px'}}>
                 <TableCell/>
-                <TableCell><b>Title</b></TableCell>
-                <TableCell style={{ textAlign: 'right' }}>Update</TableCell>
-                <TableCell style={{ textAlign: 'right' }}>Delete</TableCell>
+                <TableCell style= {{fontSize: '20px', color: 'black'}}><b>Title</b></TableCell>
+                <TableCell style={{ textAlign: 'right' ,fontSize: '20px', color: 'black' }}>Update</TableCell>
+                <TableCell style={{ textAlign: 'right' ,fontSize: '20px', color: 'black' }}>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -25,8 +25,13 @@ export const updateNewsById = async (id) => {
 };
 
 export const addNews = async (id) => {
-  const response = await fetch(`http://localhost:8000//api/news`);
+  const response = await fetch(`http://localhost:8000/api/news`);
   const data = await response.json();
   return data;
 };
 
+export const addSubscription = async (id) => {
+  const response = await fetch(`http://localhost:8000/api/subscriptions`);
+  const data = await response.json();
+  return data;
+};
