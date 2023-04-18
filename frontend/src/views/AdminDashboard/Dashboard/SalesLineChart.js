@@ -36,6 +36,7 @@ const lineOptions = {
 };
 
 const SalesLineChart = (props) => {
+    console.log('-------', props)
     const theme = useTheme();
 
     const { primary, secondary } = theme.palette.text;
@@ -45,34 +46,65 @@ const SalesLineChart = (props) => {
     const primaryMain = theme.palette.primary.main;
     const successDark = theme.palette.success.dark;
 
-    const [series] = useState([{
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-    }]);
+    const [series, setSeries] = useState([
+        {
+            name: "Sales",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        }
+    ]);
 
     const [options, setOptions] = useState(lineOptions);
 
     useEffect(() => {
+        const salesByMonth = Array(12).fill(0);
+
+        props.data.forEach(({ month, year, totalSales }) => {
+            // Convert month and year to an index in the salesByMonth array
+            const index = (year - 2022) * 12 + (month - 1);
+
+            salesByMonth[index] = totalSales;
+        });
+
+        setSeries([
+            {
+                name: "Sales",
+                data: salesByMonth,
+            }
+        ]);
+
         setOptions((prevState) => ({
             ...prevState,
             options: {
                 chart: {
-                    type: 'donut',
-                },
-                responsive: [{
-                    breakpoint: 480,
-                    options: {
-                        chart: {
-                            width: 200
-                        },
-                        legend: {
-                            position: 'bottom'
-                        }
+                    ...prevState.chart,
+                    height: 350,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
                     }
-                }]
+                },
+                dataLabels: {
+                    enabled: true
+                },
+                stroke: {
+                    curve: 'straight'
+                },
+                title: {
+                    text: 'Sales Trends by Month',
+                    align: 'left'
+                },
+                grid: {
+                    row: {
+                        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                        opacity: 0.5
+                    },
+                },
+                xaxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                }
             },
-        }))
-    }, [primary, secondary, line, warning, primaryMain, successDark]);
+        }));
+    }, [props.data, primary, secondary, line, warning, primaryMain, successDark]);
 
     return (
         <div id="chart">

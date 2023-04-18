@@ -22,6 +22,7 @@ const pieOptions = {
 };
 
 const OrdersPieChart = (props) => {
+    console.log('===', props)
     const theme = useTheme();
 
     const { primary, secondary } = theme.palette.text;
