@@ -30,7 +30,8 @@ const actionSX = {
 };
 
 
-export default function RecentPurchases() {
+export default function RecentPurchases(item) {
+    console.log('-----', item)
     return (
         <MainCard sx={{ mt: 2 }} content={false}>
             <List

@@ -22,7 +22,7 @@ const analyticsCard = async () => {
 
     const currentUserCount = await userService.countAll(currentYear, currentMonth);
     const previousUserCount = await userService.countAll(currentYear, previousMonth);
-    const percentIncreaseUser = await userService.countAll(previousUserCount, currentUserCount);
+    const percentIncreaseUser = calculatePercentIncrease(previousUserCount, currentUserCount);
 
     const currentCountUnique = await userSubscriptionService.activeSubscribers(currentYear, currentMonth);
     const previousCountUnique = await userSubscriptionService.activeSubscribers(currentYear, previousMonth);

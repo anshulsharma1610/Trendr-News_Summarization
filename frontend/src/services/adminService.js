@@ -6,12 +6,5 @@ const API_URL = "http://localhost:8000/api/";
 
 export const getAnalytics = async () => {
     const response = await axios.get(API_URL + "analytics");
-    return response;
+    return response.data;
 };
-
-// const adminService = {
-//     getAnalytics
-// };
-
-
-// export default adminService;

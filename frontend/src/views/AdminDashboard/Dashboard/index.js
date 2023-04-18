@@ -65,18 +65,59 @@ const status = [
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const Dashboard = () => {
-    const [analytics, setAnalytics] = useState([]);
+    const [analytics, setAnalytics] = useState(
+        [
+            {
+                analyticsCard: {
+                    userCount: {},
+                    activeSubscribers: {},
+                    purchaseCount: {},
+                    salesCount: {},
+                    totalNews: {},
+                    totalLikes: {},
+                    totalComments: {}
+                },
+            },
+            {
+                coloumnChart: []
+            },
+            {
+                prevPurchases: []
+            },
+            {
+                monthlySales: []
+            },
+            {
+                pieChart: []
+            },
+            {
+                getSalesAndGrowth: {
+                    salesByMonth: [],
+                    growthByMonth: []
+                },
+            }
 
-    useEffect(() => {
+        ]
+    );
+
+
+    const [articles, setArticles] = useState(0);
+    const [likes, setLikes] = useState(0);
+    const [comments, setComments] = useState(0);
+
+    useEffect(async () => {
         const fetchAnalytics = async () => {
             const data = await getAnalytics();
             setAnalytics(data);
-        };
-        fetchAnalytics();
-    }, []);
 
-    const [value, setValue] = useState('today');
-    const [slot, setSlot] = useState('week');
+            // Update likes, comments, and articles after analytics state has been updated
+            setArticles(data[0].analyticsCard.totalNews);
+            setLikes(data[0].analyticsCard.totalLikes);
+            setComments(data[0].analyticsCard.totalComments);
+        };
+        await fetchAnalytics();
+
+    }, []);
 
     console.log('----anal', analytics);
 
@@ -88,30 +129,29 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Total Users"
-                    count={analytics && analytics[0].analyticsCard.userCount.currentUserCount}
-                    percentage={59.3}
-                    extra="35" />
+                    count={analytics[0].analyticsCard.userCount.currentUserCount}
+                    percentage={analytics[0].analyticsCard.userCount.percentIncreaseUser}
+                    extra={analytics[0].analyticsCard.userCount.currentUserCount - analytics[0].analyticsCard.userCount.previousUserCount} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Active Subscribers"
-                    count={analytics && analytics[0].analyticsCard.activeSubscribers.currentCountUnique}
-                    percentage={70.5}
-                    extra="8,900" />
+                    count={analytics[0].analyticsCard.activeSubscribers.currentCountUnique}
+                    percentage={analytics[0].analyticsCard.activeSubscribers.percentIncreaseUnique}
+                    extra={analytics[0].analyticsCard.activeSubscribers.currentCountUnique - analytics[0].analyticsCard.activeSubscribers.previousCountUnique} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Total Purchases"
-                    count={analytics && analytics[0].analyticsCard.purchaseCount.currentCountAll}
-                    percentage={27.4}
-                    color="warning"
-                    extra="1,943" />
+                    count={analytics[0].analyticsCard.purchaseCount.currentCountAll}
+                    percentage={analytics[0].analyticsCard.purchaseCount.percentIncreaseAll}
+                    extra={analytics[0].analyticsCard.purchaseCount.currentCountAll - analytics[0].analyticsCard.purchaseCount.previousCountAll}
+                    color="warning" />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Total Sales"
-                    count={analytics && analytics[0].analyticsCard.salesCount.currentCountSales}
-                    percentage={27.4}
-                    isLoss
-                    color="warning"
-                    extra="$20,395" />
+                    count={analytics[0].analyticsCard.salesCount.currentCountSales}
+                    percentage={analytics[0].analyticsCard.salesCount.percentIncreaseSales}
+                    extra={analytics[0].analyticsCard.salesCount.currentCountSales - analytics[0].analyticsCard.salesCount.previousCountSales}
+                    color="warning" />
             </Grid>
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -120,32 +160,12 @@ const Dashboard = () => {
             <Grid item xs={12} md={7} lg={8}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
-                        <Typography variant="h5">Unique Visitor</Typography>
-                    </Grid>
-                    <Grid item>
-                        <Stack direction="row" alignItems="center" spacing={0}>
-                            <Button
-                                size="small"
-                                onClick={() => setSlot('month')}
-                                color={slot === 'month' ? 'primary' : 'secondary'}
-                                variant={slot === 'month' ? 'outlined' : 'text'}
-                            >
-                                Month
-                            </Button>
-                            <Button
-                                size="small"
-                                onClick={() => setSlot('week')}
-                                color={slot === 'week' ? 'primary' : 'secondary'}
-                                variant={slot === 'week' ? 'outlined' : 'text'}
-                            >
-                                Week
-                            </Button>
-                        </Stack>
+                        <Typography variant="h5">Sales</Typography>
                     </Grid>
                 </Grid>
                 <MainCard content={false} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1, pr: 2 }}>
-                        <SalesLineChart slot={slot} />
+                        <SalesLineChart data={analytics[3].monthlySales} />
                     </Box>
                 </MainCard>
             </Grid>
@@ -165,7 +185,7 @@ const Dashboard = () => {
                             <Typography variant="h3">$7,650</Typography>
                         </Stack>
                     </Box>
-                    <OrdersPieChart />
+                    <OrdersPieChart data={analytics[4].pieChart} />
                 </MainCard>
             </Grid>
 
@@ -178,7 +198,7 @@ const Dashboard = () => {
                 </Grid>
                 <MainCard content={false} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1 }}>
-                        <GrowthLineColoumn />
+                        <GrowthLineColoumn data={analytics[5].getSalesAndGrowth} />
                     </Box>
                 </MainCard>
             </Grid>
@@ -194,15 +214,15 @@ const Dashboard = () => {
                     <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
                         <ListItemButton divider>
                             <ListItemText primary="Total Articles" />
-                            <Typography variant="h5">+45.14%</Typography>
+                            <Typography variant="h5">{articles}</Typography>
                         </ListItemButton>
                         <ListItemButton divider>
                             <ListItemText primary="Total Likes" />
-                            <Typography variant="h5">0.58%</Typography>
+                            <Typography variant="h5">{likes}</Typography>
                         </ListItemButton>
                         <ListItemButton>
                             <ListItemText primary="Total Comments" />
-                            <Typography variant="h5">Low</Typography>
+                            <Typography variant="h5">{comments}</Typography>
                         </ListItemButton>
                     </List>
                 </MainCard>
@@ -218,7 +238,7 @@ const Dashboard = () => {
                 </Grid>
                 <MainCard content={true} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1 }}>
-                        <OrdersColoumnChart />
+                        <OrdersColoumnChart data={analytics[1].coloumnChart} />
                     </Box>
                 </MainCard>
             </Grid>
@@ -229,7 +249,9 @@ const Dashboard = () => {
                         <Typography variant="h5">Transaction History</Typography>
                     </Grid>
                 </Grid>
-                <RecentPurchases />
+                {analytics[2].prevPurchases.map((item, index) => {
+                    <RecentPurchases key={index} data={item} />
+                })}
             </Grid>
         </Grid >
     );
