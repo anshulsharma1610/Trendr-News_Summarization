@@ -36,7 +36,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import { clearMessage } from "store/slices/messageSlice";
-import { register } from "store/slices/authSlice";
+import { register, googleLogin } from "store/slices/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
@@ -68,8 +68,18 @@ const FirebaseRegister = ({ ...others }) => {
     const [strength, setStrength] = useState(0);
     const [level, setLevel] = useState();
 
-    const googleHandler = async () => {
-        console.error('Register');
+    // handle googleHandler oauth login
+    const googleHandler = () => {
+        dispatch(googleLogin())
+            .unwrap()
+            .then(() => {
+                console.log('----------');
+                navigate("/preferences");
+                // window.location.reload();
+            })
+            .catch(() => {
+                setLoading(false);
+            });
     };
 
     const handleClickShowPassword = () => {
