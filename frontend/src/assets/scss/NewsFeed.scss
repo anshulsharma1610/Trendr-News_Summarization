@@ -1,6 +1,19 @@
 .news-feed {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-start;
     padding: 20px;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .news-feed__twitter {
+        display: none;
+    }
+
+    // .news-feed {
+    //     padding-left: 45px;
+    //     padding-right: 45px;
+    //     /* Adjust the value as needed */
+    // }
 }
