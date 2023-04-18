@@ -19,6 +19,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import FormSubscription from './FormSubscription.js';
+import { WifiTetheringOffTwoTone } from '@mui/icons-material';
 
 
 export default function AdminSubscription() {
@@ -35,9 +37,11 @@ export default function AdminSubscription() {
       const [rowsPerPage, setRowsPerPage] = useState(10);
       const [modalOpen,setModalOpen] = useState(false);
       const [updatedSubscription,setSubscription] = useState({});
+      const [isType, setIsType] = useState('Add');
 
-      const handleUpdate = (data) => {    
-        console.log("data::", data);
+
+      const handleUpdate = (data) => {
+        setIsType('Update');
         setSubscription(data);
         setModalOpen(true);
       };
@@ -56,17 +60,7 @@ export default function AdminSubscription() {
          window.location.reload();
       };
     
-    //   const handleSave = (row) => {
-    //     setEditingRow(null);
-    //     userService.updateSubscription(row);
-    //   };
-    
-    //   const handleEdit = (index) => {
-    //     setEditingRow(index);
-    //   };
-    
       const updateDescription = (id,body) => {
-        // console.log("id:::",id, " body::", body);
         userService.updateDescriptions(id,body);
          window.location.reload();
         setModalOpen(false);
@@ -76,26 +70,37 @@ export default function AdminSubscription() {
 
       const addSubscription =(id, body)=>{
         userService.addSubscriptions(id,body);
-        window.location.reload();
-       setModalOpen(false);
+       setModalOpen(true);
+      };
+    
+  const afterUpdate = (formData)=>{
+    setModalOpen(false);
+    window.location.reload();
+  
+  }
+  
+  const closeModal = ()=>{
+    setModalOpen(false);
+  }
+
+
+  const handleModalClose = () => {
+  setModalOpen(false);
+}
+  
+  const handleUpdateChange = (event)=>{
+      event.preventDefault();
+      console.log(event.target.id);
+      const newData = Object.assign({},updatedSubscription);
+      if(event.target.id=='title_id'){
+        newData.title=event.target.value;
       }
-
-
-
-        const handleModalClose = () => setModalOpen(false);
-        const handleUpdateChange = (event)=>{
-          event.preventDefault();
-          console.log(event.target.id);
-          const newData = Object.assign({},updatedSubscription);
-          if(event.target.id=='title_id'){
-            newData.title=event.target.value;
-          }
-          if(event.target.id=='link_id'){
-            newData.desc=event.target.value;
-          }
-          if(event.target.id=='features'){
+      if(event.target.id=='link_id'){
+        newData.desc=event.target.value;
+      }
+      if(event.target.id=='features'){
             newData.features=event.target.value;
-          }
+     }
           if(event.target.id=='description_id'){
             newData.tenureDays=event.target.value;
           }
@@ -105,9 +110,42 @@ export default function AdminSubscription() {
           setSubscription(newData);
       
         }
+        const styles = {
+          container: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+      
+          },
+          Table: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '20px',
+            border: '1px solid #ccc',
+            borderRadius: '5px',
+          },
+          textfield:{
+            marginTop:'10px'
+          },
+          btn:{
+            alignItems:'center',
+            justifyContent:'center',
+            textAlign:'center',
+            marginTop:'10px'
+          },
+          headerStyl:{
+            display:'flex',
+          },
+          clear:{
+            clear:'both'
+          }
+        };
+
     return ( 
     <>
- <Modal
+<Modal
   open={modalOpen}
   onClose={handleModalClose}
   aria-labelledby="modal-modal-title"
@@ -128,50 +166,34 @@ export default function AdminSubscription() {
     height:'80%',
     textAlign: 'center',
     border: '1px solid #ccc',
-    fontSize: '50px',
+    fontSize: '10px',
     transform: 'translate(-50%, -50%)',
     justifyContent:'center',
     alignItems: 'center',
     justifyContent: 'center',
+      width: '1000px',
+      maxWidth: '100%',
   }}>
-    <div sx={{ mb: 2 }}>
-    <Typography textAlign="left" style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}>Title</Typography>
-      <TextField fullWidth id="title_id" variant="standard" value={updatedSubscription.title} onChange={handleUpdateChange} />
-    </div>
 
-    <div sx={{ mb: 2 }}>
-    <Typography style={{color: '#2196f3', fontSize: '16px' ,marginTop:"15px", marginBottom:"15px"}} textAlign="left">Description</Typography>
-      <TextField fullWidth id="link_id" variant="standard" value={updatedSubscription.desc} onChange={handleUpdateChange} />
-    </div>
+      <div style={styles.container}>
+    <Box
+      sx={{
+        width: 800,
+        maxWidth: '100%',
+      }}
+    >
 
-    <div sx={{ mb: 12 }} style={{marginTop:"10px"}}>
-      <Typography style={{color: '#2196f3', fontSize: '16px',  marginTop:"15px", marginBottom:"15px"}} textAlign="left">Features</Typography>
-      <TextField fullWidth id="features" variant="standard" value={updatedSubscription.features} onChange={handleUpdateChange}></TextField>
-        </div>
-
-    <div sx={{ mb: 2 }}>
-    <Typography style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}textAlign="left">Days</Typography>
-      <TextField fullWidth id="description_id"  variant="standard" value={updatedSubscription.tenureDays} onChange={handleUpdateChange} />
-    </div>
-
-    <div sx={{ mb: 2 }}>
-    <Typography style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}textAlign="left">Price</Typography>
-      <TextField fullWidth id="price"  variant="standard" value={updatedSubscription.price} onChange={handleUpdateChange} />
-    </div>
-
-    <div style={{justifyContent:"center",textAlign:"center", marginTop:"50px"}}>
-    <Button startIcon={<SaveIcon />} style={{  margin: '200 auto', backgroundColor: '#2196f3', color: 'white', mb: 2 }} onClick={()=>updateDescription(updatedSubscription._id,updatedSubscription)}>Update</Button>
+    <FormSubscription isType={isType}  afterUpdate={afterUpdate} updatedSubscription={updatedSubscription} closeModal={closeModal} /> 
+    </Box>
     </div>
    
   </Box>
 </Modal>
-        <Button variant="contained" onClick={<FormComponent/>}>
-          Add Subscriptions
-        </Button>
+<Button variant='contained' style= {{ backgroundColor: '#EDE7F6', color:'black'}} onClick={addSubscription}>Add Subscription</Button>
 
           <TableContainer component={Paper} style={{ marginTop: '50px'}}>
           <Table>
-            <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20'}}>
+            <TableHead style= {{ backgroundColor: '#EDE7F6',fontSize: '20px'}}>
               <TableRow style={{ fontSize: '50px'}}>
                 <TableCell/>
                 <TableCell><b>Title</b></TableCell>
@@ -195,10 +217,9 @@ export default function AdminSubscription() {
                 <TableCell>{row.price}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>{row.content}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>
-                  <Button startIcon={<SaveIcon />} size ="small" variant="contained" onClick={()=>handleUpdate(row)}>Update</Button>
+                  <Button startIcon={<SaveIcon />} style= {{ backgroundColor: '#EDE7F6', color:'black'}} size ="small" variant="contained" onClick={()=>handleUpdate(row)}>Update</Button>
               <>    </>
-                  <Button startIcon={<DeleteIcon />} size ="small"  variant="contained" onClick={() => deleteSubscription(row._id)}>Delete</Button>
-
+                  <Button startIcon={<DeleteIcon />} style= {{ backgroundColor: '#EDE7F6', color:'black'}} size ="small"  variant="contained" onClick={() => deleteSubscription(row._id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
