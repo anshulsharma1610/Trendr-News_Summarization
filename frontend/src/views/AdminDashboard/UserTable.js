@@ -5,6 +5,14 @@ import TablePagination from '@mui/material/TablePagination';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import { blue, red } from '@mui/material/colors';
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  Button,
+  TextField,
+  Box
+} from '@mui/material';
 
 const UserTable = () => {
   const [userData, setUserData] = useState(null);
@@ -31,6 +39,8 @@ const UserTable = () => {
     .catch(error => console.error(error));
   };
 
+  
+
   // Get current users
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -42,12 +52,46 @@ const UserTable = () => {
     setCurrentPage(newPage + 1);
   };
   
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+    },
+    Table: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+    },
+    textfield:{
+      marginTop:'10px'
+    },
+    btn:{
+      alignItems:'center',
+      justifyContent:'center',
+      textAlign:'center',
+      marginTop:'10px'
+    }
+  };
+
 
   return (
-    <div style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}} >
+    <div style={styles.container}>
+    <Box
+      sx={{
+        width: '1000px',
+        maxWidth: '100%',
+      }}
+    >
+    <div>
       <h1 style={{ textAlign: 'center' , marginBottom: '50px', color: 'black'}} margin>USER DETAILS</h1>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
+        <Table sx={{ maxWidth: '1000px' }}>
           <TableHead sx={{ backgroundColor: '#bbbbc6', fontSize: '50px', fontWeight: 'bold' }}>
             <TableRow>
               <TableCell sx={{  padding: '10px', fontSize: '18px' }} align="center" >Email</TableCell>
@@ -83,7 +127,9 @@ const UserTable = () => {
     sx={{ marginTop: '20px' }}
   />
 )}
-    </div>
+</div>
+</Box>    
+</div>
   );
 };
 

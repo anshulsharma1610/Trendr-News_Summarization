@@ -30,10 +30,26 @@ const addPreferences=(body)=>{
     return axios.post(API_URL+"preferences",body);
 
 }
+const getAllSubscription=()=>{
+    return axios.get(API_URL + "subscriptions")
+    }
+    
+const updateDescriptions=(id,  body)=>{
+        return axios.put(API_URL+"subscriptions/"+id, body);
+    }
+    
+const deleteSubscriptions=(id)=>{
+        return axios.delete(API_URL+"subscriptions/"+id);
+    }
+
+const addSubscriptions=(id, body)=>{
+    return axios.post(API_URL+"subscriptions/"+id, body);
+
+}
 
 const userService = {
     getPublicContent, getAllPrefernce, updatePrefernce, getUserDetail, updateUser, deletePrefernce,addPreferences
-, };
+,getAllSubscription, updateDescriptions, deleteSubscriptions, addSubscriptions };
 
 
 export default userService

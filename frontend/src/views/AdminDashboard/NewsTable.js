@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import MainCard from 'components/cards/MainCard';
 import { getAllnews } from '../fetch.js';
 import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,8 +19,9 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Button, FormLabel } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import { CenterFocusStrong, Label } from '@mui/icons-material';
+import { CenterFocusStrong, Label, PropaneSharp } from '@mui/icons-material';
 import { color } from '@mui/system';
+import FormComponent from './FormComponent.js';
 // import TextareaAutosize from '@mui/material';
 const style = {
   position: 'absolute',
@@ -44,7 +44,7 @@ const NewsTable = () => {
   const [expandedRow, setExpandedRow] = useState(null);
   const [modalOpen,setModalOpen] = useState(false);
   const [updatedNews,setUpdatedNews] = useState({});
-
+  const [isType, setIsType] = useState('Add');
 
   useEffect(() => {
     getAllnews().then(data => {setNewsData(data); 
@@ -67,9 +67,15 @@ const NewsTable = () => {
   };
 
   const handleUpdate = (data) => {
+    setIsType('Update');
     setUpdatedNews(data);
     setModalOpen(true);
   };
+  const addNews = () =>{
+    setIsType('Add');
+    setModalOpen(true);
+
+  }
 
   const updateNews = async () => {
     try {
@@ -98,6 +104,20 @@ const NewsTable = () => {
       alert('Failed to update news');
     }
   }
+  const afterUpdate = (formData)=>{
+    setModalOpen(false);
+    setNewsData(prevNewsData => prevNewsData.map(news => {
+      if (news._id === formData._id) {
+        return formData;
+      }
+      return news;
+    })); 
+  }
+  
+  const closeModal = ()=>{
+    setModalOpen(false);
+  }
+
   
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -128,6 +148,40 @@ const NewsTable = () => {
     setUpdatedNews(newData);
 
   }
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+
+    },
+    Table: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      // width: '80%',
+      padding: '20px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+    },
+    textfield:{
+      marginTop:'10px'
+    },
+    btn:{
+      alignItems:'center',
+      justifyContent:'center',
+      textAlign:'center',
+      marginTop:'10px'
+    },
+    headerStyl:{
+      display:'flex',
+    },
+    clear:{
+      clear:'both'
+    }
+  };
+
   return ( 
     <>
  <Modal
@@ -151,13 +205,15 @@ const NewsTable = () => {
     height:'80%',
     textAlign: 'center',
     border: '1px solid #ccc',
-    fontSize: '50px',
+    fontSize: '10px',
     transform: 'translate(-50%, -50%)',
     justifyContent:'center',
     alignItems: 'center',
     justifyContent: 'center',
+      width: '1000px',
+      maxWidth: '100%',
   }}>
-    <div sx={{ mb: 2 }}>
+    {/* <div sx={{ mb: 2 }}>
     <Typography textAlign="left" style={{color: '#2196f3', fontSize: '16px',marginTop:"15px", marginBottom:"15px" }}>Title</Typography>
       <TextField fullWidth id="title_id" variant="standard" value={updatedNews.title} onChange={handleUpdateChange} />
     </div>
@@ -179,15 +235,59 @@ const NewsTable = () => {
 
     <div style={{justifyContent:"center",textAlign:"center", marginTop:"50px"}}>
     <Button  style={{  margin: '200 auto', backgroundColor: '#2196f3', color: 'white', mb: 2 }} onClick={updateNews}>Update</Button>
+    </div> */}
+      <div style={styles.container}>
+    <Box
+      sx={{
+        width: 800,
+        maxWidth: '100%',
+      }}
+    >
+      
+      {/* <h1 style={{textAlign:'center', marginBottom:'50px'}}>ADD NEWS</h1>
+      <div style={styles.textfield}>
+          <TextField  style={{width:'400px'}} label="Title" id="title" value={updatedNews.title} onChange={handleUpdateChange}/>
+      
+      </div>
+      <div>
+      <TextField maxWidth style={{marginLeft:'10px'}} label="Link" id="link"value={updatedNews.link} onChange={handleUpdateChange} />
+      </div>
+
+      <div style={styles.textfield}>
+          <TextField style={{width:'400px'}}  label="Summary" id="summary" value={updatedNews.summary} onChange={handleUpdateChange} />
+          <TextField style={{marginLeft:'10px',width:'400px'}} label="Image URL" id="Image_URL" /> 
+      </div>
+
+      <div style={styles.btn}>
+          <Button variant="contained" >Submit</Button>
+      </div> */}
+    <FormComponent isType={isType} afterUpdate={afterUpdate} updatedNews={updatedNews} closeModal={closeModal}/>
+    </Box>
+  
     </div>
    
   </Box>
 </Modal>
 
 
-        <h1 style={{ textAlign: 'center', marginBottom: '20px', marginTop:'20px'}}>News Details
-        </h1>
-          <TableContainer component={Paper} style={{ width: '1000px', marginLeft: '70px', marginTop: '50px'}}>
+<div style={styles.container}>
+    <Box
+      sx={{
+        maxWidth: '100%',
+      }}
+    >
+    <div>
+        <div style={styles.headerStyl}>
+       <span style={{float:'left'}}>
+       <Typography  variant="h4" >News Details </Typography>
+        </span> 
+        <span style={{float:'right'}}>
+        <Button variant='contained' onClick={addNews}>Add News</Button>
+        </span>
+        <div style={styles.clear}></div>
+        </div>
+
+          <TableContainer component={Paper} style={{ width: '1000px', marginTop: '50px'}}>
           <Table aria-label="collapsible table">
             <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20'}}>
               <TableRow style={{ fontSize: '50px'}}>
@@ -213,7 +313,11 @@ const NewsTable = () => {
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </TableContainer>
-      </>
+
+      </div>
+</Box>    
+</div>
+</>
  
   );
 };
