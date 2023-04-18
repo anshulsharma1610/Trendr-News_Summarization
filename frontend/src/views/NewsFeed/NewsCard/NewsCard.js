@@ -17,7 +17,6 @@ import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import '../../../assets/scss/NewsCard.scss'
 import '../../../assets/scss/NewsCardStyles.scss'
 import {
     likeOrUnlikeArticle,
@@ -28,7 +27,7 @@ import {
     // bookmarkOrUnbookmarkArticle,
     toggleBookmark
 } from '../../../services/newsService.js';
-const NewsCard = ({ article }) => {
+const NewsCard = ({ classname, article }) => {
     const isLoggedIn = useSelector((state) => {
         return state.user.isLoggedIn;
     });
@@ -81,7 +80,7 @@ const NewsCard = ({ article }) => {
     };
 
     return (
-        <Card className="news-card">
+        <Card className={`news-card ${classname}`}>
             <CardContent className="card-content">
                 {article.image_url && <Box className='imageBox'> <img src={article.image_url} alt={article.title} /></Box>}
                 <Typography variant="h5" component="div" className="title">
