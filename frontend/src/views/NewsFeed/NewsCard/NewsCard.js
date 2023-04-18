@@ -58,13 +58,6 @@ const NewsCard = ({ classname, article }) => {
         setBookmarked(result.bookmarkAdded);
     };
 
-    // const handleBookmark = async () => {
-    //     const updatedArticle = await bookmarkOrUnbookmarkArticle(article._id, userId);
-    //     if (updatedArticle) {
-    //         setBookmarked(updatedArticle.likedBy.includes(userId));
-    //     }
-    // };
-
     const handleAddComment = async (newCommentObj) => {
         const updatedArticle = await commentOnNewsArticle(article._id, newCommentObj);
         if (updatedArticle) {
