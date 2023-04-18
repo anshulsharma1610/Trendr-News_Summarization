@@ -23,7 +23,7 @@
         .title {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 3px;
         }
 
         .summary {
@@ -42,6 +42,46 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .info-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding-bottom: 15px;
+
+            // .pubDate {
+            //     // ... (styles for the pubDate class)
+            // }
+
+            // .categories {
+            //     // ... (styles for the categories class)
+            //     // margin-left: 10px;
+            // }
+
+            .separator {
+                // Display the separator by default
+                display: inline;
+
+                // Hide the separator on mobile screens
+                @media (max-width: 767px) {
+                    display: none;
+                }
+            }
+        }
+
+        // Styles for small screens
+        @media (max-width: 600px) {
+            .info-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                padding-top: 3px;
+
+                .categories {
+                    margin-left: 0;
+                }
+            }
+        }
     }
 
     .card-actions {
@@ -56,6 +96,13 @@
 
         .card-action-text {
             padding-left: 8px;
+        }
+
+        .hide-on-mobile {
+            @media (max-width: 767px) {
+                // You can adjust the breakpoint based on your design
+                display: none;
+            }
         }
     }
 
