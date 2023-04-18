@@ -21,6 +21,7 @@ const twitter = new Twit({
 
 export const get = async (req, res) => {
     const user = req.query.id;
+    console.log(user)
     let preferences = [];
     // get user data from db
     const userData = await userService.getById(user);

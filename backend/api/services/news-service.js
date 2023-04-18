@@ -86,4 +86,27 @@ export const searchNews = async (categories, keywords) => {
     return newsArticles;
 };
 
+export const totalNews = async () => {
+    const result = await NewsArticleModel.countDocuments();
+    return result;
+}
 
+export const totalSocials = async () => {
+    const pipeline = [
+        {
+            $group: {
+                _id: null,
+                totalLikes: { $sum: '$likes' },
+                totalComments: { $sum: { $size: '$comments' } },
+            },
+        },
+    ];
+    const result = NewsArticleModel.aggregate(pipeline)
+        .then((result) => {
+            return result;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    return result;
+}

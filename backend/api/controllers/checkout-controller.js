@@ -9,7 +9,7 @@ import * as userService from '../services/user-service.js';
 import * as userSubscriptionService from '../services/userSubscription-service.js';
 import * as subscriptionsService from '../services/subscriptions-service.js';
 import stripe from 'stripe';
-import { subscribe } from 'diagnostics_channel';
+// import { subscribe } from 'diagnostics_channel';
 
 const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 

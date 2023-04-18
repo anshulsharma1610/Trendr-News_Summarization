@@ -5,10 +5,10 @@ import FormComponent from "./FormComponent";
 
 const AdminCRUD = () => {
   return (
-    <div>
+    <div style={{ justifyContent: 'center'}}>
         <UserTable/>
         <NewsTable/>
-        <FormComponent/> 
+        {/* <FormComponent/>  */}
     </div>
   );
 }
