@@ -1,10 +1,12 @@
 import React from 'react';
 import MainCard from 'components/cards/MainCard';
 import Avatar from 'components/extended/Avatar';
-
+import 'assets/scss/TweetCard.scss'
 const TweetCard = ({ userAvatarUrl, userName, userHandle, tweetText }) => {
     return (
-        <MainCard>
+        <MainCard className="tweet-card">
+
+            {console.log('Rendering TweetCard')}
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Avatar src={userAvatarUrl} />
                 <div style={{ marginLeft: '1rem' }}>
@@ -14,6 +16,7 @@ const TweetCard = ({ userAvatarUrl, userName, userHandle, tweetText }) => {
             </div>
             <p style={{ marginTop: '1rem', wordWrap: 'break-word' }}>{tweetText}</p>
         </MainCard>
+
     );
 };
 

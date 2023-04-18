@@ -1,33 +1,53 @@
-import React from 'react';
-import TweetCard from './TweetCard';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import TweetCard from './TweetCard.js';
+import { getTweets } from 'services/newsService';
 
-const tweets = [
-    {
-        // userAvatarUrl: 'https://example.com/avatar.png',
-        userName: 'John Smith',
-        userHandle: 'john_smith',
-        tweetText: 'Just had the best sandwich ever! #foodie',
-    },
-    {
-        // userAvatarUrl: 'https://example.com/avatar2.png',
-        userName: 'Jane Doe',
-        userHandle: 'jane_doe',
-        tweetText: 'I can\'t believe it\'s already April! Time flies... ',
-    },
-];
 
-const TwitterFeed = () => (
-    <>
-        {tweets.map((tweet) => (
-            <TweetCard
-                key={tweet.userHandle + tweet.tweetText}
-                userAvatarUrl={tweet.userAvatarUrl}
-                userName={tweet.userName}
-                userHandle={tweet.userHandle}
-                tweetText={tweet.tweetText}
-            />
-        ))}
-    </>
-);
+
+const TwitterFeed = () => {
+    const [tweets, setTweets] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const isLoggedIn = useSelector((state) => {
+        return state.user.isLoggedIn;
+    });
+    let userId;
+    if (isLoggedIn) {
+        userId = useSelector((state) => state.user.user.user._id);
+    }
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getTweets(userId);
+            setTweets(response.statuses);
+            setLoading(false);
+        };
+        fetchData();
+    }, [userId]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    console.log('Rendering TwitterFeed'); // Debugging log
+    console.log(tweets); // Debugging log
+
+    return (
+        <>
+            {tweets.map((tweet) => {
+                console.log('Rendering TweetCard for:', tweet.userHandle); // Debugging log
+                const tweetText = tweet.retweeted_status ? tweet.retweeted_status.text : tweet.text;
+                return (
+                    <TweetCard
+                        key={tweet.id_str}
+                        userAvatarUrl={tweet.user.profile_image_url_https}
+                        userName={tweet.user.name}
+                        userHandle={tweet.user.screen_name}
+                        tweetText={tweetText}
+                    />
+                );
+            })}
+        </>
+    );
+};
 
 export default TwitterFeed;
