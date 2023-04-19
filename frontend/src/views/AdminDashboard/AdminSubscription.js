@@ -18,10 +18,9 @@ import FormComponent from './FormComponent';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import AddIcon from '@mui/icons-material/Add';
 import FormSubscription from './FormSubscription.js';
-import { WifiTetheringOffTwoTone } from '@mui/icons-material';
-
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 export default function AdminSubscription() {
     const handleChangePage = (event, newPage) => {
@@ -189,11 +188,11 @@ export default function AdminSubscription() {
    
   </Box>
 </Modal>
-<Button variant='contained' style= {{ backgroundColor: '#EDE7F6', color:'black'}} onClick={addSubscription}>Add Subscription</Button>
+<Button variant='contained' startIcon={<AddIcon />} size ="small" onClick={addSubscription}>Add Subscription</Button>
 
           <TableContainer component={Paper} style={{ marginTop: '50px'}}>
           <Table>
-            <TableHead style= {{ backgroundColor: '#EDE7F6',fontSize: '20px'}}>
+            <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20px'}}>
               <TableRow style={{ fontSize: '50px'}}>
                 <TableCell/>
                 <TableCell><b>Title</b></TableCell>
@@ -217,9 +216,13 @@ export default function AdminSubscription() {
                 <TableCell>{row.price}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>{row.content}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>
-                  <Button startIcon={<SaveIcon />} style= {{ backgroundColor: '#EDE7F6', color:'black'}} size ="small" variant="contained" onClick={()=>handleUpdate(row)}>Update</Button>
+                  <Button startIcon={<ModeEditIcon />} size ="small" variant="contained" onClick={()=>handleUpdate(row)}>Update</Button>
               <>    </>
-                  <Button startIcon={<DeleteIcon />} style= {{ backgroundColor: '#EDE7F6', color:'black'}} size ="small"  variant="contained" onClick={() => deleteSubscription(row._id)}>Delete</Button>
+                  <Button startIcon={<DeleteIcon />}  size ="small" style={{
+
+        backgroundColor: "#ed5e68",
+      
+    }} variant="contained" onClick={() => deleteSubscription(row._id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
