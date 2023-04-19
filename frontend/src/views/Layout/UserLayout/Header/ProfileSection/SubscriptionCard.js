@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import { Button, Card, CardContent, Grid, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 // styles
 const CardStyle = styled(Card)(({ theme }) => ({
@@ -72,7 +74,8 @@ const UpgradePlanCard = () => {
                 </CardContent>
             </CardStyle>
         );
-    } else {
+    }
+    else {
         return (
             <CardStyle>
                 <CardContent>

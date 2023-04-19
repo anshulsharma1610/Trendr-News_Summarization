@@ -200,7 +200,7 @@ const ProfileSection = () => {
                                             </Stack>
                                         </Stack>
                                         <Divider sx={{ mt: 2 }} />
-                                        <SubscriptionCard sx={{ mt: 2 }} />
+                                        <SubscriptionCard />
                                         <Divider />
                                     </Box>
                                     <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
