@@ -31,7 +31,7 @@ const columnChartOptions = {
         }, {
             opposite: true,
             title: {
-                text: 'Social Media'
+                text: 'Sales'
             }
         },]
     },
@@ -49,13 +49,13 @@ const GrowthLineColoumn = (props) => {
 
     const [series] = useState([
         {
-            name: 'Website Blog',
+            name: 'Sales',
             type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            data: [23, 50, 41, 11, 27, 13]
         }, {
-            name: 'Social Media',
+            name: '% change',
             type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            data: [15, 12, -13, 34, -14, 34]
         },
     ]);
 

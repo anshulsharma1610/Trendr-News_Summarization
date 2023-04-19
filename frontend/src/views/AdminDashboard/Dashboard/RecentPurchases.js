@@ -30,10 +30,10 @@ const actionSX = {
 };
 
 
-export default function RecentPurchases(item) {
-    console.log('-----', item)
+export default function RecentPurchases({ item }) {
+    console.log('-----RecentPurchases', item)
     return (
-        <MainCard sx={{ mt: 2 }} content={false}>
+        <MainCard sx={{ mt: 0.5 }} content={false}>
             <List
                 component="nav"
                 sx={{
@@ -57,15 +57,15 @@ export default function RecentPurchases(item) {
                             {/* <GiftOutlined /> */}
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
+                    <ListItemText primary={<Typography variant="subtitle1" color="blue">Order #{item._id}</Typography>} secondary={item.createdAt} />
                     <ListItemSecondaryAction>
                         <Stack alignItems="flex-end">
                             <Typography variant="subtitle1" noWrap>
-                                + $1,430
+                                + ${item.price}
                             </Typography>
-                            <Typography variant="h6" color="secondary" noWrap>
-                                78%
-                            </Typography>
+                            {/* <Typography variant="h6" color="secondary" noWrap>
+                                UserId: {item.userId}
+                            </Typography> */}
                         </Stack>
                     </ListItemSecondaryAction>
                 </ListItemButton>
