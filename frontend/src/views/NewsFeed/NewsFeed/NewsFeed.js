@@ -20,29 +20,40 @@ const NewsFeed = () => {
     if (isLoggedIn) {
         userId = useSelector((state) => state.user.user.user._id);
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            let userdetails = await userService.getUserDetail(userId);
-            let preferenceIds = userdetails.data.preferences
-            console.log(userdetails)
-            let response;
+    const isSubbed = useSelector((state) => state.isUserSubbed.isUserSubbed);
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+            // Fetch user details and all preferences in parallel
+            const [userDetailsResponse, allPreferencesResponse] = await Promise.all([
+                userService.getUserDetail(userId),
+                userService.getAllPrefernce(),
+            ]);
+
+            const preferenceIds = userDetailsResponse.data.preferences;
+            const allPreferences = allPreferencesResponse.data;
+            let newsResponse;
+
             if (preferenceIds.length > 0) {
                 // Fetch news based on preferences if preferences are not empty
-                let allPreferences = await userService.getAllPrefernce();
-                const selectedPreferenceNames = preferenceIds.map(id => {
-                    // Find the preference object that matches the current ID
-                    const preference = allPreferences.data.find(pref => pref._id === id);
-                    // Return the preference name if the preference object was found, otherwise return undefined
-                    return preference ? preference.prefernceName : undefined;
-                }).filter(Boolean);
-                response = await fetchNewsbyPreference(selectedPreferenceNames);
+                const selectedPreferenceNames = preferenceIds
+                    .map(id => allPreferences.find(pref => pref._id === id)?.prefernceName)
+                    .filter(Boolean);
+                newsResponse = await fetchNewsbyPreference(selectedPreferenceNames, userId);
             } else {
                 // Fetch general news if preferences are empty
-                response = await fetchNews();
+                newsResponse = isSubbed ? await fetchNews() : await fetchNewsbyPreference([], userId);
             }
-            setArticles(response);
+
+            setArticles(newsResponse);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
             setLoading(false);
-        };
+        }
+    };
+
+    useEffect(() => {
         fetchData();
     }, []);
 
