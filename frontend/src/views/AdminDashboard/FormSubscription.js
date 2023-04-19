@@ -70,7 +70,7 @@ const FormSubscription = (props) => {
       const resp = await axios.post(Add_Subscription_URL,formData);
     //   console.log(resp.data);
     //   console.log(data);
-      alert('Added New News');
+      // alert('Added New News');
       props.afterUpdate(formData);
 
     }  
@@ -90,7 +90,7 @@ const FormSubscription = (props) => {
       if (!response.ok) {
         throw new Error('Failed to update news');
       }
-      alert('News has been updated.');
+      // alert('News has been updated.');
       clearFormData();
       props.afterUpdate(formData);
     } catch (error) {

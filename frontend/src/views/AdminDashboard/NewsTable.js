@@ -23,7 +23,8 @@ import { CenterFocusStrong, Label, PropaneSharp } from '@mui/icons-material';
 import { color } from '@mui/system';
 import FormComponent from './FormComponent.js';
 import { useTheme } from '@mui/material/styles';
-// import TextareaAutosize from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -63,7 +64,7 @@ const NewsTable = () => {
     })
       .then((response) => {
         if (response.ok) {
-          alert('News has been deleted.');
+          // alert('News has been deleted.');
           setNewsData(newsData.filter((news) => news._id !== id));
         }
       })
@@ -94,7 +95,7 @@ const NewsTable = () => {
       if (!response.ok) {
         throw new Error('Failed to update news');
       }
-      alert('News has been updated.');
+      // alert('News has been updated.');
       setModalOpen(false);
       
       setNewsData(prevNewsData => prevNewsData.map(news => {
@@ -105,7 +106,7 @@ const NewsTable = () => {
       }));
     } catch (error) {
       console.error(error);
-      alert('Failed to update news');
+      // alert('Failed to update news');
     }
   }
   const afterUpdate = (formData)=>{
@@ -246,27 +247,27 @@ const NewsTable = () => {
 </Modal>
 
 
-<div style={styles.container}>
-    <Box
+
+    {/* <Box
       sx={{
         maxWidth: '100%',
       }}
-    >
+    > */}
     <div>
-        <div style={styles.headerStyl}>
-<span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-  <Typography variant="h4" style={{ fontSize:'20px'}}>News Details</Typography>
-  <div style={{ marginLeft: 'auto' }}>
-    <Button variant="contained" style={{ backgroundColor: '#EDE7F6', color: 'black', marginLeft:'800px'}} onClick={addNews}>
+        {/* <div style={styles.headerStyl}> */}
+{/* <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}> */}
+  {/* <Typography variant="h4" style={{ fontSize:'20px'}}>News Details</Typography> */}
+  {/* <div style={{ marginLeft: 'auto' }}> */}
+    <Button variant="contained" size ="small" startIcon={<AddIcon />} onClick={addNews}>
       Add News
     </Button>
-  </div>
-</span>
-        <div style={styles.clear}></div>
-        </div>
+  {/* </div>
+</span> */}
+        
+        {/* </div> */}
           <TableContainer component={Paper} style={{ width: '1000px', marginTop: '50px'}}>
           <Table aria-label="collapsible table">
-            <TableHead style= {{ backgroundColor: '#EDE7F6',fontSize: '20px'}}>
+            <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20px'}}>
               <TableRow style={{ fontSize: '50px'}}>
                 <TableCell/>
                 <TableCell style= {{fontSize: '20px', color: 'black'}}><b>Title</b></TableCell>
@@ -292,8 +293,8 @@ const NewsTable = () => {
         </TableContainer>
 
       </div>
-</Box>    
-</div>
+{/* </Box>     */}
+
 </>
  
   );

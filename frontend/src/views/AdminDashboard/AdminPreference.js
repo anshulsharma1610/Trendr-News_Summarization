@@ -19,6 +19,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+
 
 
 
@@ -76,7 +78,7 @@ export default function AdminPreferences() {
         
 
     return ( <><div>
-        <Button variant="contained" onClick={handleClickOpen}>
+        <Button variant="contained" size ="small" startIcon={<AddIcon />} onClick={handleClickOpen}>
           Add Preferences
         </Button>
         <Dialog open={open} onClose={handleClose}>
@@ -123,7 +125,11 @@ export default function AdminPreferences() {
                 <TableCell>{row.prefernceName}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>{row.content}</TableCell>
                 <TableCell style={{ textAlign: 'right' }}>
-                  <Button startIcon={<DeleteIcon />}  variant="contained"onClick={() => deletePreferences(row._id)}>Delete</Button>
+                  <Button size ="small" startIcon={<DeleteIcon />} style={{
+
+backgroundColor: "#ed5e68",
+
+}} variant="contained"onClick={() => deletePreferences(row._id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}

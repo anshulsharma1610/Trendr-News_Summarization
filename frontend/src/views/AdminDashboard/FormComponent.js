@@ -71,7 +71,6 @@ const FormComponent = (props) => {
       const resp = await axios.post(NEWS_API_URL,formData);
       console.log(resp.data);
       console.log(data);
-      alert('Added New News');
       props.afterUpdate(formData);
 
     }
@@ -92,7 +91,7 @@ const FormComponent = (props) => {
       if (!response.ok) {
         throw new Error('Failed to update news');
       }
-      alert('News has been updated.');
+      // alert('News has been updated.');
 //      setModalOpen(false);
       props.afterUpdate(formData);
     } catch (error) {
@@ -157,18 +156,19 @@ const FormComponent = (props) => {
           <TextField style={{marginLeft:'10px', width:'270px'}} label="Source" id="source_id" onChange={handleOnChange} value={formData.source_id}/>    
       </div>
       
-      <div style={styles.textfield}>
+      {/* <div style={styles.textfield}>
   <TextField fullWidth label="PubDate" type="date" id="pubDate" onChange={handleOnChange} value={formData.pubDate || new Date().toISOString().slice(0, 10)}/>
-      </div>
+      </div> */}
 
       <div style={styles.textfield}>
-          <TextField fullWidth  inputProps={{ style: { height: "100px"},
+          <TextField  rows={10}
+        multiline fullWidth  inputProps={{ style: { height: "100px",  textAlign: 'left'},
     }} label="Summary" id="summary" onChange={handleOnChange} value={formData.summary}/>    
       </div>
 
       <div style={styles.btn}>
-          <Button variant="contained" onClick={handleOnSubmit}>Submit</Button>
-          <Button variant="contained" style={{background:'red'}} onClick={closeModal}>Cancel</Button>
+          <Button variant="contained" style={{ marginTop:'30px',marginRight:'15px'}} onClick={handleOnSubmit}>Submit</Button> <>    </>
+          <Button variant="contained" style={{marginTop:'30px',background:"#ed5e68"}} onClick={closeModal}>Cancel</Button>
       </div>
 
     </Box>
