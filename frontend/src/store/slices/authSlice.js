@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setMessage } from "./messageSlice";
+import { userSubbed } from "./subscriptionSlice";
 
 import AuthService from "services/authService";
 
@@ -31,6 +32,9 @@ export const login = createAsyncThunk(
         try {
             const data = await AuthService.login(email, password);
 
+            console.log('anshul--login', data)
+            if (data.userSubscription && data.userSubscription.userSub)
+                thunkAPI.dispatch(userSubbed());
             thunkAPI.dispatch(setMessage(data.message));
 
             return { user: data };
@@ -60,9 +64,12 @@ export const googleLogin = createAsyncThunk(
                     console.error('Error:', error);
                     // Handle the error
                 });
-            console.log("here at succ", data)
-            // await thunkAPI.dispatch(setMessage(data.message));
 
+            console.log("here at succ", data)
+            // thunkAPI.dispatch(setMessage(data.message));
+
+            if (data.userSubscription && data.userSubscription.userSub)
+                thunkAPI.dispatch(userSubbed());
             return { user: data };
         } catch (error) {
             const message =

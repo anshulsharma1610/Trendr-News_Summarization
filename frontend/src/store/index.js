@@ -3,6 +3,7 @@ import customizationReducer from './slices/customizationSlice';
 import authReducer from './slices/authSlice';
 import messageReducer from './slices/messageSlice';
 import snackbarReducer from "./slices/snackbarSlice";
+import subbedReducer from "./slices/subscriptionSlice";
 
 const store = configureStore({
     reducer: {
@@ -10,7 +11,8 @@ const store = configureStore({
         customization: customizationReducer,
         user: authReducer,
         message: messageReducer,
-        snackbar: snackbarReducer
+        snackbar: snackbarReducer,
+        isUserSubbed: subbedReducer
     }
 });
 
