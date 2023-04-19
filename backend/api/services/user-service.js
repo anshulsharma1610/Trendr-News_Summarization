@@ -10,7 +10,8 @@ export const getAll = async () => {
 }
 
 export const getById = async (id) => {
-    return User.findById(id);
+    const result = await User.findById(id);
+    return result
 }
 
 export const update = async (id, updatedUser) => {
