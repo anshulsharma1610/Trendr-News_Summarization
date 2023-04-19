@@ -3,26 +3,20 @@ import { lazy } from 'react';
 // project imports
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
-import TrendingNews from 'views/TrendingNews';
-import Preferences from 'views/Preferences';
-import Bookmarks from 'views/Bookmarks/Bookmarks';
-import AdminCRUD from 'views/AdminDashboard/AdminUserTable';
-import Profile from 'views/Profile';
-import SearchResults from 'views/Search/SearchResults';
-import Checkout from 'views/Checkout/SubscriptionPlans/SubscriptionPlans';
-import Success from 'views/Checkout/Success';
-import Cancel from 'views/Checkout/Cancel';
-import NotFound from 'components/NotFound';
 import { Navigate } from 'react-router-dom';
-import { Check } from '@mui/icons-material';
-import AdminPreferences from 'views/AdminDashboard/AdminPreference';
-import AdminSubscription from 'views/AdminDashboard/AdminSubscription';
-import UserSubscriptions from 'views/AdminDashboard/UserSubscriptions';
-import AdminNews from 'views/AdminDashboard/AdminNews';
+import ProtectedRoute from 'components/ProtectedRoute';
 
-
-const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
+const Checkout = Loadable(lazy(() => import('views/Checkout/SubscriptionPlans/SubscriptionPlans')));
+const Success = Loadable(lazy(() => import('views/Checkout/Success')));
+const Cancel = Loadable(lazy(() => import('views/Checkout/Cancel')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
+const NotFound = Loadable(lazy(() => import('components/NotFound')));
+const SearchResults = Loadable(lazy(() => import('views/Search/SearchResults')));
+const Profile = Loadable(lazy(() => import('views/Profile')));
+const Bookmarks = Loadable(lazy(() => import('views/Bookmarks/Bookmarks')));
+const Preferences = Loadable(lazy(() => import('views/Preferences')));
+const TrendingNews = Loadable(lazy(() => import('views/TrendingNews')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -30,44 +24,40 @@ const MainRoutes = {
     element: <UserLayout />,
     children: [
         {
+            path: '/news',
+            element: <ProtectedRoute component={NewsFeed} />
+        },
+        {
             path: '/',
-            element: <NewsFeed />
+            element: <TrendingNews />
         },
         {
-            path: '/anshul',
-            element: <HelloWorld />
-        },
-        {
-            path: '/trendingnews',
+            path: '/trending',
             element: <TrendingNews />
         },
         {
             path: '/preferences',
-            element: <Preferences />
+            element: <ProtectedRoute component={Preferences} />
         },
         {
             path: '/bookmarks',
-            element: <Bookmarks />
-        },
-        {
-            path: '/admincrud',
-            element: <AdminCRUD />
+            element: <ProtectedRoute component={Bookmarks} />
         },
         {
             path: '/account',
-            element: <Profile />
+            element: <ProtectedRoute component={Profile} />
         },
         {
             path: '/checkout',
-            element: <Checkout />
+            element: <ProtectedRoute component={Checkout} />
         },
         {
             path: '/success',
-            element: <Success />
+            element: <ProtectedRoute component={Success} />
         },
         {
             path: '/cancel',
-            element: <Cancel />
+            element: <ProtectedRoute component={Cancel} />
         },
         {
             path: '/404',
@@ -78,31 +68,9 @@ const MainRoutes = {
             element: <Navigate to="/404" />
         },
         {
-            path: '/admincrud/preferences',
-            element: <AdminPreferences />
-
-        },
-        {
             path: '/search',
-            element: <SearchResults />
-        }
-        ,
-        {
-            path: '/admincrud/subscription',
-            element: <AdminSubscription />
-        } ,
-        {
-            path: '/admincrud/userSubscription',
-            element: <UserSubscriptions />
+            element: <ProtectedRoute component={SearchResults} />
         },
-        {
-            path: '/admincrud/users',
-            element: <AdminCRUD />
-        },
-        {
-            path: '/admincrud/news',
-            element: <AdminNews />
-        }
     ]
 };
 
