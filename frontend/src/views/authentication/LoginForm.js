@@ -70,6 +70,7 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
+                dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
                 navigate("/");
                 // window.location.reload();
@@ -98,6 +99,7 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
+                dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
                 navigate("/");
                 // window.location.reload();

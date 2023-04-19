@@ -17,3 +17,7 @@ export const remove = async (id) => {
     return Role.findByIdAndRemove(id);
 }
 
+export const getById = async (id) => {
+    const result = await Role.findById(id);
+    return result;
+}

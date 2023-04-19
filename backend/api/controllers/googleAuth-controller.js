@@ -26,7 +26,10 @@ passport.use(
                 if (existingUser) {
                     return done(null, existingUser);
                 }
-                const user = await userService.save({ email: profile._json.email, fname: profile.name.givenName, lname: profile.name.familyName });
+                let user = await userService.save({ email: profile._json.email, fname: profile.name.givenName, lname: profile.name.familyName });
+                // const userRole = await Roles.findOne({ role: 'user' });
+                // user.roleId = userRole._id;
+                user = await userService.getById(user._id);
                 return done(null, user);
             } catch (err) {
                 console.log(err);

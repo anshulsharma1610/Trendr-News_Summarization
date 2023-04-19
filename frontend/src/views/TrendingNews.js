@@ -50,7 +50,7 @@ const TrendingNews = () => {
       </Typography>
 
       <List className={theme.root}>
-        {news.map((item, index) => (
+        {news.length > 0 && news.map((item, index) => (
           <MainCard sx={{ mt: 2 }} key={index}>
             <ListItem sx={{ m: -2 }} key={index} id="ListItem" className={theme.listItem}>
               <Link href={item.link} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
@@ -80,7 +80,7 @@ const TrendingNews = () => {
             </ListItem>
           </MainCard>
         ))}
-        {news.length === 0 && (
+        {news.length == 0 && (
           <Typography variant="h4">No News Found!</Typography>
         )}
       </List>
