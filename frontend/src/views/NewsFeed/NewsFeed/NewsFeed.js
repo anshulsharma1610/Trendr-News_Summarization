@@ -8,6 +8,8 @@ import '../../../assets/scss/NewsFeed.scss';
 import '../../../assets/scss/NewsCardStyles.scss';
 import TwitterFeed from 'views/Twitter/TwitterFeed.js';
 import MainCard from 'components/cards/MainCard.js';
+import SubCard from 'views/NewsFeed/NewsFeed/SubscriptionCard.js';
+
 const NewsFeed = () => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -66,6 +68,7 @@ const NewsFeed = () => {
                     <TwitterFeed />
                 </Box>
             </Box>
+            <SubCard />
         </Box>
     );
 };
