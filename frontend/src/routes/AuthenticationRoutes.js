@@ -30,7 +30,7 @@ const AuthenticationRoutes = {
         },
         {
             path: '/404',
-            element: <ProtectedRoute component={NotFound} />
+            element: <NotFound />
         },
         {
             path: '/*',

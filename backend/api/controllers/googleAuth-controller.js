@@ -4,6 +4,9 @@ import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import dotenv from 'dotenv';
 import User from '../models/user.js';
 import * as userService from '../services/user-service.js';
+import * as userSubscriptionService from '../services/userSubscription-service.js';
+import * as subscriptionService from '../services/subscriptions-service.js';
+import Roles from '../models/role.js';
 
 dotenv.config();
 
@@ -26,9 +29,8 @@ passport.use(
                 if (existingUser) {
                     return done(null, existingUser);
                 }
-                let user = await userService.save({ email: profile._json.email, fname: profile.name.givenName, lname: profile.name.familyName });
-                // const userRole = await Roles.findOne({ role: 'user' });
-                // user.roleId = userRole._id;
+                const userRole = await Roles.findOne({ role: 'user' });
+                let user = await userService.save({ email: profile._json.email, fname: profile.name.givenName, lname: profile.name.familyName, roleId: userRole._id });
                 user = await userService.getById(user._id);
 
                 let isUserSubbed = await userSubscriptionService.getByUserId(user._id);

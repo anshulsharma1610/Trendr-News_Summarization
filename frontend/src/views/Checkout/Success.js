@@ -24,7 +24,7 @@ function Success() {
                 .
             </Typography>
             <Box sx={{ mt: 5 }}>
-                <Button variant="contained" color="primary" href="/">
+                <Button variant="contained" color="primary" href="/user">
                     Go to Home Page
                 </Button>
             </Box>

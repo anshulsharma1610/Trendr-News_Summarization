@@ -8,21 +8,21 @@ const Protected = ({ component: Component }) => {
         role = useSelector((state) => state.user.user.user.roleId.role);
     }
     const location = useLocation();
-    console.log('---------loca', location)
+    console.log('---------loca', isAuthenticated, location)
     if (!isAuthenticated && (location.pathname !== "/login" && location.pathname !== "/register")) {
         return <Navigate to="/login" replace />;
     }
 
-    if (location.pathname === "/") {
-        return <Navigate to="/login" replace />;
-    }
-
-    if (role === "admin" && location.pathname.includes("/user")) {
+    if (role === "admin" && (location.pathname.includes("/user") || location.pathname === "/")) {
         return <Navigate to="/admin" replace />;
     }
 
-    if (role === "user" && location.pathname.includes("/admin")) {
+    if (role === "user" && (location.pathname.includes("/admin") || location.pathname === "/")) {
         return <Navigate to="/user" replace />;
+    }
+
+    if (location.pathname === "/") {
+        return <Navigate to="/login" replace />;
     }
 
     return <Component />;

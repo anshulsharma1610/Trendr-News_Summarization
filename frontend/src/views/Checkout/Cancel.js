@@ -11,7 +11,7 @@ function Cancel() {
                 Sorry for the inconvinience! If you have any questions, please email us at{" "}
                 <a href="mailto:support@trendr.com">support@trendr.com</a>.
             </Typography>
-            <Button variant="contained" size="large" sx={{ mt: 2 }}>
+            <Button variant="contained" size="large" sx={{ mt: 2 }} href="/user">
                 Go to Home Page
             </Button>
         </Box>

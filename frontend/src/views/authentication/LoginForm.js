@@ -55,13 +55,13 @@ const Login = ({ ...others }) => {
     const [loading, setLoading] = useState(false);
     const { isLoggedIn } = useSelector((state) => {
         console.log('---state here at login', state);
-        let userRole = useSelector((state) => state.user.user?.user?.roleId?.role);
-        console.log('-------userrole', userRole)
-        if (userRole == 'admin') {
-            navigate("/admin");
-        } else if (userRole == 'user') {
-            navigate("/");
-        }
+        // let userRole = useSelector((state) => state.user.user?.user?.roleId?.role);
+        // console.log('-------userrole', userRole)
+        // if (userRole == 'admin') {
+        //     navigate("/admin");
+        // } else if (userRole == 'user') {
+        //     navigate("/");
+        // }
         return state.user.isLoggedIn;
     });
     const dispatch = useDispatch();
@@ -77,9 +77,9 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
-                dispatch(userSubbed());
+                // dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
-                navigate("/");
+                navigate("/user");
                 // window.location.reload();
             })
             .catch(() => {
@@ -106,8 +106,9 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
-                dispatch(userSubbed());
+                // dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
+                navigate("/user");
                 // window.location.reload();
             })
             .catch(() => {

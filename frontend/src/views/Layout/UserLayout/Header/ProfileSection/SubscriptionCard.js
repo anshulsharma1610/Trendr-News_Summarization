@@ -56,7 +56,7 @@ const UpgradePlanCard = () => {
 
     const handleNavigate = () => {
         console.log('-----------------ams')
-        navigate("/checkout");
+        navigate("/user/checkout");
     };
 
     if (isUserSubbed) {
