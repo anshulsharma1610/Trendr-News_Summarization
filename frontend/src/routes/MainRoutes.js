@@ -6,7 +6,7 @@ import Loadable from 'components/Loadable';
 import TrendingNews from 'views/TrendingNews';
 import Preferences from 'views/Preferences';
 import Bookmarks from 'views/Bookmarks/Bookmarks';
-import AdminCRUD from 'views/AdminDashboard/AdminCRUD';
+import AdminCRUD from 'views/AdminDashboard/AdminUserTable';
 import Profile from 'views/Profile';
 import SearchResults from 'views/Search/SearchResults';
 import Checkout from 'views/Checkout/SubscriptionPlans/SubscriptionPlans';
@@ -18,6 +18,8 @@ import { Check } from '@mui/icons-material';
 import AdminPreferences from 'views/AdminDashboard/AdminPreference';
 import AdminSubscription from 'views/AdminDashboard/AdminSubscription';
 import UserSubscriptions from 'views/AdminDashboard/UserSubscriptions';
+import AdminNews from 'views/AdminDashboard/AdminNews';
+
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
@@ -92,6 +94,14 @@ const MainRoutes = {
         {
             path: '/admincrud/userSubscription',
             element: <UserSubscriptions />
+        },
+        {
+            path: '/admincrud/users',
+            element: <AdminCRUD />
+        },
+        {
+            path: '/admincrud/news',
+            element: <AdminNews />
         }
     ]
 };

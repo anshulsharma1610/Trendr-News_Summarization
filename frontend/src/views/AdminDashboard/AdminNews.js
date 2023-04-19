@@ -4,14 +4,14 @@ import FormComponent from "./FormComponent";
 import FormSubscription from "./FormSubscription";
 
 
-const AdminCRUD = () => {
+const AdminNews = () => {
   return (
     <div style={{ justifyContent: 'center'}}>
-        <UserTable/>
+        {/* <UserTable/> */}
         <NewsTable/>
         {/* <FormSubscription/> */}
     </div>
   );
 }
 
-export default AdminCRUD;
+export default AdminNews;
