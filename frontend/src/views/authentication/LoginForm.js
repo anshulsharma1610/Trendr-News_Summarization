@@ -61,7 +61,7 @@ const Login = ({ ...others }) => {
 
     useEffect(() => {
         dispatch(clearMessage());
-        dispatch(clearUserSub());
+        // dispatch(clearUserSub());
     }, [dispatch]);
 
     // handle googleHandler oauth login

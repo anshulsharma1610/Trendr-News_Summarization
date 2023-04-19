@@ -6,9 +6,15 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 // constant
-const icons = { IconDashboard ,DashboardIcon, LoginIcon,HowToRegIcon, TrendingUpIcon,BookmarksIcon,AdminPanelSettingsIcon,CreditCardIcon};
+const icons = { IconDashboard ,DashboardIcon, LoginIcon,HowToRegIcon,
+     TrendingUpIcon, BookmarksIcon, AdminPanelSettingsIcon, CreditCardIcon, PersonAddAltIcon,
+     AccountBoxIcon, LibraryAddIcon, NewspaperIcon};
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -72,6 +78,48 @@ const dashboard = {
             type: 'item',
             url: '/checkout',
             icon: icons.CreditCardIcon,
+            breadcrumbs: false 
+        },
+
+        ////////////////////////////////---ADMIN---///////////////////////////////////////
+       
+        {
+            id: 'Subscriptions',
+            title: 'Subscriptions',
+            type: 'item',
+            url: '/admincrud/subscription',
+            icon: icons.CreditCardIcon,
+            breadcrumbs: false 
+        },
+        {
+            id: 'NEWS',
+            title: 'NEWS',
+            type: 'item',
+            url: '/admincrud/news',
+            icon: icons.NewspaperIcon,
+            breadcrumbs: false 
+        },
+        {
+            id: 'Preferences',
+            title: 'Preferences',
+            type: 'item',
+            url: '/admincrud/preferences',
+            icon: icons.LibraryAddIcon,
+            breadcrumbs: false 
+        }, {
+            id: 'User-Subscriptions',
+            title: 'User-Subscriptions',
+            type: 'item',
+            url: '/admincrud/userSubscription',
+            icon: icons.AccountBoxIcon,
+            breadcrumbs: false 
+        },
+        {
+            id: 'Users',
+            title: 'Users',
+            type: 'item',
+            url: '/admincrud/users',
+            icon: icons.PersonAddAltIcon,
             breadcrumbs: false 
         }
     ]

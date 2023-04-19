@@ -36,6 +36,8 @@ import Transitions from 'components/extended/Transitions';
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { logout } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
+import { clearUserSub } from "store/slices/subscriptionSlice";
+import SubscriptionCard from './SubscriptionCard';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -63,7 +65,7 @@ const ProfileSection = () => {
     const dispatch = useDispatch();
     let username = "You"
     console.log('----loggedIN?', isLoggedIn)
-    if (isLoggedIn) username = useSelector((state) => state.user.user.user.email);
+    if (isLoggedIn) username = useSelector((state) => state.user.user.user.fname);
 
     // useEffect(() => {
     //     dispatch(clearMessage());
@@ -86,6 +88,7 @@ const ProfileSection = () => {
 
     const handleLogout = useCallback(() => {
         dispatch(logout());
+        dispatch(clearUserSub());
         navigate("/login");
     }, [dispatch]);
 
@@ -196,22 +199,8 @@ const ProfileSection = () => {
                                                 </Typography>
                                             </Stack>
                                         </Stack>
-                                        <OutlinedInput
-                                            sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
-                                            id="input-search-profile"
-                                            value={value}
-                                            onChange={(e) => setValue(e.target.value)}
-                                            placeholder="Search profile options"
-                                            startAdornment={
-                                                <InputAdornment position="start">
-                                                    <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
-                                                </InputAdornment>
-                                            }
-                                            aria-describedby="search-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight'
-                                            }}
-                                        />
+                                        <Divider sx={{ mt: 2 }} />
+                                        <SubscriptionCard />
                                         <Divider />
                                     </Box>
                                     <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
@@ -222,31 +211,12 @@ const ProfileSection = () => {
                                                     my: 0
                                                 }}
                                             >
-                                                <CardContent>
-                                                    <Grid container spacing={3} direction="column">
-                                                        <Grid item>
-                                                            <Grid item container alignItems="center" justifyContent="space-between">
-                                                                <Grid item>
-                                                                    <Typography variant="subtitle1">Allow Notifications</Typography>
-                                                                </Grid>
-                                                                <Grid item>
-                                                                    <Switch
-                                                                        checked={notification}
-                                                                        onChange={(e) => setNotification(e.target.checked)}
-                                                                        name="sdm"
-                                                                        size="small"
-                                                                    />
-                                                                </Grid>
-                                                            </Grid>
-                                                        </Grid>
-                                                    </Grid>
-                                                </CardContent>
                                             </Card>
-                                            <Divider />
                                             <List
                                                 component="nav"
                                                 sx={{
                                                     width: '100%',
+                                                    mt: -3,
                                                     maxWidth: 350,
                                                     minWidth: 300,
                                                     backgroundColor: theme.palette.background.paper,
