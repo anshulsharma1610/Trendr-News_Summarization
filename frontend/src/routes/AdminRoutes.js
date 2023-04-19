@@ -18,7 +18,7 @@ const Profile = Loadable(lazy(() => import('views/Profile')));
 
 const MainRoutes = {
     path: '/admin',
-    element: <AdminLayout />,
+    element: <ProtectedRoute component={AdminLayout} />,
     children: [
         {
             path: '/admin',

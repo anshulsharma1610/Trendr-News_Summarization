@@ -20,55 +20,55 @@ const TrendingNews = Loadable(lazy(() => import('views/TrendingNews')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-    path: '/',
-    element: <UserLayout />,
+    path: '/user',
+    element: <ProtectedRoute component={UserLayout} />,
     children: [
         {
-            path: '/',
+            path: '/user',
             element: <ProtectedRoute component={NewsFeed} />
         },
         {
-            path: '/trending',
+            path: '/user/trending',
             element: <TrendingNews />
         },
         {
-            path: '/trending',
+            path: '/user/trending',
             element: <TrendingNews />
         },
         {
-            path: '/preferences',
+            path: '/user/preferences',
             element: <ProtectedRoute component={Preferences} />
         },
         {
-            path: '/bookmarks',
+            path: '/user/bookmarks',
             element: <ProtectedRoute component={Bookmarks} />
         },
         {
-            path: '/account',
+            path: '/user/account',
             element: <ProtectedRoute component={Profile} />
         },
         {
-            path: '/checkout',
+            path: '/user/checkout',
             element: <ProtectedRoute component={Checkout} />
         },
         {
-            path: '/success',
+            path: '/user/success',
             element: <ProtectedRoute component={Success} />
         },
         {
-            path: '/cancel',
+            path: '/user/cancel',
             element: <ProtectedRoute component={Cancel} />
         },
         {
-            path: '/404',
+            path: '/user/404',
             element: <NotFound />
         },
         {
-            path: '*',
+            path: 'user/*',
             element: <Navigate to="/404" />
         },
         {
-            path: '/search',
+            path: '/user/search',
             element: <ProtectedRoute component={SearchResults} />
         },
     ]

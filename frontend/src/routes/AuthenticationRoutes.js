@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import Loadable from 'components/Loadable';
 import AuthLayout from 'views/Layout/AuthLayout';
+import ProtectedRoute from 'components/ProtectedRoute';
 
 const Login = Loadable(lazy(() => import('views/authentication/Login')));
 const Register = Loadable(lazy(() => import('views/authentication/Register')));
@@ -11,15 +12,19 @@ const Register = Loadable(lazy(() => import('views/authentication/Register')));
 
 const AuthenticationRoutes = {
     path: '/',
-    element: <AuthLayout />,
+    element: <ProtectedRoute component={AuthLayout} />,
     children: [
         {
+            path: '/',
+            element: <ProtectedRoute component={Login} />,
+        },
+        {
             path: '/login',
-            element: <Login />
+            element: <ProtectedRoute component={Login} />,
         },
         {
             path: '/register',
-            element: <Register />
+            element: <ProtectedRoute component={Register} />,
         }
     ]
 };
