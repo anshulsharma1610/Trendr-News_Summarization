@@ -3,10 +3,13 @@ import { useSelector } from "react-redux";
 
 const Protected = ({ component: Component }) => {
     const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
-    const role = useSelector((state) => state.user.user.user.roleId.role);
+    let role;
+    if (isAuthenticated) {
+        role = useSelector((state) => state.user.user.user.roleId.role);
+    }
     const location = useLocation();
     console.log('---------loca', location)
-    if (!isAuthenticated) {
+    if (!isAuthenticated && (location.pathname !== "/login" && location.pathname !== "/register")) {
         return <Navigate to="/login" replace />;
     }
 

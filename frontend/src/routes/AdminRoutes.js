@@ -25,7 +25,7 @@ const MainRoutes = {
             element: <ProtectedRoute component={Dashboard} />
         },
         {
-            path: '/admin/users',
+            path: '/admin/customer',
             element: <ProtectedRoute component={UserCrud} />
         },
         {
@@ -37,7 +37,7 @@ const MainRoutes = {
             element: <ProtectedRoute component={SubscriptionCrud} />
         },
         {
-            path: '/admin/usersubscription',
+            path: '/admin/customersubscription',
             element: <ProtectedRoute component={UserSubscriptionCrud} />
         },
         {
@@ -46,14 +46,14 @@ const MainRoutes = {
         },
         {
             path: '/admin/404',
-            element: <NotFound />
+            element: <ProtectedRoute component={NotFound} />
         },
         {
             path: '/admin/account',
             element: <ProtectedRoute component={Profile} />
         },
         {
-            path: '*',
+            path: '/admin/*',
             element: <Navigate to="/admin/404" />
         }
     ]

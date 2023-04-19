@@ -7,6 +7,8 @@ import ProtectedRoute from 'components/ProtectedRoute';
 
 const Login = Loadable(lazy(() => import('views/authentication/Login')));
 const Register = Loadable(lazy(() => import('views/authentication/Register')));
+const NotFound = Loadable(lazy(() => import('components/NotFound')));
+const { Navigate } = require('react-router-dom');
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
@@ -25,6 +27,14 @@ const AuthenticationRoutes = {
         {
             path: '/register',
             element: <ProtectedRoute component={Register} />,
+        },
+        {
+            path: '/404',
+            element: <ProtectedRoute component={NotFound} />
+        },
+        {
+            path: '/*',
+            element: <Navigate to="/404" />
         }
     ]
 };

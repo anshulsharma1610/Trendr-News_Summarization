@@ -32,10 +32,6 @@ const MainRoutes = {
             element: <TrendingNews />
         },
         {
-            path: '/user/trending',
-            element: <TrendingNews />
-        },
-        {
             path: '/user/preferences',
             element: <ProtectedRoute component={Preferences} />
         },
@@ -61,11 +57,11 @@ const MainRoutes = {
         },
         {
             path: '/user/404',
-            element: <NotFound />
+            element: <ProtectedRoute component={NotFound} />
         },
         {
-            path: 'user/*',
-            element: <Navigate to="/404" />
+            path: '/user/*',
+            element: <Navigate to="/user/404" />
         },
         {
             path: '/user/search',

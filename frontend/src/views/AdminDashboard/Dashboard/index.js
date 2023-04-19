@@ -105,18 +105,17 @@ const Dashboard = () => {
     const [likes, setLikes] = useState(0);
     const [comments, setComments] = useState(0);
 
-    useEffect(async () => {
+    useEffect(() => {
         const fetchAnalytics = async () => {
-            const data = await getAnalytics();
-            setAnalytics(data);
+            const data = getAnalytics();
+            await setAnalytics(data);
 
             // Update likes, comments, and articles after analytics state has been updated
-            setArticles(data[0].analyticsCard.totalNews);
-            setLikes(data[0].analyticsCard.totalLikes);
-            setComments(data[0].analyticsCard.totalComments);
+            // setArticles(data[0].analyticsCard.totalNews);
+            // setLikes(data[0].analyticsCard.totalLikes);
+            // setComments(data[0].analyticsCard.totalComments);
         };
-        await fetchAnalytics();
-
+        fetchAnalytics();
     }, []);
 
     console.log('----anal', analytics);
@@ -127,7 +126,7 @@ const Dashboard = () => {
             <Grid item xs={12} sx={{ mb: -2.25 }}>
                 <Typography variant="h5">Dashboard</Typography>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            {/* <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Total Users"
                     count={analytics[0].analyticsCard.userCount.currentUserCount}
                     percentage={analytics[0].analyticsCard.userCount.percentIncreaseUser}
@@ -152,7 +151,7 @@ const Dashboard = () => {
                     percentage={analytics[0].analyticsCard.salesCount.percentIncreaseSales}
                     extra={analytics[0].analyticsCard.salesCount.currentCountSales - analytics[0].analyticsCard.salesCount.previousCountSales}
                     color="warning" />
-            </Grid>
+            </Grid> */}
 
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
 
@@ -165,7 +164,7 @@ const Dashboard = () => {
                 </Grid>
                 <MainCard content={false} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1, pr: 2 }}>
-                        <SalesLineChart data={analytics[3].monthlySales} />
+                        {/* <SalesLineChart data={analytics[3].monthlySales} /> */}
                     </Box>
                 </MainCard>
             </Grid>
@@ -185,7 +184,7 @@ const Dashboard = () => {
                             <Typography variant="h3">$7,650</Typography>
                         </Stack>
                     </Box>
-                    <OrdersPieChart data={analytics[4].pieChart} />
+                    {/* <OrdersPieChart data={analytics[4].pieChart} /> */}
                 </MainCard>
             </Grid>
 
@@ -198,7 +197,7 @@ const Dashboard = () => {
                 </Grid>
                 <MainCard content={false} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1 }}>
-                        <GrowthLineColoumn data={analytics[5].getSalesAndGrowth} />
+                        {/* <GrowthLineColoumn data={analytics[5].getSalesAndGrowth} /> */}
                     </Box>
                 </MainCard>
             </Grid>
@@ -238,7 +237,7 @@ const Dashboard = () => {
                 </Grid>
                 <MainCard content={true} sx={{ mt: 1.5 }}>
                     <Box sx={{ pt: 1 }}>
-                        <OrdersColoumnChart data={analytics[1].coloumnChart} />
+                        {/* <OrdersColoumnChart data={analytics[1].coloumnChart} /> */}
                     </Box>
                 </MainCard>
             </Grid>
@@ -249,9 +248,9 @@ const Dashboard = () => {
                         <Typography variant="h5">Transaction History</Typography>
                     </Grid>
                 </Grid>
-                {analytics[2].prevPurchases.map((item, index) => {
+                {/* {analytics[2].prevPurchases.map((item, index) => {
                     <RecentPurchases key={index} data={item} />
-                })}
+                })} */}
             </Grid>
         </Grid >
     );

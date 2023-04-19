@@ -56,7 +56,7 @@ const dashboard = {
             id: 'Users',
             title: 'Users',
             type: 'item',
-            url: '/admin/users',
+            url: '/admin/customer',
             icon: icons.PersonAddAltIcon,
             breadcrumbs: false
         },
@@ -72,7 +72,7 @@ const dashboard = {
             id: 'User-Subscriptions',
             title: 'User Subscriptions',
             type: 'item',
-            url: '/admin/usersubscription',
+            url: '/admin/customersubscription',
             icon: icons.AccountBoxIcon,
             breadcrumbs: false
         },
