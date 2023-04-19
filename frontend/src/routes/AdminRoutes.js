@@ -24,7 +24,7 @@ const MainRoutes = {
             element: <ProtectedRoute component={Dashboard} />
         },
         {
-            path: '/admin/user',
+            path: '/admin/users',
             element: <ProtectedRoute component={UserCrud} />
         },
         {

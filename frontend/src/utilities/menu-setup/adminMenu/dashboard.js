@@ -35,52 +35,55 @@ const dashboard = {
     id: 'dashboard',
     title: 'Menu',
     type: 'group',
-    children: [{
-        id: 'Subscriptions',
-        title: 'Subscriptions',
-        type: 'item',
-        url: '/admincrud/subscription',
-        icon: icons.CreditCardIcon,
-        breadcrumbs: false
-    },
-    {
-        id: 'NEWS',
-        title: 'NEWS',
-        type: 'item',
-        url: '/admincrud/news',
-        icon: icons.NewspaperIcon,
-        breadcrumbs: false
-    },
-    {
-        id: 'Preferences',
-        title: 'Preferences',
-        type: 'item',
-        url: '/admincrud/preferences',
-        icon: icons.LibraryAddIcon,
-        breadcrumbs: false
-    }, {
-        id: 'User-Subscriptions',
-        title: 'User-Subscriptions',
-        type: 'item',
-        url: '/admincrud/userSubscription',
-        icon: icons.AccountBoxIcon,
-        breadcrumbs: false
-    },
-    {
-        id: 'Users',
-        title: 'Users',
-        type: 'item',
-        url: '/admincrud/users',
-        icon: icons.PersonAddAltIcon,
-        breadcrumbs: false
-    }, {
-        id: 'Dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        url: '/dashboard',
-        icon: icons.AdminPanelSettingsIcon,
-        breadcrumbs: false
-    },
+    children: [
+        {
+            id: 'Dashboard',
+            title: 'Dashboard',
+            type: 'item',
+            url: '/dashboard',
+            icon: icons.AdminPanelSettingsIcon,
+            breadcrumbs: false
+        },
+        {
+            id: 'NEWS',
+            title: 'NEWS',
+            type: 'item',
+            url: '/admin/news',
+            icon: icons.NewspaperIcon,
+            breadcrumbs: false
+        },
+        {
+            id: 'Users',
+            title: 'Users',
+            type: 'item',
+            url: '/admin/users',
+            icon: icons.PersonAddAltIcon,
+            breadcrumbs: false
+        },
+        {
+            id: 'Subscriptions',
+            title: 'Subscriptions',
+            type: 'item',
+            url: '/admin/subscription',
+            icon: icons.CreditCardIcon,
+            breadcrumbs: false
+        },
+        {
+            id: 'User-Subscriptions',
+            title: 'User-Subscriptions',
+            type: 'item',
+            url: '/admin/usersubscription',
+            icon: icons.AccountBoxIcon,
+            breadcrumbs: false
+        },
+        {
+            id: 'Preferences',
+            title: 'Preferences',
+            type: 'item',
+            url: '/admin/preferences',
+            icon: icons.LibraryAddIcon,
+            breadcrumbs: false
+        },
     ]
 };
 

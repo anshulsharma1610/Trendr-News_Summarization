@@ -45,14 +45,14 @@ const TrendingNews = () => {
 
   return (
     <>
-      <Typography variant="h2" stgutterBottom>
+      <Typography variant="h2">
         Trending Headlines
       </Typography>
 
       <List className={theme.root}>
         {news.map((item, index) => (
-          <MainCard sx={{ mt: 2 }}>
-            <ListItem sx={{ m: -2 }} key={item.link} id="ListItem" className={theme.listItem}>
+          <MainCard sx={{ mt: 2 }} key={index}>
+            <ListItem sx={{ m: -2 }} key={index} id="ListItem" className={theme.listItem}>
               <Link href={item.link} style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer">
                 <ListItemAvatar>
                   <Avatar
