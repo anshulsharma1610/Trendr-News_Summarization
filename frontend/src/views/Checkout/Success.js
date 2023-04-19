@@ -3,6 +3,7 @@ import { Typography, Box, Link, Button } from "@mui/material";
 import { CheckCircleOutline } from "@mui/icons-material";
 import { useDispatch, useSelector } from 'react-redux';
 import { userSubbed } from "store/slices/subscriptionSlice";
+import { Link as RouterLink } from 'react-router-dom'
 
 function Success() {
     const dispatch = useDispatch();
@@ -24,9 +25,11 @@ function Success() {
                 .
             </Typography>
             <Box sx={{ mt: 5 }}>
-                <Button variant="contained" color="primary" href="/user">
-                    Go to Home Page
-                </Button>
+                <RouterLink to="/user">
+                    <Button variant="contained" color="primary">
+                        Go to Home Page
+                    </Button>
+                </RouterLink>
             </Box>
         </Box>
     );

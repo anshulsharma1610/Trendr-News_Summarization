@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Box, Button } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom'
 
 function Cancel() {
     return (
@@ -11,9 +12,11 @@ function Cancel() {
                 Sorry for the inconvinience! If you have any questions, please email us at{" "}
                 <a href="mailto:support@trendr.com">support@trendr.com</a>.
             </Typography>
-            <Button variant="contained" size="large" sx={{ mt: 2 }} href="/user">
-                Go to Home Page
-            </Button>
+            <RouterLink to="/user">
+                <Button variant="contained" color="primary">
+                    Go to Home Page
+                </Button>
+            </RouterLink>
         </Box>
     );
 }
