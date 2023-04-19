@@ -38,12 +38,12 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { logout } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
 import { clearUserSub } from "store/slices/subscriptionSlice";
-import SubscriptionCard from './SubscriptionCard';
+// import SubscriptionCard from './SubscriptionCard';
 import { createBrowserHistory } from 'history';
 
-const history = createBrowserHistory();
 // ==============================|| PROFILE MENU ||============================== //
 
+const history = createBrowserHistory();
 const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
@@ -94,7 +94,6 @@ const ProfileSection = () => {
         dispatch(clearUserSub());
         navigate("/login");
         window.location.reload();
-
         // history.push("/login")
     }, [dispatch]);
 
@@ -206,8 +205,8 @@ const ProfileSection = () => {
                                             </Stack>
                                         </Stack>
                                         <Divider sx={{ mt: 2 }} />
-                                        <SubscriptionCard />
-                                        <Divider />
+                                        {/* <SubscriptionCard /> */}
+                                        {/* <Divider /> */}
                                     </Box>
                                     <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                                         <Box sx={{ p: 2 }}>
@@ -238,7 +237,7 @@ const ProfileSection = () => {
                                                 <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     selected={selectedIndex === 0}
-                                                    onClick={(event) => handleListItemClick(event, 0, '/user/account')}
+                                                    onClick={(event) => handleListItemClick(event, 0, '/admin/account')}
                                                 >
                                                     <ListItemIcon>
                                                         <IconSettings stroke={1.5} size="1.3rem" />

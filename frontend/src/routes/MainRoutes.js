@@ -3,106 +3,70 @@ import { lazy } from 'react';
 // project imports
 import UserLayout from 'views/Layout/UserLayout';
 import Loadable from 'components/Loadable';
-import TrendingNews from 'views/TrendingNews';
-import Preferences from 'views/Preferences';
-import Bookmarks from 'views/Bookmarks/Bookmarks';
-import AdminCRUD from 'views/AdminDashboard/AdminUserTable';
-import Profile from 'views/Profile';
-import SearchResults from 'views/Search/SearchResults';
-import Checkout from 'views/Checkout/SubscriptionPlans/SubscriptionPlans';
-import Success from 'views/Checkout/Success';
-import Cancel from 'views/Checkout/Cancel';
-import NotFound from 'components/NotFound';
 import { Navigate } from 'react-router-dom';
-import { Check } from '@mui/icons-material';
-import AdminPreferences from 'views/AdminDashboard/AdminPreference';
-import AdminSubscription from 'views/AdminDashboard/AdminSubscription';
-import UserSubscriptions from 'views/AdminDashboard/UserSubscriptions';
-import AdminNews from 'views/AdminDashboard/AdminNews';
+import ProtectedRoute from 'components/ProtectedRoute';
 
-
-const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
+const Checkout = Loadable(lazy(() => import('views/Checkout/SubscriptionPlans/SubscriptionPlans')));
+const Success = Loadable(lazy(() => import('views/Checkout/Success')));
+const Cancel = Loadable(lazy(() => import('views/Checkout/Cancel')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
+const NotFound = Loadable(lazy(() => import('components/NotFound')));
+const SearchResults = Loadable(lazy(() => import('views/Search/SearchResults')));
+const Profile = Loadable(lazy(() => import('views/Profile')));
+const Bookmarks = Loadable(lazy(() => import('views/Bookmarks/Bookmarks')));
+const Preferences = Loadable(lazy(() => import('views/Preferences')));
+const TrendingNews = Loadable(lazy(() => import('views/TrendingNews')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-    path: '/',
+    path: '/user',
     element: <UserLayout />,
     children: [
         {
-            path: '/',
+            path: '/user',
             element: <NewsFeed />
         },
         {
-            path: '/anshul',
-            element: <HelloWorld />
-        },
-        {
-            path: '/trendingnews',
+            path: '/user/trending',
             element: <TrendingNews />
         },
         {
-            path: '/preferences',
+            path: '/user/preferences',
             element: <Preferences />
         },
         {
-            path: '/bookmarks',
+            path: '/user/bookmarks',
             element: <Bookmarks />
         },
         {
-            path: '/admincrud',
-            element: <AdminCRUD />
-        },
-        {
-            path: '/account',
+            path: '/user/account',
             element: <Profile />
         },
         {
-            path: '/checkout',
+            path: '/user/checkout',
             element: <Checkout />
         },
         {
-            path: '/success',
+            path: '/user/success',
             element: <Success />
         },
         {
-            path: '/cancel',
+            path: '/user/cancel',
             element: <Cancel />
         },
         {
-            path: '/404',
+            path: '/user/404',
             element: <NotFound />
         },
         {
-            path: '*',
-            element: <Navigate to="/404" />
+            path: '/user/*',
+            element: <Navigate to="/user/404" />
         },
         {
-            path: '/admincrud/preferences',
-            element: <AdminPreferences />
-
-        },
-        {
-            path: '/search',
+            path: '/user/search',
             element: <SearchResults />
-        }
-        ,
-        {
-            path: '/admincrud/subscription',
-            element: <AdminSubscription />
-        } ,
-        {
-            path: '/admincrud/userSubscription',
-            element: <UserSubscriptions />
         },
-        {
-            path: '/admincrud/users',
-            element: <AdminCRUD />
-        },
-        {
-            path: '/admincrud/news',
-            element: <AdminNews />
-        }
     ]
 };
 

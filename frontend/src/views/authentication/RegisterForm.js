@@ -109,9 +109,9 @@ const FirebaseRegister = ({ ...others }) => {
             });
     };
 
-    if (isLoggedIn) {
-        return <Navigate to="/" />;
-    }
+    // if (isLoggedIn) {
+    //     return <Navigate to="/" />;
+    // }
 
 
     const changePassword = (value) => {

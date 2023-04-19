@@ -1,5 +1,9 @@
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+// import { history } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 
 const API_URL = process.env.AUTH_API_URL || "http://localhost:8000/auth/";
 
@@ -83,6 +87,7 @@ const googleLogin = () => {
 
 const logout = () => {
     localStorage.removeItem("user");
+    // history.push("/login")
 };
 
 const authService = {

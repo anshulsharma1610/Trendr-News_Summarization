@@ -51,10 +51,19 @@ const Login = ({ ...others }) => {
     const customization = useSelector((state) => state.customization);
     const [checked, setChecked] = useState(true);
 
-    const { message } = useSelector((state) => state.message);
+    // const { message } = useSelector((state) => state.message);
     const [loading, setLoading] = useState(false);
     const { isLoggedIn } = useSelector((state) => {
+        let userRole = state.user.user?.user?.roleId?.role;
+        console.log('--userRole', userRole)
         console.log('---state here at login', state);
+        if (userRole == 'admin') {
+            navigate("/admin");
+            // window.location.reload();
+        } else if (userRole == 'user') {
+            navigate("/user");
+            // window.location.reload();
+        }
         return state.user.isLoggedIn;
     });
     const dispatch = useDispatch();
@@ -62,7 +71,7 @@ const Login = ({ ...others }) => {
     useEffect(() => {
         dispatch(clearMessage());
         // dispatch(clearUserSub());
-    }, [dispatch]);
+    }, []);
 
     // handle googleHandler oauth login
     const googleHandler = () => {
@@ -70,8 +79,9 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
+                // dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
-                navigate("/");
+                // navigate("/user");
                 // window.location.reload();
             })
             .catch(() => {
@@ -98,8 +108,15 @@ const Login = ({ ...others }) => {
             .unwrap()
             .then(() => {
                 console.log('----------');
+                // dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
-                navigate("/");
+                // let userRole = useSelector((state) => state.user.user?.user?.roleId?.role);
+                // console.log('-------userrole', userRole)
+                // if (userRole == 'admin') {
+                //     navigate("/admin");
+                // } else if (userRole == 'user') {
+                //     navigate("/user");
+                // }
                 // window.location.reload();
             })
             .catch(() => {

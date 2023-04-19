@@ -10,7 +10,8 @@ dotenv.config();
 export const signup = async (req, res, next) => {
     try {
         const { email, password, fname, lname } = req.body;
-        const user = await userService.save({ email, password, fname, lname });
+        let user = await userService.save({ email, password, fname, lname });
+        user = await userService.getById(user._id);
         const token = jwt.sign({ user: { "email": user.email }, id: user._id }, process.env.JWT_SECRET);
         res.status(201).json({ user, token: token });
     } catch (err) {
@@ -47,6 +48,8 @@ export const login = async (req, res, next) => {
             } else {
                 userSubscription['isUserSubbed'] = false;
             }
+        } else {
+            userSubscription['isUserSubbed'] = false;
         }
         console.log(';--usre', user)
         // res.redirect('/api/users');

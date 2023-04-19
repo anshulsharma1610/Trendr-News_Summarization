@@ -11,6 +11,8 @@ export const register = createAsyncThunk(
     async ({ fname, lname, email, password }, thunkAPI) => {
         try {
             const data = await AuthService.register(fname, lname, email, password);
+            if (data.userSubscription && data.userSubscription.userSub)
+                thunkAPI.dispatch(userSubbed());
             thunkAPI.dispatch(setMessage(data.message));
             return { user: data };
         } catch (error) {
@@ -105,6 +107,7 @@ const authSlice = createSlice({
         },
         [register.rejected]: (state, action) => {
             state.isLoggedIn = false;
+            state.user = null;
         },
         [login.fulfilled]: (state, action) => {
             state.isLoggedIn = true;

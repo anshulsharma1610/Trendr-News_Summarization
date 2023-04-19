@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSnackbar, clearSnackbar } from 'store/slices/snackbarSlice';
+import { Route, Navigate } from 'react-router-dom';
 
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, StyledEngineProvider } from '@mui/material';
@@ -26,6 +27,8 @@ const App = () => {
     const customization = useSelector((state) => state.customization);
     const snackbars = useSelector((state) => state.snackbar);
     const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state) => state.user.isLoggedIn);
+    console.log('--isAuth', isAuthenticated)
 
     const vertical = snackbars.vertical;
     const horizontal = snackbars.horizontal;

@@ -10,7 +10,7 @@ export const getAll = async () => {
 }
 
 export const getById = async (id) => {
-    const result = await User.findById(id);
+    const result = await User.findById(id).populate('roleId');
     return result
 }
 
@@ -23,7 +23,7 @@ export const remove = async (id) => {
 }
 
 export const findUserByEmail = async (email) => {
-    return User.findOne({ email: email })
+    return User.findOne({ email: email }).populate('roleId');
 }
 
 export const countAll = async (currentYear, month) => {
