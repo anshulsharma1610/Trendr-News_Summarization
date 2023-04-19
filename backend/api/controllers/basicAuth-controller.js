@@ -48,6 +48,8 @@ export const login = async (req, res, next) => {
             } else {
                 userSubscription['isUserSubbed'] = false;
             }
+        } else {
+            userSubscription['isUserSubbed'] = false;
         }
         console.log(';--usre', user)
         // res.redirect('/api/users');

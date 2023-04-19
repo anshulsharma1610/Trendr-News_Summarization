@@ -58,33 +58,33 @@ const createDefaultAdminUser = async () => {
     const adminUser = await Users.findOne({ roleId: adminRole._id });
     if (!adminUser) {
         const adminPassword = 'admin';
-        bcrypt.genSalt(10, (err, salt) => {
-            if (err) {
-                console.error('Error generating salt:', err);
-                return;
-            }
-            bcrypt.hash(adminPassword, salt, async (err, hash) => {
-                if (err) {
-                    console.error('Error hashing password:', err);
-                    return;
-                }
-                const adminUser = new Users({
-                    fname: 'Admin',
-                    lname: 'User',
-                    mobile: '',
-                    email: 'admin@trendr.com',
-                    password: hash,
-                    location: '',
-                    phone: '',
-                    roleId: adminRole._id,
-                    image: '',
-                    preferences: [],
-                    createdAt: new Date(),
-                });
-                await adminUser.save();
-                console.log('Default admin user created');
-            });
+        // bcrypt.genSalt(10, (err, salt) => {
+        //     if (err) {
+        //         console.error('Error generating salt:', err);
+        //         return;
+        //     }
+        //     bcrypt.hash(adminPassword, salt, async (err, hash) => {
+        //         if (err) {
+        //             console.error('Error hashing password:', err);
+        //             return;
+        //         }
+        const adminUser = new Users({
+            fname: 'Admin',
+            lname: 'User',
+            mobile: '',
+            email: 'admin@trendr.com',
+            password: adminPassword,
+            location: '',
+            phone: '',
+            roleId: adminRole._id,
+            image: '',
+            preferences: [],
+            createdAt: new Date(),
         });
+        await adminUser.save();
+        console.log('Default admin user created');
+        //     });
+        // });
     }
 };
 

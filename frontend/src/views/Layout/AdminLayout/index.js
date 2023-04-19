@@ -7,8 +7,8 @@ import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material'
 
 // project imports
 import Breadcrumbs from 'components/extended/Breadcrumbs';
-import Header from 'views/Layout/UserLayout/Header';
-import Sidebar from 'views/Layout/UserLayout/Sidebar';
+import Header from 'views/Layout/AdminLayout/Header';
+import Sidebar from 'views/Layout/AdminLayout/Sidebar';
 import navigation from 'utilities/menu-setup/adminMenu';
 import { drawerWidth } from 'store/constant';
 import { customize } from 'store/slices/customizationSlice';

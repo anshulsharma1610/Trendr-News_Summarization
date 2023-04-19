@@ -55,6 +55,13 @@ const Login = ({ ...others }) => {
     const [loading, setLoading] = useState(false);
     const { isLoggedIn } = useSelector((state) => {
         console.log('---state here at login', state);
+        let userRole = useSelector((state) => state.user.user?.user?.roleId?.role);
+        console.log('-------userrole', userRole)
+        if (userRole == 'admin') {
+            navigate("/admin");
+        } else if (userRole == 'user') {
+            navigate("/");
+        }
         return state.user.isLoggedIn;
     });
     const dispatch = useDispatch();
@@ -101,7 +108,6 @@ const Login = ({ ...others }) => {
                 console.log('----------');
                 dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
-                navigate("/");
                 // window.location.reload();
             })
             .catch(() => {

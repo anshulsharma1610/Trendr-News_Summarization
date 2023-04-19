@@ -24,11 +24,11 @@ const MainRoutes = {
     element: <UserLayout />,
     children: [
         {
-            path: '/news',
+            path: '/',
             element: <ProtectedRoute component={NewsFeed} />
         },
         {
-            path: '/',
+            path: '/trending',
             element: <TrendingNews />
         },
         {

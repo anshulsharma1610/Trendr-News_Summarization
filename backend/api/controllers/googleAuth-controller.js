@@ -30,6 +30,25 @@ passport.use(
                 // const userRole = await Roles.findOne({ role: 'user' });
                 // user.roleId = userRole._id;
                 user = await userService.getById(user._id);
+
+                let isUserSubbed = await userSubscriptionService.getByUserId(user._id);
+                console.log('-------isUserSubbed', isUserSubbed);
+                let userSubscription = {};
+
+                if (isUserSubbed.length > 0) {
+                    let sub = await subscriptionService.getById(isUserSubbed[0].subId);
+                    console.log('-------sub', sub);
+                    if (Object.keys(sub).length > 0) {
+                        userSubscription['isUserSubbed'] = true;
+                        userSubscription['userSub'] = isUserSubbed[0];
+                        userSubscription['subscription'] = sub;
+                    } else {
+                        userSubscription['isUserSubbed'] = false;
+                    }
+                } else {
+                    userSubscription['isUserSubbed'] = false;
+                }
+                console.log(';--usre', user)
                 return done(null, user);
             } catch (err) {
                 console.log(err);

@@ -16,11 +16,11 @@ const UserCrud = Loadable(lazy(() => import('views/AdminDashboard/AdminUserTable
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-    path: '/',
+    path: '/admin',
     element: <AdminLayout />,
     children: [
         {
-            path: '/dashboard',
+            path: '/admin/dashboard',
             element: <ProtectedRoute component={Dashboard} />
         },
         {
@@ -44,12 +44,12 @@ const MainRoutes = {
             element: <ProtectedRoute component={NewsCrud} />
         },
         {
-            path: '/404',
+            path: '/admin/404',
             element: <NotFound />
         },
         {
             path: '*',
-            element: <Navigate to="/404" />
+            element: <Navigate to="/admin/404" />
         }
     ]
 };

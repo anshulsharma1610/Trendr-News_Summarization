@@ -70,7 +70,7 @@ const dashboard = {
         },
         {
             id: 'User-Subscriptions',
-            title: 'User-Subscriptions',
+            title: 'User Subscriptions',
             type: 'item',
             url: '/admin/usersubscription',
             icon: icons.AccountBoxIcon,

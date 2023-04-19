@@ -44,7 +44,10 @@ const UpgradePlanCard = () => {
     const dispatch = useDispatch();
     const isUserSubbed = useSelector((state) => state.isUserSubbed.isUserSubbed);
     const expiry = useSelector((state) => {
-        if (state.user.user && state.user.user.userSubscription) {
+        if (state.user.user && state.user.user.userSubscription
+            && isUserSubbed
+            && state.user.user.userSubscription.userSub
+            && state.user.user.userSubscription.userSub.validTill) {
             return new Date(state.user.user.userSubscription.userSub.validTill).toLocaleDateString();
         }
         return "";
