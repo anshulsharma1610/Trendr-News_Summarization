@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 // project imports
-import UserLayout from 'views/Layout/UserLayout';
+import AdminLayout from 'views/Layout/AdminLayout';
 import Loadable from 'components/Loadable';
 import NotFound from 'components/NotFound';
 import { Navigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ const UserCrud = Loadable(lazy(() => import('views/AdminDashboard/AdminUserTable
 
 const MainRoutes = {
     path: '/',
-    element: <UserLayout />,
+    element: <AdminLayout />,
     children: [
         {
             path: '/dashboard',

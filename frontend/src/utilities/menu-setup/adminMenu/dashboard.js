@@ -13,8 +13,6 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import HomeIcon from '@mui/icons-material/Home';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-
 
 // constant
 const icons = {
@@ -32,56 +30,57 @@ const icons = {
     NewspaperIcon,
     HomeIcon
 };
+
 const dashboard = {
     id: 'dashboard',
-    // title: 'Dashboard',
+    title: 'Menu',
     type: 'group',
     children: [{
-            id: 'Subscriptions',
-            title: 'Subscriptions',
-            type: 'item',
-            url: '/admincrud/subscription',
-            icon: icons.CreditCardIcon,
-            breadcrumbs: false
-        },
-        {
-            id: 'NEWS',
-            title: 'NEWS',
-            type: 'item',
-            url: '/admincrud/news',
-            icon: icons.NewspaperIcon,
-            breadcrumbs: false
-        },
-        {
-            id: 'Preferences',
-            title: 'Preferences',
-            type: 'item',
-            url: '/admincrud/preferences',
-            icon: icons.LibraryAddIcon,
-            breadcrumbs: false
-        }, {
-            id: 'User-Subscriptions',
-            title: 'User-Subscriptions',
-            type: 'item',
-            url: '/admincrud/userSubscription',
-            icon: icons.AccountBoxIcon,
-            breadcrumbs: false
-        },
-        {
-            id: 'Users',
-            title: 'Users',
-            type: 'item',
-            url: '/admincrud/users',
-            icon: icons.PersonAddAltIcon,
-            breadcrumbs: false
-        },{
-            id: 'Dashboard',
-            title: 'Dashboard',
-            type: 'item',
-            url: '/dashboard',
-            icon: icons.AdminPanelSettingsIcon,
-            breadcrumbs: false
-        },
+        id: 'Subscriptions',
+        title: 'Subscriptions',
+        type: 'item',
+        url: '/admincrud/subscription',
+        icon: icons.CreditCardIcon,
+        breadcrumbs: false
+    },
+    {
+        id: 'NEWS',
+        title: 'NEWS',
+        type: 'item',
+        url: '/admincrud/news',
+        icon: icons.NewspaperIcon,
+        breadcrumbs: false
+    },
+    {
+        id: 'Preferences',
+        title: 'Preferences',
+        type: 'item',
+        url: '/admincrud/preferences',
+        icon: icons.LibraryAddIcon,
+        breadcrumbs: false
+    }, {
+        id: 'User-Subscriptions',
+        title: 'User-Subscriptions',
+        type: 'item',
+        url: '/admincrud/userSubscription',
+        icon: icons.AccountBoxIcon,
+        breadcrumbs: false
+    },
+    {
+        id: 'Users',
+        title: 'Users',
+        type: 'item',
+        url: '/admincrud/users',
+        icon: icons.PersonAddAltIcon,
+        breadcrumbs: false
+    }, {
+        id: 'Dashboard',
+        title: 'Dashboard',
+        type: 'item',
+        url: '/dashboard',
+        icon: icons.AdminPanelSettingsIcon,
+        breadcrumbs: false
+    },
     ]
 };
 
