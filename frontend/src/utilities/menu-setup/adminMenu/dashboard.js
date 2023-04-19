@@ -40,7 +40,7 @@ const dashboard = {
             id: 'Dashboard',
             title: 'Dashboard',
             type: 'item',
-            url: '/dashboard',
+            url: '/admin',
             icon: icons.AdminPanelSettingsIcon,
             breadcrumbs: false
         },

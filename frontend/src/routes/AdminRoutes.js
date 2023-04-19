@@ -13,6 +13,7 @@ const SubscriptionCrud = Loadable(lazy(() => import('views/AdminDashboard/AdminS
 const UserSubscriptionCrud = Loadable(lazy(() => import('views/AdminDashboard/UserSubscriptions')));
 const NewsCrud = Loadable(lazy(() => import('views/AdminDashboard/AdminNews')));
 const UserCrud = Loadable(lazy(() => import('views/AdminDashboard/AdminUserTable')));
+const Profile = Loadable(lazy(() => import('views/Profile')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -20,7 +21,7 @@ const MainRoutes = {
     element: <AdminLayout />,
     children: [
         {
-            path: '/admin/dashboard',
+            path: '/admin',
             element: <ProtectedRoute component={Dashboard} />
         },
         {
@@ -46,6 +47,10 @@ const MainRoutes = {
         {
             path: '/admin/404',
             element: <NotFound />
+        },
+        {
+            path: '/admin/account',
+            element: <ProtectedRoute component={Profile} />
         },
         {
             path: '*',
