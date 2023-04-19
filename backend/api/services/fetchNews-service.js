@@ -2,7 +2,7 @@ import axios from 'axios';
 import NewsArticleModel from '../models/newsModel.js';
 import { Configuration, OpenAIApi } from 'openai';
 
-const API_KEY = 'pub_20028c388105d1882197cdfae7a95bcbc6ab8';
+const API_KEY = process.env.NEWS_API_KEY;
 const BASE_URL = 'https://newsdata.io/api/1/news';
 // OpenAI API configuration
 const configuration = new Configuration({
@@ -47,7 +47,10 @@ export const fetchNews = async (queryParams) => {
         const response = await axios.get(url.toString());
         const data = response.data;
         for (const article of data.results) {
-            //console.log(article.content.substring(0, 9000))
+            // Skip the current iteration if image_url is null
+            if (article.image_url === null || article.content === null) {
+                continue;
+            }
             const summary = await summarizeContent(article.content.substring(0, 9000)); // Use GPT-3 to summarize content
             article.summary = summary; // Add the summary to the article object
             newsArticles.push(article);

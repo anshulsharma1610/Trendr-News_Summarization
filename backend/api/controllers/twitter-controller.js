@@ -51,7 +51,7 @@ export const get = async (req, res) => {
         query = 'latest news on world since:' + date;
     }
 
-    await twitter.get('search/tweets', { q: query, count: 20 }, (err, data, response) => {
+    await twitter.get('search/tweets', { q: query, count: 17 }, (err, data, response) => {
         if (err) {
             setErrorResponse(err, res);
         } else {

@@ -118,10 +118,10 @@ export const shareArticle = async (req, res) => {
 export const searchNewsArticles = async (req, res) => {
     try {
         // Extract the search criteria from the query parameters
-        const { categories, keywords } = req.query;
-
+        const { categories, keywords, userId } = req.query;
+        console.log(userId)
         // Call the searchNews service to perform the search
-        const newsArticles = await searchNews(categories, keywords);
+        const newsArticles = await searchNews(categories, keywords, userId);
 
         // Send the search results as the response
         res.status(200).json(newsArticles);
