@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -24,6 +25,13 @@ const SearchSection = () => {
     // State to store the fetched categories
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate(); // Get the navigate function
+    const isLoggedIn = useSelector((state) => {
+        return state.user.isLoggedIn;
+    });
+    let userId
+    if (isLoggedIn) {
+        userId = useSelector((state) => state.user.user.user._id);
+    }
     // Fetch categories on component mount
     useEffect(() => {
         axios.get('http://localhost:8000/api/preferences')
@@ -42,6 +50,7 @@ const SearchSection = () => {
 
         axios.get('http://localhost:8000/api/news/search', {
             params: {
+                userId: userId,
                 categories: selectedCategoriesCleaned.join(','),
                 keywords: keywords
             }
@@ -49,6 +58,9 @@ const SearchSection = () => {
             .then((response) => {
                 setNews(response.data);
                 navigate('/search', { state: response.data });
+                // Clear the selectedCategories and keywords states
+                setSelectedCategories([]);
+                setKeywords('');
             })
             .catch((error) => {
                 console.error(error);

@@ -1,5 +1,5 @@
 import NewsArticleModel from '../models/newsModel.js';
-
+import { isUserSubbed } from '../controllers/user-controller.js';
 export const getAllNewsArticles = async () => {
     return await NewsArticleModel.find();
 };
@@ -72,7 +72,7 @@ export const likeOrUnlikeArticle = async (articleId, userId) => {
 };
 
 // Search news articles based on categories and title keywords
-export const searchNews = async (categories, keywords) => {
+export const searchNews = async (categories, keywords, userId) => {
     // Build the search query
     const searchQuery = {
         $and: [
@@ -81,9 +81,23 @@ export const searchNews = async (categories, keywords) => {
         ],
     };
 
+    // If the $and array is empty, remove the $and operator from the query
+    if (searchQuery.$and.length === 0) {
+        delete searchQuery.$and;
+    }
+
     // Query the database using the Mongoose model
     const newsArticles = await NewsArticleModel.find(searchQuery);
-    return newsArticles;
+
+    const isUserSubscribed = await isUserSubbed(userId);
+    // If the user has a valid subscription, return all articles
+    if (isUserSubscribed) {
+        return newsArticles;
+    } else {
+        // If the user does not have a valid subscription, return only the first 5 articles
+        return newsArticles.slice(0, 5);
+    }
+
 };
 
 export const totalNews = async () => {

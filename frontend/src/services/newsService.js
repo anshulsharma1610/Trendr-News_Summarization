@@ -44,10 +44,10 @@ export const getTweets = async (userId) => {
 }
 
 
-export const fetchNewsbyPreference = async (preferences) => {
+export const fetchNewsbyPreference = async (preferences, userId) => {
     // Filter out the "Category: " prefix from selected categories
     const selectedCategoriesCleaned = preferences.map((preference) => preference.toLowerCase());
     //console.log(preferences)
-    const response = await axios.get('http://localhost:8000/api/news/search', { params: { categories: selectedCategoriesCleaned.join(',') } })
+    const response = await axios.get('http://localhost:8000/api/news/search', { params: { categories: selectedCategoriesCleaned.join(','), userId: userId } })
     return response.data;
 };

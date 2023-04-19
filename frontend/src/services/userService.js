@@ -46,10 +46,14 @@ const addSubscriptions=(id, body)=>{
     return axios.post(API_URL+"subscriptions/"+id, body);
 
 }
+const getallUserSubscriptions=()=>{
+    return axios.get(API_URL+"usersubscriptions");
+
+}
 
 const userService = {
     getPublicContent, getAllPrefernce, updatePrefernce, getUserDetail, updateUser, deletePrefernce,addPreferences
-,getAllSubscription, updateDescriptions, deleteSubscriptions, addSubscriptions };
+,getAllSubscription, updateDescriptions, deleteSubscriptions, addSubscriptions,getallUserSubscriptions };
 
 
 export default userService

@@ -7,32 +7,35 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/system";
+import logo from 'assets/images/icons/pro-logo.jpeg'
+
+
 
 function StripePayment({ product, makePayment }) {
 
     return (
-        <Card sx={{ maxWidth: 300, margin: '5px' }}>
+        <Card sx={{ width: 300, margin: '5px', textAlign: 'center', paddingTop:'20px' , paddingRight:'20px' , maxWidth:300}}>
             <CardMedia
                 component="img"
                 height="194"
-                image=""
+                image={logo}
                 alt="product image"
             />
-            <CardContent>
-                <Typography gutterBottom variant="h4" component="div">
-                    {product.name}
+            <CardContent  style={{ fontSize:'20px'}} >
+                <Typography  style={{ fontSize:'15px', textAlign: 'center'}} gutterBottom variant="h4" component="div">
+                    <b>{product.name}</b>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {product.desc}
+                <Typography style={{ fontSize:'15px', textAlign: 'center'}} variant="body2" color="text.secondary">
+                    <b>{product.desc}</b>
                 </Typography>
-                <Typography variant="body2" color="text.secondary" component="ul">
+                <Typography style={{ fontSize:'15px', textAlign: 'center', justifyContent: 'center'}} variant="body2" color="text.secondary" component="ul">
                     {product.features.map((feature, index) => (
-                        <li key={index}>{feature}</li>
+                        <li  key={index}> <b>{feature}</b></li>
                     ))}
                 </Typography>
                 <Box sx={{ my: 3 }} />
                 <Typography variant="body2" color="text.secondary">
-                    Price: ${product.price}
+                    <b>Price: ${product.price}</b>
                 </Typography>
             </CardContent>
             <CardActions sx={{ justifyContent: 'center' }}>
