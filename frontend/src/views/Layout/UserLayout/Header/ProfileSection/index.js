@@ -25,6 +25,7 @@ import {
     Switch,
     Typography
 } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -259,8 +260,8 @@ const ProfileSection = () => {
                                                         selected={selectedIndex === 4}
                                                         onClick={handleLogin}
                                                     >
-                                                        <ListItemIcon>
-                                                            <IconLogout stroke={1.5} size="1.3rem" />
+                                                        <ListItemIcon >
+                                                            <LoginIcon sx={{ ml: -1 }} stroke={1.5} size="1.3rem" />
                                                         </ListItemIcon>
                                                         <ListItemText primary={<Typography variant="body2">Login</Typography>} />
                                                     </ListItemButton>

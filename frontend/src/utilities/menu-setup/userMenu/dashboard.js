@@ -35,22 +35,22 @@ const dashboard = {
             icon: icons.HomeIcon,
             breadcrumbs: false
         },
-        {
-            id: 'login',
-            title: 'Login',
-            type: 'item',
-            url: '/login',
-            icon: icons.LoginIcon,
-            breadcrumbs: false
-        },
-        {
-            id: 'register',
-            title: 'Register',
-            type: 'item',
-            url: '/register',
-            icon: icons.HowToRegIcon,
-            breadcrumbs: false
-        },
+        // {
+        //     id: 'login',
+        //     title: 'Login',
+        //     type: 'item',
+        //     url: '/login',
+        //     icon: icons.LoginIcon,
+        //     breadcrumbs: false
+        // },
+        // {
+        //     id: 'register',
+        //     title: 'Register',
+        //     type: 'item',
+        //     url: '/register',
+        //     icon: icons.HowToRegIcon,
+        //     breadcrumbs: false
+        // },
         {
             id: 'trendingnews',
             title: 'TrendingNews',
