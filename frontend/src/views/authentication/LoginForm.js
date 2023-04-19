@@ -40,6 +40,7 @@ import Google from 'assets/images/icons/social-google.svg';
 import { login, googleLogin } from "store/slices/authSlice";
 import { setMessage, clearMessage } from "store/slices/messageSlice";
 import { setSnackbar, clearSnackbar } from "store/slices/snackbarSlice";
+import { userSubbed, clearUserSub } from 'store/slices/subscriptionSlice';
 // ============================||  LOGIN ||============================ //
 
 const Login = ({ ...others }) => {
@@ -60,6 +61,7 @@ const Login = ({ ...others }) => {
 
     useEffect(() => {
         dispatch(clearMessage());
+        dispatch(clearUserSub());
     }, [dispatch]);
 
     // handle googleHandler oauth login
