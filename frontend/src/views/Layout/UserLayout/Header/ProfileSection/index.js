@@ -39,7 +39,9 @@ import { logout } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
 import { clearUserSub } from "store/slices/subscriptionSlice";
 import SubscriptionCard from './SubscriptionCard';
+import { createBrowserHistory } from 'history';
 
+const history = createBrowserHistory();
 // ==============================|| PROFILE MENU ||============================== //
 
 const ProfileSection = () => {
@@ -91,6 +93,9 @@ const ProfileSection = () => {
         dispatch(logout());
         dispatch(clearUserSub());
         navigate("/login");
+        // window.location.reload();
+
+        history.push("/login")
     }, [dispatch]);
 
     const handleLogin = () => {
@@ -233,7 +238,7 @@ const ProfileSection = () => {
                                                 <ListItemButton
                                                     sx={{ borderRadius: `${customization.borderRadius}px` }}
                                                     selected={selectedIndex === 0}
-                                                    onClick={(event) => handleListItemClick(event, 0, '/account')}
+                                                    onClick={(event) => handleListItemClick(event, 0, '/user/account')}
                                                 >
                                                     <ListItemIcon>
                                                         <IconSettings stroke={1.5} size="1.3rem" />

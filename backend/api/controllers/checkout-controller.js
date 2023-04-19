@@ -40,8 +40,8 @@ export const post = async (req, res) => {
             },
         ],
         mode: "payment",
-        success_url: process.env.CLIENT_URL + "/success",
-        cancel_url: process.env.CLIENT_URL + "/cancel",
+        success_url: process.env.CLIENT_URL + "/user/success",
+        cancel_url: process.env.CLIENT_URL + "/user/cancel",
     })
     console.log("--------before send", session)
     res.json({ id: session.id });

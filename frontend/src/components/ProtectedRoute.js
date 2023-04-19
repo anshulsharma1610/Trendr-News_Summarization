@@ -21,9 +21,9 @@ const Protected = ({ component: Component }) => {
         return <Navigate to="/user" replace />;
     }
 
-    if (location.pathname === "/") {
-        return <Navigate to="/login" replace />;
-    }
+    // if (location.pathname === "/") {
+    //     return <Navigate to="/login" replace />;
+    // }
 
     return <Component />;
 };

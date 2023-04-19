@@ -190,7 +190,7 @@ export const ordersVsSubs = async () => {
     ];
 
     const result = await UserSubscriptions.aggregate(pipeline);
-    return result[0].subCounts;
+    return result.length > 0 ? result[0].subCounts : 0;
 }
 
 export const getSalesAndGrowth = async () => {

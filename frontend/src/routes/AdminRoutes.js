@@ -18,39 +18,39 @@ const Profile = Loadable(lazy(() => import('views/Profile')));
 
 const MainRoutes = {
     path: '/admin',
-    element: <ProtectedRoute component={AdminLayout} />,
+    element: <AdminLayout />,
     children: [
         {
             path: '/admin',
-            element: <ProtectedRoute component={Dashboard} />
+            element: <Dashboard />
         },
         {
             path: '/admin/customer',
-            element: <ProtectedRoute component={UserCrud} />
+            element: <UserCrud />
         },
         {
             path: '/admin/preferences',
-            element: <ProtectedRoute component={PreferencesCrud} />
+            element: <PreferencesCrud />
         },
         {
             path: '/admin/subscription',
-            element: <ProtectedRoute component={SubscriptionCrud} />
+            element: <SubscriptionCrud />
         },
         {
             path: '/admin/customersubscription',
-            element: <ProtectedRoute component={UserSubscriptionCrud} />
+            element: <UserSubscriptionCrud />
         },
         {
             path: '/admin/news',
-            element: <ProtectedRoute component={NewsCrud} />
+            element: <NewsCrud />
         },
         {
             path: '/admin/404',
-            element: <ProtectedRoute component={NotFound} />
+            element: <NotFound />
         },
         {
             path: '/admin/account',
-            element: <ProtectedRoute component={Profile} />
+            element: <Profile />
         },
         {
             path: '/admin/*',

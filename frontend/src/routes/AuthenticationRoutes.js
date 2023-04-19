@@ -14,19 +14,19 @@ const { Navigate } = require('react-router-dom');
 
 const AuthenticationRoutes = {
     path: '/',
-    element: <ProtectedRoute component={AuthLayout} />,
+    element: <AuthLayout />,
     children: [
         {
             path: '/',
-            element: <ProtectedRoute component={Login} />,
+            element: <Login />,
         },
         {
             path: '/login',
-            element: <ProtectedRoute component={Login} />,
+            element: <Login />,
         },
         {
             path: '/register',
-            element: <ProtectedRoute component={Register} />,
+            element: <Register />,
         },
         {
             path: '/404',

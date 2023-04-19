@@ -39,9 +39,11 @@ import { logout } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
 import { clearUserSub } from "store/slices/subscriptionSlice";
 // import SubscriptionCard from './SubscriptionCard';
+import { createBrowserHistory } from 'history';
 
 // ==============================|| PROFILE MENU ||============================== //
 
+const history = createBrowserHistory();
 const ProfileSection = () => {
     const theme = useTheme();
     const customization = useSelector((state) => state.customization);
@@ -91,6 +93,8 @@ const ProfileSection = () => {
         dispatch(logout());
         dispatch(clearUserSub());
         navigate("/login");
+        // window.location.reload();
+        // history.push("/login")
     }, [dispatch]);
 
     const handleLogin = () => {

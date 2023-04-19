@@ -21,11 +21,11 @@ const TrendingNews = Loadable(lazy(() => import('views/TrendingNews')));
 
 const MainRoutes = {
     path: '/user',
-    element: <ProtectedRoute component={UserLayout} />,
+    element: <UserLayout />,
     children: [
         {
             path: '/user',
-            element: <ProtectedRoute component={NewsFeed} />
+            element: <NewsFeed />
         },
         {
             path: '/user/trending',
@@ -33,31 +33,31 @@ const MainRoutes = {
         },
         {
             path: '/user/preferences',
-            element: <ProtectedRoute component={Preferences} />
+            element: <Preferences />
         },
         {
             path: '/user/bookmarks',
-            element: <ProtectedRoute component={Bookmarks} />
+            element: <Bookmarks />
         },
         {
             path: '/user/account',
-            element: <ProtectedRoute component={Profile} />
+            element: <Profile />
         },
         {
             path: '/user/checkout',
-            element: <ProtectedRoute component={Checkout} />
+            element: <Checkout />
         },
         {
             path: '/user/success',
-            element: <ProtectedRoute component={Success} />
+            element: <Success />
         },
         {
             path: '/user/cancel',
-            element: <ProtectedRoute component={Cancel} />
+            element: <Cancel />
         },
         {
             path: '/user/404',
-            element: <ProtectedRoute component={NotFound} />
+            element: <NotFound />
         },
         {
             path: '/user/*',
@@ -65,7 +65,7 @@ const MainRoutes = {
         },
         {
             path: '/user/search',
-            element: <ProtectedRoute component={SearchResults} />
+            element: <SearchResults />
         },
     ]
 };

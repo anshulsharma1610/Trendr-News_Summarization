@@ -31,31 +31,15 @@ const dashboard = {
             id: 'default',
             title: 'Home',
             type: 'item',
-            url: '/news',
+            url: '/user',
             icon: icons.HomeIcon,
             breadcrumbs: false
         },
-        // {
-        //     id: 'login',
-        //     title: 'Login',
-        //     type: 'item',
-        //     url: '/login',
-        //     icon: icons.LoginIcon,
-        //     breadcrumbs: false
-        // },
-        // {
-        //     id: 'register',
-        //     title: 'Register',
-        //     type: 'item',
-        //     url: '/register',
-        //     icon: icons.HowToRegIcon,
-        //     breadcrumbs: false
-        // },
         {
             id: 'trendingnews',
             title: 'TrendingNews',
             type: 'item',
-            url: '/trending',
+            url: '/user/trending',
             icon: icons.TrendingUpIcon,
             breadcrumbs: false
         },
@@ -63,7 +47,7 @@ const dashboard = {
             id: 'bookmarks',
             title: 'Bookmarks',
             type: 'item',
-            url: '/bookmarks',
+            url: '/user/bookmarks',
             icon: icons.BookmarksIcon,
             breadcrumbs: false
         },
@@ -71,7 +55,7 @@ const dashboard = {
             id: 'Subscriptions',
             title: 'Subscriptions',
             type: 'item',
-            url: '/checkout',
+            url: '/user/checkout',
             icon: icons.CreditCardIcon,
             breadcrumbs: false
         },
