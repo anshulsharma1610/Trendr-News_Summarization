@@ -22,7 +22,7 @@ const NewsFeed = () => {
         const fetchData = async () => {
             let userdetails = await userService.getUserDetail(userId);
             let preferenceIds = userdetails.data.preferences
-            //console.log(userdetails)
+            console.log(userdetails)
             let response;
             if (preferenceIds.length > 0) {
                 // Fetch news based on preferences if preferences are not empty

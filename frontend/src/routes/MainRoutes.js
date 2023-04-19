@@ -17,6 +17,7 @@ import { Navigate } from 'react-router-dom';
 import { Check } from '@mui/icons-material';
 import AdminPreferences from 'views/AdminDashboard/AdminPreference';
 import AdminSubscription from 'views/AdminDashboard/AdminSubscription';
+import UserSubscriptions from 'views/AdminDashboard/UserSubscriptions';
 
 const HelloWorld = Loadable(lazy(() => import('views/HelloWorld')));
 const NewsFeed = Loadable(lazy(() => import('views/NewsFeed/NewsFeed/NewsFeed')));
@@ -82,11 +83,15 @@ const MainRoutes = {
         {
             path: '/search',
             element: <SearchResults />
-        },
+        }
         ,
         {
             path: '/admincrud/subscription',
             element: <AdminSubscription />
+        } ,
+        {
+            path: '/admincrud/userSubscription',
+            element: <UserSubscriptions />
         }
     ]
 };
