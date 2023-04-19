@@ -106,7 +106,7 @@ const NewsTable = () => {
       }));
     } catch (error) {
       console.error(error);
-      // alert('Failed to update news');
+   
     }
   }
   const afterUpdate = (formData)=>{
@@ -265,7 +265,7 @@ const NewsTable = () => {
 </span> */}
         
         {/* </div> */}
-          <TableContainer component={Paper} style={{ width: '1000px', marginTop: '50px'}}>
+          <TableContainer component={Paper} style={{  marginTop: '50px'}}>
           <Table aria-label="collapsible table">
             <TableHead style= {{ backgroundColor: '#bbbbc6',fontSize: '20px'}}>
               <TableRow style={{ fontSize: '50px'}}>

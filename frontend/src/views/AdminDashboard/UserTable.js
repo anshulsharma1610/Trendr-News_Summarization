@@ -85,14 +85,15 @@ const UserTable = () => {
     <div style={styles.container}>
     <Box
       sx={{
-        width: '1000px',
+        width: 1120,
         maxWidth: '100%',
+        // fullWidth
       }}
     >
     <div>
       {/* <h1 style={{ textAlign: 'center' , marginBottom: '50px', color: 'black'}} margin>USER DETAILS</h1> */}
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: '1000px' }}>
+        <Table fullWidth >
           <TableHead sx={{backgroundColor: '#bbbbc6',fontSize: '20px' }}>
             <TableRow>
               <TableCell sx={{  padding: '10px', fontSize: '18px' }} align="center" >Email</TableCell>
