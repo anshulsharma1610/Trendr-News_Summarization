@@ -36,6 +36,7 @@ import Transitions from 'components/extended/Transitions';
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { logout } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
+import SubscriptionCard from './SubscriptionCard';
 
 // ==============================|| PROFILE MENU ||============================== //
 
@@ -63,7 +64,7 @@ const ProfileSection = () => {
     const dispatch = useDispatch();
     let username = "You"
     console.log('----loggedIN?', isLoggedIn)
-    if (isLoggedIn) username = useSelector((state) => state.user.user.user.email);
+    if (isLoggedIn) username = useSelector((state) => state.user.user.user.fname);
 
     // useEffect(() => {
     //     dispatch(clearMessage());
@@ -196,22 +197,8 @@ const ProfileSection = () => {
                                                 </Typography>
                                             </Stack>
                                         </Stack>
-                                        <OutlinedInput
-                                            sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
-                                            id="input-search-profile"
-                                            value={value}
-                                            onChange={(e) => setValue(e.target.value)}
-                                            placeholder="Search profile options"
-                                            startAdornment={
-                                                <InputAdornment position="start">
-                                                    <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
-                                                </InputAdornment>
-                                            }
-                                            aria-describedby="search-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight'
-                                            }}
-                                        />
+                                        <Divider sx={{ mt: 2 }} />
+                                        <SubscriptionCard sx={{ mt: 2 }} />
                                         <Divider />
                                     </Box>
                                     <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
