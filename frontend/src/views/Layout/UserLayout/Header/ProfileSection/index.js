@@ -36,6 +36,7 @@ import Transitions from 'components/extended/Transitions';
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
 import { logout } from "store/slices/authSlice";
 import { clearMessage } from "store/slices/messageSlice";
+import { clearUserSub } from "store/slices/subscriptionSlice";
 import SubscriptionCard from './SubscriptionCard';
 
 // ==============================|| PROFILE MENU ||============================== //
@@ -87,6 +88,7 @@ const ProfileSection = () => {
 
     const handleLogout = useCallback(() => {
         dispatch(logout());
+        dispatch(clearUserSub());
         navigate("/login");
     }, [dispatch]);
 
@@ -209,31 +211,12 @@ const ProfileSection = () => {
                                                     my: 0
                                                 }}
                                             >
-                                                <CardContent>
-                                                    <Grid container spacing={3} direction="column">
-                                                        <Grid item>
-                                                            <Grid item container alignItems="center" justifyContent="space-between">
-                                                                <Grid item>
-                                                                    <Typography variant="subtitle1">Allow Notifications</Typography>
-                                                                </Grid>
-                                                                <Grid item>
-                                                                    <Switch
-                                                                        checked={notification}
-                                                                        onChange={(e) => setNotification(e.target.checked)}
-                                                                        name="sdm"
-                                                                        size="small"
-                                                                    />
-                                                                </Grid>
-                                                            </Grid>
-                                                        </Grid>
-                                                    </Grid>
-                                                </CardContent>
                                             </Card>
-                                            <Divider />
                                             <List
                                                 component="nav"
                                                 sx={{
                                                     width: '100%',
+                                                    mt: -3,
                                                     maxWidth: 350,
                                                     minWidth: 300,
                                                     backgroundColor: theme.palette.background.paper,
