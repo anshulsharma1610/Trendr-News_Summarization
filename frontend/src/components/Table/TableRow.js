@@ -15,8 +15,11 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {TablePagination} from '@mui/material';
 import MainCard from 'components/cards/MainCard';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { blue, red } from '@mui/material/colors';
+import Button from '@mui/material/Button';
+
+
 
 function Row(props) {
   const row = props.row;
@@ -46,18 +49,25 @@ function Row(props) {
           {row.title}
         </TableCell>
         <TableCell align="right">
-          <IconButton aria-label="update" onClick={() => handleRowUpdate(row)}>
+          {/* <IconButton aria-label="update" onClick={() => handleRowUpdate(row)}>
             <EditIcon />
-          </IconButton>
+          </IconButton> */}
+          <Button startIcon={<ModeEditIcon />} size ="small" variant="contained" onClick={()=>handleRowUpdate(row)}>Update</Button>
+
         </TableCell>
         <TableCell align="right">
-          <IconButton
+          {/* <IconButton
           aria-label="delete"
           className="delete-button"
             onClick={() => handleRowDelete(row._id)}
           >
             <DeleteIcon sx={{ color: red[500] }} />
-          </IconButton>
+          </IconButton> */}
+           <Button startIcon={<DeleteIcon />}  size ="small" style={{
+
+backgroundColor: "#ed5e68",
+
+}} variant="contained" onClick={() => handleRowDelete(row._id)}>Delete</Button>
         </TableCell>
       </TableRow>
       <TableRow>
@@ -76,9 +86,8 @@ function Row(props) {
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <Typography variant="subtitle1">
-                        <b>Summary</b>
-                      </Typography>
+                       Summary
+                
                     </TableCell>
                     <TableCell align="left">{row.summary}</TableCell>
                   </TableRow>

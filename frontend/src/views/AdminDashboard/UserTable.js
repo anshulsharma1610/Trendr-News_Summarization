@@ -5,6 +5,7 @@ import TablePagination from '@mui/material/TablePagination';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 import { blue, red } from '@mui/material/colors';
+
 import {
   FormControl,
   InputLabel,
@@ -84,15 +85,16 @@ const UserTable = () => {
     <div style={styles.container}>
     <Box
       sx={{
-        width: '1000px',
+        width: 1120,
         maxWidth: '100%',
+        // fullWidth
       }}
     >
     <div>
-      <h1 style={{ textAlign: 'center' , marginBottom: '50px', color: 'black'}} margin>USER DETAILS</h1>
+      {/* <h1 style={{ textAlign: 'center' , marginBottom: '50px', color: 'black'}} margin>USER DETAILS</h1> */}
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: '1000px' }}>
-          <TableHead sx={{backgroundColor: '#EDE7F6',fontSize: '20px' }}>
+        <Table fullWidth >
+          <TableHead sx={{backgroundColor: '#bbbbc6',fontSize: '20px' }}>
             <TableRow>
               <TableCell sx={{  padding: '10px', fontSize: '18px' }} align="center" >Email</TableCell>
               <TableCell sx={{ padding: '10px', fontSize: '18px' }} align="center">First Name</TableCell>
@@ -107,9 +109,13 @@ const UserTable = () => {
                 <TableCell sx={{ padding: '10px' , width: '25%', fontSize: '15px' }} align="center" >{user.fname}</TableCell>
                 <TableCell sx={{padding: '10px' , width: '25%', fontSize: '15px' }} align="center" >{user.lname}</TableCell>
                 <TableCell sx={{ padding: '10px' , width: '25%', fontSize: '15px' }} align="center">
-                  <IconButton sx={{ padding: '10px' }} aria-label="delete" onClick={() => handleDelete(user._id)}>
-                    <DeleteIcon sx={{ color: red[500] }} />
-                  </IconButton>
+                  <Button size ="small" startIcon={<DeleteIcon />} style={{
+
+backgroundColor: "#ed5e68",
+
+}} variant="contained"onClick={() => handleDelete(user._id)}>
+                  Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
