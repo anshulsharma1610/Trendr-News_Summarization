@@ -10,11 +10,13 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import HomeIcon from '@mui/icons-material/Home';
+
 
 // constant
 const icons = { IconDashboard ,DashboardIcon, LoginIcon,HowToRegIcon,
      TrendingUpIcon, BookmarksIcon, AdminPanelSettingsIcon, CreditCardIcon, PersonAddAltIcon,
-     AccountBoxIcon, LibraryAddIcon, NewspaperIcon};
+     AccountBoxIcon, LibraryAddIcon, NewspaperIcon, HomeIcon};
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -25,10 +27,10 @@ const dashboard = {
     children: [
         {
             id: 'default',
-            title: 'Dashboard',
+            title: 'Home',
             type: 'item',
             url: '/',
-            icon: icons.DashboardIcon,
+            icon: icons.HomeIcon,
             breadcrumbs: false
             
         },
@@ -64,14 +66,7 @@ const dashboard = {
             icon: icons.BookmarksIcon,
             breadcrumbs: false
         },
-        {
-            id: 'AdminDashboard',
-            title: 'AdminDashboard',
-            type: 'item',
-            url: '/admincrud',
-            icon: icons.AdminPanelSettingsIcon,
-            breadcrumbs: false
-        },
+        
         {
             id: 'Subscriptions',
             title: 'Subscriptions',
@@ -83,45 +78,45 @@ const dashboard = {
 
         ////////////////////////////////---ADMIN---///////////////////////////////////////
        
-        {
-            id: 'Subscriptions',
-            title: 'Subscriptions',
-            type: 'item',
-            url: '/admincrud/subscription',
-            icon: icons.CreditCardIcon,
-            breadcrumbs: false 
-        },
-        {
-            id: 'NEWS',
-            title: 'NEWS',
-            type: 'item',
-            url: '/admincrud/news',
-            icon: icons.NewspaperIcon,
-            breadcrumbs: false 
-        },
-        {
-            id: 'Preferences',
-            title: 'Preferences',
-            type: 'item',
-            url: '/admincrud/preferences',
-            icon: icons.LibraryAddIcon,
-            breadcrumbs: false 
-        }, {
-            id: 'User-Subscriptions',
-            title: 'User-Subscriptions',
-            type: 'item',
-            url: '/admincrud/userSubscription',
-            icon: icons.AccountBoxIcon,
-            breadcrumbs: false 
-        },
-        {
-            id: 'Users',
-            title: 'Users',
-            type: 'item',
-            url: '/admincrud/users',
-            icon: icons.PersonAddAltIcon,
-            breadcrumbs: false 
-        }
+        // {
+        //     id: 'Subscriptions',
+        //     title: 'Subscriptions',
+        //     type: 'item',
+        //     url: '/admincrud/subscription',
+        //     icon: icons.CreditCardIcon,
+        //     breadcrumbs: false 
+        // },
+        // {
+        //     id: 'NEWS',
+        //     title: 'NEWS',
+        //     type: 'item',
+        //     url: '/admincrud/news',
+        //     icon: icons.NewspaperIcon,
+        //     breadcrumbs: false 
+        // },
+        // {
+        //     id: 'Preferences',
+        //     title: 'Preferences',
+        //     type: 'item',
+        //     url: '/admincrud/preferences',
+        //     icon: icons.LibraryAddIcon,
+        //     breadcrumbs: false 
+        // }, {
+        //     id: 'User-Subscriptions',
+        //     title: 'User-Subscriptions',
+        //     type: 'item',
+        //     url: '/admincrud/userSubscription',
+        //     icon: icons.AccountBoxIcon,
+        //     breadcrumbs: false 
+        // },
+        // {
+        //     id: 'Users',
+        //     title: 'Users',
+        //     type: 'item',
+        //     url: '/admincrud/users',
+        //     icon: icons.PersonAddAltIcon,
+        //     breadcrumbs: false 
+        // }
     ]
 };
 
