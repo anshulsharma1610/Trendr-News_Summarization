@@ -62,7 +62,7 @@ const Login = ({ ...others }) => {
             // window.location.reload();
         } else if (userRole == 'user') {
             navigate("/user");
-            window.location.reload();
+            // window.location.reload();
         }
         return state.user.isLoggedIn;
     });
@@ -82,10 +82,6 @@ const Login = ({ ...others }) => {
                 // dispatch(userSubbed());
                 dispatch(setSnackbar({ message: "Logged in Successfully!" }));
                 // navigate("/user");
-
-                let userRole = useSelector((state) => state.user.user?.user?.roleId?.role);
-                console.log('-------userrole', userRole)
-
                 // window.location.reload();
             })
             .catch(() => {

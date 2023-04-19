@@ -93,7 +93,7 @@ const ProfileSection = () => {
         dispatch(logout());
         dispatch(clearUserSub());
         navigate("/login");
-        // window.location.reload();
+        window.location.reload();
         // history.push("/login")
     }, [dispatch]);
 
