@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+// code defines a schema for user subscriptions, with fields for user ID, subscription ID, price, 
+// creation date, and expiration date.
 const userSubscriptionsSchema = new mongoose.Schema({
     userId: String,
     subId: String,
@@ -17,5 +19,6 @@ userSubscriptionsSchema.pre('save', function (next) {
     next();
 });
 
+// exports a model for the schema
 const UserSubscriptions = mongoose.model('UserSubscriptions', userSubscriptionsSchema);
 export default UserSubscriptions;

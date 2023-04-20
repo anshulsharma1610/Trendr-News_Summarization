@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userSubbed } from "store/slices/subscriptionSlice";
 import { Link as RouterLink } from 'react-router-dom'
 
+
+//code defines a React component that displays a success message and
+// dispatches an action to update the user's subscription status upon successful payment.
 function Success() {
     const dispatch = useDispatch();
     dispatch(userSubbed());

@@ -57,6 +57,9 @@ const NewsTable = () => {
   
   }, []);
 
+  // code defines a function that deletes a news article with a specified id by sending a DELETE 
+  // request to a backend API and updates the state of newsData.
+
   const handleDelete = (id) => {
     // Implement logic for deleting news with specified ID
     fetch(`http://localhost:8000/api/news/${id}`, {
@@ -64,23 +67,29 @@ const NewsTable = () => {
     })
       .then((response) => {
         if (response.ok) {
-          // alert('News has been deleted.');
           setNewsData(newsData.filter((news) => news._id !== id));
         }
       })
       .catch((error) => console.error(error)); 
   };
 
+  //code defines a function that sets the state of isType to 'Update', 
+  //sets the state of updatedNews to data, and sets the state of modalOpen to true.
+
   const handleUpdate = (data) => {
     setIsType('Update');
     setUpdatedNews(data);
     setModalOpen(true);
   };
+
+  // code defines a function that sets the state of isType to 'Add' and sets the state of modalOpen to true.
   const addNews = () =>{
     setIsType('Add');
     setModalOpen(true);
 
   }
+
+  // Asynchronous function to update news data via API call and update the state of newsData.
 
   const updateNews = async () => {
     try {
@@ -95,7 +104,6 @@ const NewsTable = () => {
       if (!response.ok) {
         throw new Error('Failed to update news');
       }
-      // alert('News has been updated.');
       setModalOpen(false);
       
       setNewsData(prevNewsData => prevNewsData.map(news => {
@@ -109,16 +117,19 @@ const NewsTable = () => {
    
     }
   }
+  // function closes the modal and reloads the page after updating the form data.
   const afterUpdate = (formData)=>{
     setModalOpen(false);
     window.location.reload();
   }
   
+  // function closes the modal and reloads the page after updating the form data.
   const closeModal = ()=>{
     setModalOpen(false);
   }
 
-  
+  // function is used to handle changes in the page number of a paginated table.
+  // It takes in two parameters, event and newPage, and sets the state variable page to the new page number.
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -129,6 +140,7 @@ const NewsTable = () => {
   };
 
   const handleModalClose = () => setModalOpen(false);
+  // function updates the updatedNews state based on the target ID and value of the input field.
   const handleUpdateChange = (event)=>{
     event.preventDefault();
     console.log(event.target.id);

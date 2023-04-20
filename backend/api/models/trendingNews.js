@@ -1,4 +1,7 @@
+
+
 import mongoose, { now } from "mongoose";
+// Mongoose schema for a collection named "TrendingNews" with four fields: title, pubDate, link, and image_url.
 const TrendingNews = new mongoose.Schema({
     title: {
         type: String,
@@ -22,6 +25,7 @@ const TrendingNews = new mongoose.Schema({
     }
 );
 
+// exports a model for the schema
 const TrendNews = mongoose.model('TrendingNews', TrendingNews);
 
 export default TrendNews;

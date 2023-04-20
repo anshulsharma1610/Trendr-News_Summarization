@@ -7,6 +7,8 @@ import {
     setnotFound
 } from '../util/statusCodes.js';
 
+// code exports an asynchronous function that creates a new user subscription by saving the request body,
+// and returns a success or error response based on the result.
 export const post = async (req, res) => {
     try {
         const newUserSubscription = req.body;
@@ -20,6 +22,9 @@ export const post = async (req, res) => {
     }
 }
 
+// code exports an asynchronous function that retrieves all user subscriptions and returns a
+// success or error response based on the result.
+
 export const get = async (req, res) => {
     try {
         const userSubscription = await userSubscriptionService.getAll();
@@ -28,6 +33,9 @@ export const get = async (req, res) => {
         return setErrorResponse(err, res);
     }
 }
+
+//  code exports an asynchronous function that updates a user subscription with the specified ID
+//   using the request body, and returns a success or error response based on the result.
 
 export const put = async (req, res) => {
     try {
@@ -43,6 +51,9 @@ export const put = async (req, res) => {
     }
 }
 
+// code exports an asynchronous function that removes a user subscription with the specified ID, 
+// and returns a success or error response based on the result.
+
 export const remove = async (req, res) => {
     try {
         const id = req.params.id;
@@ -56,6 +67,8 @@ export const remove = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+// code exports an asynchronous function that retrieves a user subscription with the 
+// specified ID and returns a success or error response based on the result.
 
 export const getById = async (req, res) => {
     try {

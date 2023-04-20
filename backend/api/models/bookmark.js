@@ -1,4 +1,9 @@
 import mongoose from "mongoose";
+
+// This code defines a Mongoose model for bookmarks, 
+// with a schema that includes a user ID and an article ID 
+// (referencing the User and NewsArticle models respectively), and exports it.
+
 const bookmarkSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,

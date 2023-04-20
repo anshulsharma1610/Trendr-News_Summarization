@@ -11,6 +11,9 @@ import {
     searchNews
 } from '../services/news-service.js';
 
+// An asynchronous  function that handles HTTP GET requests for all news articles 
+// and returns a JSON response of the fetched news or an error message if there is an issue.
+
 export const getNews = async (req, res) => {
     try {
         const newsArticles = await getAllNewsArticles();
@@ -19,6 +22,9 @@ export const getNews = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// Asynchronous  function that handles HTTP GET requests for a news article by ID,
+//  and returns a JSON response of the fetched article or an error message if there is an issue.
 
 export const getArticleById = async (req, res) => {
     try {
@@ -33,6 +39,8 @@ export const getArticleById = async (req, res) => {
     }
 };
 
+//asynchronous JavaScript function that handles HTTP PUT requests to update a news
+//  article by ID, and returns a JSON response of the updated article or an error message if there is an issue.
 export const updateArticleById = async (req, res) => {
     try {
         const articleId = req.params.id;
@@ -47,6 +55,9 @@ export const updateArticleById = async (req, res) => {
     }
 };
 
+// An asynchronous function that deletes a news article from a database 
+// based on the provided article ID and returns an appropriate HTTP response.
+
 export const deleteArticleById = async (req, res) => {
     try {
         const articleId = req.params.id;
@@ -60,6 +71,8 @@ export const deleteArticleById = async (req, res) => {
     }
 };
 
+// An asynchronous function that creates a new news article in a database based on the provided 
+// request body data and returns the newly created article as a JSON response with a HTTP status of 201.
 export const createArticle = async (req, res) => {
     try {
         const newArticleData = req.body;
@@ -71,6 +84,10 @@ export const createArticle = async (req, res) => {
 };
 
 // ... other controller functions
+
+// An asynchronous function  allows a user to like or unlike a news article in a database based on the
+//  provided article ID and user ID, and returns the updated article as 
+//  a JSON response with an appropriate HTTP status.
 
 export const likeArticle = async (req, res) => {
     try {
@@ -86,6 +103,10 @@ export const likeArticle = async (req, res) => {
     }
 };
 
+// An asynchronous function that adds a comment to a news article in a 
+// database based on the provided article ID and comment object from the request body,
+//  and returns the updated article as a JSON response with an appropriate HTTP status.
+
 export const addComment = async (req, res) => {
     try {
         const articleId = req.params.id;
@@ -99,6 +120,10 @@ export const addComment = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// An asynchronous function that allows a user to share a news article from a database 
+// based on the provided article ID and returns the shared article 
+// as a JSON response with an appropriate HTTP status.
 
 export const shareArticle = async (req, res) => {
     try {

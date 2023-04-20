@@ -29,6 +29,10 @@ const summarizeContent = async (content) => {
     return response.data.choices[0].text.trim();
 };
 
+// An asynchronous function that retrieves news articles from the Newsdata.io API based on the specified query parameters,
+//  summarizes the content of each article using GPT-3, adds the summary to the article object,
+//   saves the articles to MongoDB using the Mongoose model, and returns the articles.
+
 export const fetchNews = async (queryParams) => {
     const newsArticles = [];
     let nextPage = null;

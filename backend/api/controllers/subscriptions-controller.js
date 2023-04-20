@@ -7,6 +7,9 @@ import {
     setnotFound
 } from '../util/statusCodes.js';
 
+// code exports an asynchronous function that creates a new subscription by saving the request body,
+//  and returns a success or error response based on the result.
+
 export const post = async (req, res) => {
     try {
         const newSubscription = req.body;
@@ -20,6 +23,8 @@ export const post = async (req, res) => {
         return setErrorResponse(res, err);
     }
 }
+// code exports an asynchronous function that retrieves all subscriptions and returns a success or 
+// error response based on the result.
 
 export const get = async (req, res) => {
     try {
@@ -29,6 +34,9 @@ export const get = async (req, res) => {
         return setErrorResponse(err, res);
     }
 }
+
+// code exports an asynchronous function that updates a subscription with the specified ID,
+//  and returns a success or error response based on the result.
 
 export const put = async (req, res) => {
     try {
@@ -44,6 +52,9 @@ export const put = async (req, res) => {
     }
 }
 
+// This function removes a subscription by ID and sends a success response if 
+// the subscription is found and deleted, otherwise sends a not found error response.
+
 export const remove = async (req, res) => {
     try {
         const id = req.params.id;
@@ -57,6 +68,10 @@ export const remove = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+
+//  An asynchronous function named getById that retrieves a subscription by its ID 
+// and sends a successful response containing the subscription data.
+//  If the subscription does not exist, it sends a not found response.
 
 export const getById = async (req, res) => {
     try {

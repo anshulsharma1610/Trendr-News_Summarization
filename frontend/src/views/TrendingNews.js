@@ -31,6 +31,7 @@ const useStyles = styled((theme) => ({
   },
 }));
 
+//component called trendingNews that uses the useState and useEffect hooks to fetch top news data on mount and update the state with the fetched data.
 const TrendingNews = () => {
   const theme = useTheme();
   const [news, setNews] = useState([]);
@@ -43,6 +44,7 @@ const TrendingNews = () => {
     fetchNewsData();
   }, []);
 
+  //code renders a list of news items with their respective images, titles, and publication dates fetched from an API, and displays a message if no news is available.
   return (
     <>
       <Typography variant="h2">

@@ -14,6 +14,8 @@ import {
     Box
 } from '@mui/material';
 import '../../../assets/scss/CommentDialog.scss'
+
+//code defines a React component for a comment dialog that allows users to view and add comments.
 const CommentDialog = ({ open, onClose, comments, onAddComment }) => {
     const [newComment, setNewComment] = useState('');
     const [localComments, setLocalComments] = useState(comments);
@@ -38,6 +40,7 @@ const CommentDialog = ({ open, onClose, comments, onAddComment }) => {
     }, [comments]);
 
 
+    //code defines a function to handle the event of clicking on a button to add a new comment. 
     const handleAddCommentClick = () => {
         const timestamp = new Date().toISOString(); // Get the current timestamp
         const fullName = `${firstname} ${lastname}`; // Get the user's full name
@@ -51,6 +54,8 @@ const CommentDialog = ({ open, onClose, comments, onAddComment }) => {
         onAddComment(newCommentObj); // Pass the new comment to the parent component
         setNewComment(''); // Clear the input field
     };
+
+    //React component for displaying and adding comments with a dialog box.
 
     return (
         <Dialog open={open} onClose={onClose} className="comment-dialog">

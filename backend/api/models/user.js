@@ -3,6 +3,10 @@ import bcrypt from 'bcrypt';
 import Roles from './role.js';
 import passportLocalMongoose from 'passport-local-mongoose';
 
+
+// code defines a Mongoose schema for a user with properties such as first name, 
+// last name, mobile, email, password, location, phone, roleId, image, preferences, and createdAt.
+
 const userSchema = new mongoose.Schema({
     fname: String,
     lname: String,

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-// Define a schema for comments
+// A schema for a comment with fields for user ID, user full name, content, and timestamp.
 const CommentSchema = new mongoose.Schema({
     /* Implementation for UserId or UserName required */
     userId: mongoose.Schema.Types.ObjectId,
@@ -8,6 +8,8 @@ const CommentSchema = new mongoose.Schema({
     content: String,
     timestamp: Date,
 });
+
+// A schema for a news article with various fields.
 
 const NewsArticleSchema = new mongoose.Schema({
     title: String,

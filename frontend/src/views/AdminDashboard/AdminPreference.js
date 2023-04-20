@@ -27,14 +27,22 @@ import AddIcon from '@mui/icons-material/Add';
 
 export default function AdminPreferences() {
 
+  // code defines a function that updates the value of a page state variable with a new value 
+  // passed as an argument when called.
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
       };
     
+      // code defines  function that updates the value of a rows per
+      //  page state variable with a new value passed as an argument when called, and also sets the current page to the first page.
       const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
       };
+
+      //  code defines and manages state variables using React Hooks for a paginated table with chip data and 
+      //  a new preference input.
       const [page, setPage] = useState(0);
       const [chipData, setChipData] = React.useState([]);
       const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -57,6 +65,9 @@ export default function AdminPreferences() {
         return {'preferences' : transformedBody};
       } 
 
+      // code defines a function that deletes a preference with a given id, reloads the page,
+      //  and calls another function to retrieve all preferences.
+
       const deletePreferences = (id) => {
         userService.deletePrefernce(id);
         window.location.reload();
@@ -65,11 +76,16 @@ export default function AdminPreferences() {
 
         const [open, setOpen] = React.useState(false);
       
+        // code defines a function that sets the state of a variable called open to true and sets the 
+        // value of another state variable called newPreference to an empty string.
         const handleClickOpen = () => {
           setOpen(true);
           setNewPreference('');
         };
       
+        //  code defines a function that sends a new preference to a backend API using and sets the state 
+        //  of a variable called open to false.
+
         const handleClose = () => {
             console.log("-----here---");
             userService.addPreferences({ prefernceName: newPreference });
@@ -77,6 +93,8 @@ export default function AdminPreferences() {
         };
         
 
+        // code renders a table with pagination and an add preference dialog, and allows the 
+        //user to delete preferences from the table.
     return ( <><div>
         <Button variant="contained" size ="small" startIcon={<AddIcon />} onClick={handleClickOpen}>
           Add Preferences
