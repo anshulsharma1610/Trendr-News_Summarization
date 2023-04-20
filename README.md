@@ -19,93 +19,95 @@ This news application provides a comprehensive news experience for users while o
  ### Project Milestones and User Stories
 
 <table>
-  <thead>
-    <tr>
-      <th>Milestone</th>
-      <th>User Story</th>
-      <th>Assigned To</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="2">Milestone 1: User Authentication and Preferences</td>
-      <td>As a user, I want to create an account and log in with a unique username and password.</td>
-      <td>Anshul</td>
-    </tr>
-    <tr>
-      <td>As a user, I want to be able to get and change my preferences for news categories and sources.</td>
-      <td>Arpita</td>
-    </tr>
-    <tr>
-      <td rowspan="5">Milestone 2: News Feed, Social Features, and Bookmarks</td>
-      <td>As a user, I want to be able to see news summaries on the news feed.</td>
-      <td>Kashyap</td>
-    </tr>
-     <tr>
-      <td>As a user, I want to be able to see top tweets based on my news preference</td>
-      <td>Anshul</td>
-    </tr>
-    <tr>
-    <td> As a user, I want to be able to see top news headlines in trending section irrespective of my preferences</td>
-    <td>Shubhi</td>
-    </tr>
-    <tr>
-      <td>As a user, I want to be able to like, comment, and share news articles.</td>
-      <td>Kashyap</td>
-    </tr>
-    <tr>
-      <td>As a user, I want to be able to save/bookmark articles.</td>
-      <td>Shubhi</td>
-    </tr>
-     <tr>
-      <td>As a User, I want to be update my personal details and preferences.</td>
-      <td>Arpita</td>
-    </tr>
-    <tr>
-      <td rowspan="2">Milestone 3: Search</td>
-      <td>As a user, I want to be able to search for news articles by keywords and categories.</td>
-      <td>Kashyap</td>
-    </tr>
-    <tr>
-      <td rowspan="2">Milestone 4: Subscription Management and Paid Subscribers</td>
-      <td>As a user, I want to be able to enroll and manage my app subscription.</td>
-      <td>Anshul</td>
-    </tr>
-        <tr>
-      <td>As a user, i want to be able to buy a subscription and complete my transaction via payment Gateway</td>
-      <td>Anshul</td>
-    </tr>
-    <tr>
-      <td>As an admin, I want to be able to view paid subscribers.</td>
-      <td>Arpita</td>
-    </tr>
-    <tr>
-      <td rowspan="3">Milestone 5: Admin Features and User Management</td>
-      <td>As an admin, I want to be able to add news articles to the website.</td>
-      <td>Shubhi</td>
-    </tr>
-    <tr>
-      <td>As an admin, I want to be able to manage Users</td>
-      <td>Shubhi</td>
-    </tr>
-      <tr>
-      <td>As an admin, I want to be able to manage News</td>
-      <td>Shubhi</td>
-    </tr>
-        <tr>
-      <td>As an admin, I want to be able to manage Subscription</td>
-      <td>Arpita</td>
-    </tr>
-    <tr>
-      <td>As an admin, I want to be able to manage Preferences.</td>
-      <td>Arpita</td>
-    </tr>
-      <tr>
-      <td>As a admin, I should to be able fetch news summaries using OpenAI GPT-3.5.</td>
-      <td>Kashyap</td>
-    </tr>
-    
-  </tbody>
+<thead>
+<tr>
+<th>Milestone</th>
+<th>User Story</th>
+<th>Assigned To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="4">Milestone 1: User Authentication and Preferences</td>
+<td>As a user, I want to create an account and log in with a unique username and password.</td>
+<td>Anshul</td>
+</tr>
+<tr>
+<td>As a user, I want to be able to get and change my preferences for news categories and sources.</td>
+<td>Arpita</td>
+</tr>
+<tr>
+<td>As a user, I want to be able to see news summaries on the news feed.</td>
+<td>Kashyap</td>
+</tr>
+<tr>
+<td>As a user, I want to be able to see top news headlines in trending section irrespective of my preferences</td>
+<td>Shubhi</td>
+<tr>
+<td rowspan="5">Milestone 2: News Feed, Social Features, and Bookmarks</td>
+<td>As a user, I want to be able to see news summaries on the news feed.</td>
+<td>Kashyap</td>
+</tr>
+<tr>
+<td>As a user, i want to be able to buy a subscription and complete my transaction via payment Gateway</td>
+<td>Anshul</td>
+</tr>
+<tr>
+<td>As a user, I want to be able to see top tweets based on my news preference</td>
+<td>Anshul</td>
+</tr>
+<tr>
+<td>As a user, I want to be able to like, comment, and share news articles.</td>
+<td>Shubhi</td>
+</tr>
+<tr>
+<td>As a user, I want to be able to save/bookmark articles.</td>
+<td>Arpita</td>
+</tr>
+<tr>
+<td rowspan="1">Milestone 3: Search</td>
+<td>As a user, I want to be able to search for news articles by keywords and categories.</td>
+<td>Kashyap</td>
+</tr>
+<tr>
+<td rowspan="2">Milestone 4: Subscription Management and Paid Subscribers</td>
+<td>As a user, I want to be able to enroll and manage my app subscription.</td>
+<td>Anshul</td>
+</tr>
+<tr>
+<td>As an admin, I want to be able to view paid subscribers.</td>
+<td>Anshul</td>
+</tr>
+<tr>
+<td rowspan="7">Milestone 5: Admin Features and User Management</td>
+<td>As an admin, I want to be able to add news articles to the website.</td>
+<td>Shubhi</td>
+</tr>
+<tr>
+<td>As an admin, I want to be able to manage users</td>
+<td>Shubhi</td>
+</tr>
+<tr>
+<td>As an admin, I want to be able to manage subscription</td>
+<td>Arpita</td>
+</tr>
+<tr>
+<td>As an admin, I want to be able to manage Prefernece</td>
+<td>Arpita</td>
+</tr>
+<tr>
+<td>As an admin, I want to be able to manage news</td>
+<td>Shubhi</td>
+</tr>
+<tr>
+<td>As an admin, I want to be able to view an analytics dashboard to track website traffic and user behavior.</td>
+<td>Anshul</td>
+</tr>
+<td>As a admin, I should to be able fetch news summaries using OpenAI GPT-3.5.</td>
+<td>Kashyap</td>
+</tr>
+
+</tbody>
 </table>
 
 
