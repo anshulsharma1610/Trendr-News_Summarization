@@ -33,6 +33,22 @@ This news application provides a comprehensive news experience for users while o
 <td>Anshul</td>
 </tr>
 <tr>
+<td>As a admin, I want to be able to log in with a unique username and password with Google Sign in.</td>
+<td>Anshul</td>
+</tr>
+ <tr>
+<td>As user & admin, there should be secured Routes for admin and user.</td>
+<td>Anshul</td>
+</tr>
+ <tr>
+<td>As a user, I want to be able to logout.</td>
+<td>Anshul</td>
+</tr>
+ <tr>
+<td>As a developer, there should be a role based access.</td>
+<td>Anshul</td>
+</tr>
+<tr>
 <td>As a user, I want to be able to get and change my preferences for news categories and sources.</td>
 <td>Arpita</td>
 </tr>
@@ -72,6 +88,10 @@ This news application provides a comprehensive news experience for users while o
 <tr>
 <td rowspan="2">Milestone 4: Subscription Management and Paid Subscribers</td>
 <td>As a user, I want to be able to enroll and manage my app subscription.</td>
+<td>Anshul</td>
+</tr>
+ <tr>
+<td>As a admin, stripe webhook should be called to save stripe payment data on database.</td>
 <td>Anshul</td>
 </tr>
 <tr>
