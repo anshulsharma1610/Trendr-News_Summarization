@@ -8,6 +8,7 @@ import { Configuration, OpenAIApi } from 'openai';
 
 import dotenv from 'dotenv';
 
+// function fetches 10 trending news articles with images based on the given query parameters using the Newsdata.io API.
 export const fetchTrendingNews = async (queryParams) => {
     const newsArticles = [];
     let nextPage = null;

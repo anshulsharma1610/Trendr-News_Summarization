@@ -7,6 +7,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+
+// This code creates a new user with the given information, saves it to a database,
+//  generates a JWT token, and sends it with the user data in the response. 
+//  If there's an error, it passes it to the next middleware function.
+
 export const signup = async (req, res, next) => {
     try {
         const { email, password, fname, lname } = req.body;
@@ -19,6 +24,11 @@ export const signup = async (req, res, next) => {
         next(err);
     }
 }
+
+
+// This code logs a user in by checking their credentials, generating a JWT token,
+//  retrieving their subscription details, and sending a response with the user data, 
+//  JWT token, and subscription details. If there's an error, it passes it to the next middleware function.
 
 export const login = async (req, res, next) => {
     try {

@@ -2,6 +2,9 @@ import Bookmark from "../models/bookmark.js";
 import NewsArticleModel from "../models/newsModel.js";
 
 
+// This code defines a service function that toggles a bookmark for a user on a news article, 
+// either creating or deleting the bookmark as needed.
+
 export const toggleBookmark = async (userId, articleId) => {
     console.log("Inside service")
     const bookmark = await Bookmark.findOne({ userId, articleId });
@@ -17,6 +20,9 @@ export const toggleBookmark = async (userId, articleId) => {
         return { bookmarkAdded: true };
     }
 };
+
+// This code defines a service function that retrieves all bookmarks for a specific user,
+//  including the associated news article information.
 
 export const getUserBookmarks = async (userId) => {
     console.log(userId)

@@ -7,6 +7,10 @@ import {
     setnotFound
 } from '../util/statusCodes.js';
 
+// This code defines a function to handle HTTP POST requests for creating a new preference,
+//  checks if the request body contains a preference name, 
+//  saves the preference to the database using a service, 
+//  and returns a successful response with the saved preference object or an error response if there was an error.
 export const post = async (req, res) => {
     try {
         const newPrefernce = req.body;
@@ -20,6 +24,8 @@ export const post = async (req, res) => {
     }
 }
 
+// code exports a function that retrieves all preferences using the preference service and 
+// sends a successful response with the preferences in JSON format, or an error response if an error occurs.
 export const get = async (req, res) => {
     try {
         const preferences = await preferenceService.getAll();
@@ -28,6 +34,9 @@ export const get = async (req, res) => {
         return setErrorResponse(err, res);
     }
 }
+
+// code updates a preference object with a specific id and sends a successful
+//  response if the update was successful, otherwise sends a not found error response.
 
 export const put = async (req, res) => {
     try {
@@ -42,6 +51,10 @@ export const put = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+
+// code exports an asynchronous function that removes a preference object with the given id and sends a 
+// successful response with the removed object if it exists, or a not found response if it does not exist, 
+// and sends an error response if an error occurs.
 
 export const remove = async (req, res) => {
     try {
@@ -58,7 +71,7 @@ export const remove = async (req, res) => {
     }
 }
 
-// get by id
+// code exports an asynchronous function that retrieves a preference document from the database by its ID.
 export const getById = async (id) => {
     try {
         const preference = await Preference.findById(id);

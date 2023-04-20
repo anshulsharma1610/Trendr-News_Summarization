@@ -12,6 +12,7 @@ import LoginForm from './LoginForm';
 
 // ================================|| AUTH - LOGIN ||================================ //
 
+//code defines a login component that renders a login form and some related text and links.
 const Login = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));

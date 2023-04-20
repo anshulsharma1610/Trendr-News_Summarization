@@ -1,26 +1,36 @@
 import NewsArticleModel from '../models/newsModel.js';
 import { isUserSubbed } from '../controllers/user-controller.js';
+
+// asynchronous function that retrieves all news articles from the NewsArticleModel.
 export const getAllNewsArticles = async () => {
     return await NewsArticleModel.find();
 };
 
+// asynchronous function that  retrieves a single news article from the NewsArticleModel by its ID.
 export const getNewsArticleById = async (id) => {
     return await NewsArticleModel.findById(id);
 };
 
+// asynchronous function updates a single news article in the NewsArticleModel 
+// by its ID with the provided updatedData, and returns the updated article
 export const updateNewsArticleById = async (id, updatedData) => {
     return await NewsArticleModel.findByIdAndUpdate(id, updatedData, { new: true });
 };
 
+// asynchronous function that deletes a single news article from the NewsArticleModel by its ID.
 export const deleteNewsArticleById = async (id) => {
     return await NewsArticleModel.findByIdAndDelete(id);
 };
 
+// asynchronous function that creates a new news article in the NewsArticleModel 
+// with the provided newArticleData, and returns the created article.
 export const createNewsArticle = async (newArticleData) => {
     const newArticle = new NewsArticleModel(newArticleData);
     return await newArticle.save();
 };
 
+//asynchronously increments the number of likes of a news article in the 
+// NewsArticleModel by its ID, and returns the updated article.
 export const likeNewsArticleById = async (id) => {
     const article = await NewsArticleModel.findById(id);
     if (!article) {
@@ -30,6 +40,9 @@ export const likeNewsArticleById = async (id) => {
     await article.save();
     return article;
 };
+
+// asynchronous function  adds a comment to a news article in the NewsArticleModel 
+// by its ID, and returns the updated article.
 
 export const addCommentToNewsArticle = async (articleId, commentObj) => {
     const article = await NewsArticleModel.findById(articleId);
@@ -41,6 +54,8 @@ export const addCommentToNewsArticle = async (articleId, commentObj) => {
     return article;
 };
 
+// asynchronous function increments the number of shares of a news article in the
+// NewsArticleModel by its ID, and returns the updated article.
 export const shareNewsArticleById = async (id) => {
     const article = await NewsArticleModel.findById(id);
     if (!article) {
@@ -51,6 +66,8 @@ export const shareNewsArticleById = async (id) => {
     return article;
 };
 
+// asynchronous function adds or removes a like from a news article in the NewsArticleModel by its ID,
+//  based on the user who performed the action, and returns the updated article.
 export const likeOrUnlikeArticle = async (articleId, userId) => {
     const article = await NewsArticleModel.findById(articleId);
     if (!article) {
@@ -100,10 +117,15 @@ export const searchNews = async (categories, keywords, userId) => {
 
 };
 
+// asynchronous function counts the total number of news articles in the NewsArticleModel 
+// and returns the count.
 export const totalNews = async () => {
     const result = await NewsArticleModel.countDocuments();
     return result;
 }
+
+// asynchronous function calculates the total number of likes and comments across all news articles in the
+// using an aggregation pipeline, and returns the result.
 
 export const totalSocials = async () => {
     const pipeline = [

@@ -27,6 +27,8 @@ import AddIcon from '@mui/icons-material/Add';
 
 export default function UserSubscriptions() {
 
+// code defines state variables and functions to handle pagination and 
+//retrieve user preferences using useEffect and async/await.
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
       };
@@ -57,6 +59,9 @@ export default function UserSubscriptions() {
         return {'preferences' : transformedBody};
       } 
 
+      //code defines a function to delete a user preference by ID, 
+      //then reloads the page and calls getAllPreferences to update the list.
+
       const deletePreferences = (id) => {
         userService.deletePrefernce(id);
         window.location.reload();
@@ -76,6 +81,7 @@ export default function UserSubscriptions() {
             setOpen(false);
         };
         
+//code renders a table displaying user preferences with pagination and a dialog box to add new preferences.
 
     return ( <><div>
         {/* <Button variant="contained" size ="small" startIcon={<AddIcon />} onClick={handleClickOpen}>

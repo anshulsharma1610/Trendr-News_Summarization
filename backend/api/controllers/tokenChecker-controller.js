@@ -28,6 +28,9 @@ passport.use(
     )
 );
 
+// code exports a function that authenticates the request using JWT and
+// returns the user details in the response if the user is authenticated, otherwise returns an error response.
+
 export const getDetails = (req, res, next) => {
     console.log("req", req.headers);
     passport.authenticate('jwt', { session: false }, (err, user, info) => {

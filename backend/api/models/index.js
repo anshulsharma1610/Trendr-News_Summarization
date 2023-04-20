@@ -9,6 +9,9 @@ import UserSubscriptions from './userSubscriptons.js';
 dotenv.config()
 mongoose.Promise = Promise;
 
+// code connects to a MongoDB database using the URL from the environment variable DATABASEURL or a default URL 
+// if the variable is not defined, and exports several MongoDB models.
+
 const url = process.env.DATABASEURL || 'mongodb://127.0.0.1/trendr';
 mongoose.connect(url, {
     useNewUrlParser: true,

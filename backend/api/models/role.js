@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
+// code defines a schema for roles, with a single string field for the role name.
 const roleSchema = new mongoose.Schema({
     role: String,
 });
 
+// exports a model for the schema
 const Roles = mongoose.model('Role', roleSchema);
 
 

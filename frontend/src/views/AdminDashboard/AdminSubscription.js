@@ -22,6 +22,10 @@ import AddIcon from '@mui/icons-material/Add';
 import FormSubscription from './FormSubscription.js';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
+
+// This code defines a React component called AdminSubscription, 
+// which manages pagination, chip data, and state of modal for adding or updating a subscription.
+
 export default function AdminSubscription() {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -39,6 +43,8 @@ export default function AdminSubscription() {
       const [isType, setIsType] = useState('Add');
 
 
+
+//handleUpdate 
       const handleUpdate = (data) => {
         setIsType('Update');
         setSubscription(data);
@@ -49,15 +55,25 @@ export default function AdminSubscription() {
         getAllSubscriptions(); 
       }, []);
     
+
+      // The  code defines an asynchronous function named getAllSubscriptions,
+      //  which makes an API call  and sets the response data to the state variable chipData
+
       const getAllSubscriptions = async () => {
         let response = await userService.getAllSubscription();
         setChipData(response.data);
       };
 
+      // This code defines a function deleteSubscription that calls 
+      //  with an id parameter, and then reloads the current window.
+
       const deleteSubscription = (id) => {
         userService.deleteSubscriptions(id);
          window.location.reload();
       };
+
+      // This code defines a function that updates user description,
+      //  reloads the window, and sets modal to closed.
     
       const updateDescription = (id,body) => {
         userService.updateDescriptions(id,body);
@@ -66,26 +82,32 @@ export default function AdminSubscription() {
         
       };
 
-
+      //  code defines a function that adds a subscription for a user  and sets the modal to open.
       const addSubscription =(id, body)=>{
         userService.addSubscriptions(id,body);
        setModalOpen(true);
       };
     
+      //  code defines a function that sets the modal to closed and reloads the window after form data has been updated.
   const afterUpdate = (formData)=>{
     setModalOpen(false);
     window.location.reload();
   
   }
-  
+
+
+  //  code defines a function that sets the modal to closed.
   const closeModal = ()=>{
     setModalOpen(false);
   }
 
 
+  //  code defines a function that sets the modal to closed.
   const handleModalClose = () => {
   setModalOpen(false);
 }
+
+//  code defines a function that updates the state of subscription based on the user's input in the form.
   
   const handleUpdateChange = (event)=>{
       event.preventDefault();
@@ -182,12 +204,16 @@ export default function AdminSubscription() {
       }}
     >
 
+ {/* code renders a React component FormSubscription that displays a subscription form and takes in four props - isType, afterUpdate, updatedSubscription, and closeModal. */}
     <FormSubscription isType={isType}  afterUpdate={afterUpdate} updatedSubscription={updatedSubscription} closeModal={closeModal} /> 
     </Box>
     </div>
    
   </Box>
 </Modal>
+ {/* code renders a React component that displays a table of subscription
+ data and includes several callback functions for adding, updating, and deleting subscription information. */}
+ 
 <Button variant='contained' startIcon={<AddIcon />} size ="small" onClick={addSubscription}>Add Subscription</Button>
 
           <TableContainer component={Paper} style={{ marginTop: '50px'}}>

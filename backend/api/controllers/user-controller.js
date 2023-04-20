@@ -8,6 +8,9 @@ import {
 } from '../util/statusCodes.js';
 import * as userSubscriptionService from '../services/userSubscription-service.js';
 
+
+// An async function that saves the request body as a new user and returns either
+//  a successful response with the new user data or an error response if there was a problem.
 export const post = async (req, res) => {
     try {
         const newUser = req.body;
@@ -23,6 +26,9 @@ export const post = async (req, res) => {
     }
 }
 
+// An asynchronous function that retrieves all users and returns either a 
+// successful response with the user data or an error response if there was a problem.
+
 export const get = async (req, res) => {
     try {
         const users = await userService.getAll();
@@ -31,6 +37,9 @@ export const get = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+
+// An asynchronous function that retrieves a user by their ID and returns either a successful 
+// response with the user data or an error response if there was a problem.
 
 export const getById = async (req, res) => {
     try {
@@ -44,6 +53,9 @@ export const getById = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+
+// code defines an async function that updates a user's information with the
+// provided request body and responds with a success or error response.
 
 export const update = async (req, res) => {
     try {
@@ -63,6 +75,7 @@ export const update = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+// An async function that removes a user with the specified ID and responds with a success or error response.
 
 export const remove = async (req, res) => {
     try {
@@ -76,6 +89,9 @@ export const remove = async (req, res) => {
         setErrorResponse(err, res);
     }
 }
+
+// This below code exports an asynchronous function that retrieves user information, 
+// including their subscription status, using the email provided in the request body.
 
 export const getUserInfo = async (req, res) => {
     try {
@@ -104,6 +120,9 @@ export const getUserInfo = async (req, res) => {
         next(err);
     }
 }
+
+//  code exports an asynchronous function that checks if a user is subscribed
+//  by retrieving their subscription information using their user ID.
 
 export const isUserSubbed = async (id) => {
     let isUserSubbed = await userSubscriptionService.getByUserId(id);

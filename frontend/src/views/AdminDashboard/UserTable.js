@@ -15,6 +15,10 @@ import {
   Box
 } from '@mui/material';
 
+
+// This code defines a functional component  that initializes three state variables using the 
+// useState hook, and fetches data from an API using the useEffect hook when the component mounts.
+
 const UserTable = () => {
   const [userData, setUserData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,6 +29,10 @@ const UserTable = () => {
     getAlluser()
       .then(data => setUserData(data));
   }, []);
+
+
+  // code defines a function handleDelete that sends a DELETE request to an API to delete a user with a specified ID, 
+  // and updates the state to remove the deleted user from the list if the request is successful.
 
   const handleDelete = (id) => {
     // Implement logic for deleting user with specified ID
@@ -53,6 +61,9 @@ const UserTable = () => {
     setCurrentPage(newPage + 1);
   };
   
+  // This code defines a JavaScript object called styles that contains CSS styles for a container, 
+  // table, text field, and button.
+
   const styles = {
     container: {
       display: 'flex',
@@ -80,6 +91,9 @@ const UserTable = () => {
     }
   };
 
+  // code returns a table of user details fetched from an API, 
+  // along with pagination functionality and a button to delete users. 
+  // The component uses Material-UI components and styles defined in a JavaScript object.
 
   return (
     <div style={styles.container}>

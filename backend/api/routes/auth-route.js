@@ -8,30 +8,30 @@ import * as twitterAuthController from '../controllers/twitterAuth-controller.js
 const Router = express.Router();
 
 Router.route('/google')
-    .get(googleAuthController.google)
+    .get(googleAuthController.google) //GET route for initiating Google OAuth authentication.
 
 Router.route('/google/callback')
-    .get(googleAuthController.googleCallback)
+    .get(googleAuthController.googleCallback) //GET route for handling the callback from Google OAuth authentication.
 
 Router.route('/getdetails')
-    .get(tokenCheckerController.getDetails)
+    .get(tokenCheckerController.getDetails) //GET route for retrieving user details after authentication.
 
 Router.route('/signup')
-    .post(basicAuthController.signup)
+    .post(basicAuthController.signup) //POST route for registering a new user.
 
 Router.route('/login')
-    .post(basicAuthController.login)
+    .post(basicAuthController.login) //POST route for user login.
 
 Router.route('/fb')
-    .get(fbAuthController.facebook)
+    .get(fbAuthController.facebook) //GET route for initiating Facebook OAuth authentication.
 
 Router.route('/fb/callback')
-    .get(fbAuthController.facebookCallback)
+    .get(fbAuthController.facebookCallback) //GET route for handling the callback from Facebook OAuth authentication.
 
 Router.route('/twitter')
-    .get(twitterAuthController.twitter)
+    .get(twitterAuthController.twitter) //GET route for initiating Twitter OAuth authentication.
 
 Router.route('/twitter/callback')
-    .get(twitterAuthController.twitterCallback)
+    .get(twitterAuthController.twitterCallback) // GET route for handling the callback from Twitter OAuth authentication.
 
 export default Router;

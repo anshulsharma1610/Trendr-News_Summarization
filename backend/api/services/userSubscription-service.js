@@ -1,26 +1,33 @@
 import UserSubscriptions from '../models/userSubscriptons.js';
 
+
+// An asynchronous function saves a new user subscription to the database
 export const save = async (newSubscription) => {
     const userSubscriptions = new UserSubscriptions(newSubscription);
     return userSubscriptions.save();
 }
 
+// An asynchronous function retrieves all user subscriptions from the database
 export const getAll = async () => {
     return UserSubscriptions.find();
 }
 
+// An asynchronous function pdates a user subscription with the given ID with the given data
 export const update = async (id, updatedUserSubscription) => {
     return UserSubscriptions.findByIdAndUpdate(id, updatedUserSubscription);
 }
 
+// An asynchronous function removes a user subscription with the given ID from the database
 export const remove = async (id) => {
     return UserSubscriptions.findByIdAndRemove(id);
 }
 
+// An asynchronous function retrieves a user subscription with the given ID from the database
 export const getById = async (id) => {
     return UserSubscriptions.findById(id);
 }
 
+// An asynchronous function retrieves up to 5 active user subscriptions for the user with the given ID, sorted by creation date
 export const getByUserId = async (id) => {
     const result = await UserSubscriptions.find({
         userId: id,
@@ -31,6 +38,7 @@ export const getByUserId = async (id) => {
     return result;
 }
 
+// An asynchronous function retrieves the count of active subscribers for the given month and year
 export const activeSubscribers = async (currentYear, month) => {
     const subscriptionCount = await UserSubscriptions.distinct('userId', {
         createdAt: {
@@ -43,7 +51,7 @@ export const activeSubscribers = async (currentYear, month) => {
     });
     return subscriptionCount.length > 0 ? subscriptionCount.length : 0;
 }
-
+// An asynchronous function retrieves the count of all subscriptions (including expired ones) for the given month and year
 export const countAll = async (currentYear, month) => {
     const purchaseCount = await UserSubscriptions.count({
         createdAt: {
@@ -54,6 +62,7 @@ export const countAll = async (currentYear, month) => {
     return purchaseCount != null ? purchaseCount : 0;
 }
 
+// An asynchronous function retrieves the total sales amount for the given month and year
 export const countSales = async (currentYear, month) => {
     const salesCount = await UserSubscriptions.aggregate([
         {
@@ -74,6 +83,7 @@ export const countSales = async (currentYear, month) => {
     return salesCount.length > 0 ? salesCount[0].totalSales : 0;
 }
 
+// An asynchronous function retrieves the sales amount for each subscription ID for the past 6 months
 export const salesBySubId = async () => {
     const currentDate = new Date();
     const sixMonthsAgoDate = new Date();
@@ -111,11 +121,13 @@ export const salesBySubId = async () => {
     return result;
 }
 
+// An asynchronous function retrieves the last 5 user subscriptions added to the database
 export const getLast5 = async () => {
     const result = UserSubscriptions.find().sort({ createdAt: -1 }).limit(5);
     return result;
 }
 
+// An asynchronous function retrieves the total sales amount for each month in the past 6 months
 export const getMonthlySales = async () => {
     const currentDate = new Date();
     const sixMonthsAgoDate = new Date();
@@ -151,6 +163,7 @@ export const getMonthlySales = async () => {
     return result;
 }
 
+// An asynchronous function retrieves the count and percentage of orders for each subscription ID
 export const ordersVsSubs = async () => {
     const pipeline = [
         {
@@ -192,6 +205,8 @@ export const ordersVsSubs = async () => {
     const result = await UserSubscriptions.aggregate(pipeline);
     return result.length > 0 ? result[0].subCounts : 0;
 }
+// asynchronous function  queries a  database to retrieve the 
+//total sales and growth percentages for the past six months, grouped by month and year.
 
 export const getSalesAndGrowth = async () => {
     const currentDate = new Date();

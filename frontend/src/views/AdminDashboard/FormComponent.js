@@ -14,6 +14,8 @@ import { useEffect } from 'react';
 const NEWS_API_URL = "http://localhost:8000/api/news"
 
 
+//  code defines a FormComponet that maintains a form state for collecting news data and updates 
+// the state based on the props passed in.
 
 const FormComponent = (props) => {
   // const [showForm, setShowForm] = useState(false);
@@ -54,6 +56,10 @@ const FormComponent = (props) => {
     }
     setFormData(clData);
   }
+
+  // code defines a  handleOnChange that updates the formData state object 
+  // with new data based on the id and value of the form input element that triggered the onChange event.
+
   const handleOnChange = (event)=>{
     event.preventDefault();
     const id = event.target.id;
@@ -61,6 +67,11 @@ const FormComponent = (props) => {
     updateData[id] = event.target.value;
     setFormData(updateData);
   }
+
+  // The code defines an function handleOnSubmit that prevents the default form submission behavior,
+  //  converts formData to JSON, and updates data with an updateNews call or a POST request to 
+  //  NEWS_API_URL followed by a callback function with the updated form data.
+
   const handleOnSubmit = async (event)=>{
     event.preventDefault();
     const data = JSON.stringify(formData);
@@ -77,6 +88,10 @@ const FormComponent = (props) => {
   
     
   }
+
+  // The code defines an  function updateNews that sends an HTTP PUT request to update an existing news 
+  // item in the backend API, and calls a callback function with the updated form data on success,
+  //  or logs an error message and displays an alert on failure.
   
   const updateNews = async () => {
     try {
@@ -99,9 +114,14 @@ const FormComponent = (props) => {
       alert('Failed to update news');
     }
   }
+
+  //  code defines a function named closeModal that calls a callback function passed in the props to close a modal.
   const closeModal = ()=>{
       props.closeModal();
   }
+  // The code defines an object named styles which contains properties 
+  // representing CSS styles for different components of the UI.
+
   const styles = {
     container: {
       display: 'flex',
@@ -131,6 +151,9 @@ const FormComponent = (props) => {
     }
   };
 
+  // code defines a form for creating news articles with input fields for title, link, 
+  // creator, image URL, category, country, source, and summary, along with submit and cancel buttons.
+  
   return (
     <div style={styles.container}>
     <Box
@@ -155,11 +178,6 @@ const FormComponent = (props) => {
           <TextField style={{ marginLeft:'10px', width:'250px'}} label="country" id="country" onChange={handleOnChange} value={formData.country}/>     
           <TextField style={{marginLeft:'10px', width:'270px'}} label="Source" id="source_id" onChange={handleOnChange} value={formData.source_id}/>    
       </div>
-      
-      {/* <div style={styles.textfield}>
-  <TextField fullWidth label="PubDate" type="date" id="pubDate" onChange={handleOnChange} value={formData.pubDate || new Date().toISOString().slice(0, 10)}/>
-      </div> */}
-
       <div style={styles.textfield}>
           <TextField  rows={10}
         multiline fullWidth  inputProps={{ style: { height: "100px",  textAlign: 'left'},

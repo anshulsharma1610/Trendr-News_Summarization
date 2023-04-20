@@ -2,6 +2,8 @@ import React from "react";
 import { Typography, Box, Button } from "@mui/material";
 import { Link as RouterLink } from 'react-router-dom'
 
+// code defines a component that displays a cancellation message and provides a link to contact support,
+//  along with a button to return to the home page.
 function Cancel() {
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", mt: 5 }}>

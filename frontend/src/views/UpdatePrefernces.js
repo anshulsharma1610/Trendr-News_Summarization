@@ -25,6 +25,8 @@ const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(1.3),
 }));
 
+// functional component called ChipArray that retrieves user preferences and displays 
+// them as a set of chips, and it uses Redux for state management.
 export default function ChipArray() {
   // const id="643879915855ff1fede9af06";
 const  isLoggedIn  = useSelector((state) => {
@@ -50,11 +52,14 @@ if (isLoggedIn){id = useSelector((state) => state.user.user.user._id);
 
 
 
+  // an asynchronous function that sends a GET request to the server to retrieve a list of preferences, 
+  // and then updates the component's state with the retrieved data.
   const getAllPrefernces = async () => {
     let response = await userService.getAllPrefernce();
     setChipData(response.data);
   };
 
+  // function checks if a given chip already exists in the user's preferences and returns a boolean value accordingly.
   const checkExistingPreferences = (chip) => {
     console.log(userPreferences.includes(chip)+ "   "+chip + " matches "+userPreferences  );
  return  userPreferences.includes(chip);
@@ -62,6 +67,8 @@ if (isLoggedIn){id = useSelector((state) => state.user.user.user._id);
 
 const [selectedChips, setSelectedChips] = React.useState([]);
 
+// This function updates the selectedChips and userPreferences state
+//  based on whether a chip is selected or deselected by the user.
 const handleClick = (chip) => () => {
     const isSelected = selectedChips.includes(chip);
     let newSelectedChips = [];
@@ -75,6 +82,7 @@ const handleClick = (chip) => () => {
   };
 
 
+//  This function updates user preferences and navigates to the home page.
 const handleSavePreferences = async () => {
   console.log("selectedChips",transformJSONBody(selectedChips));
   userService.updatePrefernce(id, transformJSONBody(selectedChips));
@@ -151,7 +159,7 @@ function transformJSONBody(body) {
           }
         
           const isExistingPreference = checkExistingPreferences(data._id);
-
+          //code returns a paper component containing a list of chips, with the ability to select and save preferences.
         return (
           <ListItem key={data.key}>
             <Chip

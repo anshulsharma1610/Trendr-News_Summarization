@@ -13,6 +13,9 @@ import stripe from 'stripe';
 
 const stripeInstance = stripe(process.env.STRIPE_SECRET_KEY);
 
+// Asynchronous function which receives a request and response as parameters,
+//  creates a Stripe checkout session with the provided product data, and sends a response with the session ID.
+
 export const post = async (req, res) => {
     const { product } = req.body;
     console.log('-------', product)
@@ -46,6 +49,10 @@ export const post = async (req, res) => {
     console.log("--------before send", session)
     res.json({ id: session.id });
 }
+
+// asynchronous function that retrieves data on a user's payment status using Stripe's API,
+//  saves the user's subscription details to a database if the payment has been made,
+//   and returns the payment status as a JSON object.
 
 export const checkstatus = async (req, res) => {
     console.log('-------check req', req.body)
