@@ -3,6 +3,8 @@
 ## Trendr - Stay ahead of the news 
 
 
+PRESENTATION VIDEO LINK: https://drive.google.com/file/d/1CriVNwXQ9jv1l4hGD8uyttSP9gy1kRMR/view?usp=sharing
+
  ### Project Description: Trendr
 
 This project is a news application that allows users to create an account and log in with a unique username and password. Users can then set and change their preferences for news categories and sources.
@@ -142,4 +144,3 @@ git clone `<use HTTP Link or SSH Link>`
 #### To run Stripe Webhook throught Stripe CLI on local: stripe listen --forward-to localhost:4242/webhook 
 -----------------------------------------------------
 
-PRESENTATION VIDEO LINK: https://drive.google.com/file/d/1CriVNwXQ9jv1l4hGD8uyttSP9gy1kRMR/view?usp=sharing
