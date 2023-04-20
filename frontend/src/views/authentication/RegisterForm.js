@@ -102,7 +102,7 @@ const FirebaseRegister = ({ ...others }) => {
             .then(() => {
                 setSuccessful(true);
                 dispatch(setSnackbar({ message: "Registered Successfully!" }));
-                navigate("/preferences");
+                navigate("/user/preferences");
             })
             .catch(() => {
                 setSuccessful(false);
