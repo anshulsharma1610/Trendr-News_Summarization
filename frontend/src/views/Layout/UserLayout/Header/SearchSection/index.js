@@ -9,9 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Hidden from '@mui/material/Hidden';
-import { useTheme, styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-
 const SearchSection = () => {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const theme = useTheme();
@@ -46,7 +45,6 @@ const SearchSection = () => {
 
     // Handle search
     const handleSearch = () => {
-        const theme = useTheme();
         // Filter out the "Category: " prefix from selected categories
         const selectedCategoriesCleaned = selectedCategories.map((category) => category.replace('Category: ', '').toLowerCase());
 
@@ -59,7 +57,7 @@ const SearchSection = () => {
         })
             .then((response) => {
                 setNews(response.data);
-                navigate('/search', { state: response.data });
+                navigate('/user/search', { state: response.data });
                 // Clear the selectedCategories and keywords states
                 setSelectedCategories([]);
                 setKeywords('');
@@ -84,6 +82,7 @@ const SearchSection = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 width: '100%',
+                // paddingTop: '16px',
             }}
         >
             <Hidden smUp>
@@ -110,35 +109,35 @@ const SearchSection = () => {
                                     onChange={(event) => setKeywords(event.target.value)}
                                     onKeyDown={handleKeyDown}
                                     fullWidth
-                                    sx={{ minWidth: '180px' }}
+
+                                    sx={{ minWidth: '200px' }}
                                 />
                             )}
                         />
                         <IconButton onClick={() => setShowSearchBar(false)} sx={{
                             backgroundColor: '#ede7f6',
-                            padding: '6px',
+                            padding: '8px',
                             borderRadius: '50%',
-                            marginLeft: '4px'
+                            marginLeft: '8px'
                         }}>
-                            <CloseIcon sx={{ color: "#8667C4" }} />
+                            <CloseIcon color="#5e35b1" />
                         </IconButton>
                     </Box>
                 ) : (
                     <Box sx={{ alignSelf: 'flex-start', paddingLeft: '8px' }}>
                         <IconButton onClick={() => setShowSearchBar(true)} sx={{
-                            backgroundColor: '#EDE7F6',
-                            padding: '6px',
+                            backgroundColor: '#ede7f6',
+                            padding: '8px',
                             borderRadius: '50%',
                         }}>
-                            <SearchIcon sx={{ color: "#8667C4" }} />
+                            <SearchIcon color="#5e35b1" />
                         </IconButton>
                     </Box>
                 )}
             </Hidden>
-            <Hidden smDown>
+            <Hidden mdDown>
                 <Autocomplete
                     multiple
-                    color={theme.palette.primary.light}
                     options={categories}
                     value={selectedCategories}
                     onChange={(event, newValue) => {
@@ -152,18 +151,15 @@ const SearchSection = () => {
                         <TextField
                             {...params}
                             variant="outlined"
-                            // color={theme.palette.primary.light}
                             label="Search"
                             placeholder="Categories & Keywords"
                             onChange={(event) => setKeywords(event.target.value)}
                             onKeyDown={handleKeyDown}
                             sx={{
-                                width: selectedCategories.length > 0 ? '90%' : '50%',
-                                minWidth: '450px',
-                                mr: 1,
-                                ml: 1,
-                                [theme.breakpoints.down('md')]: {
-                                    width: '90%',
+                                width: selectedCategories.length > 0 ? '100%' : '50%',
+                                minWidth: '500px',
+                                [theme.breakpoints.down('sm')]: {
+                                    width: '100%',
                                 },
                             }}
                         />
