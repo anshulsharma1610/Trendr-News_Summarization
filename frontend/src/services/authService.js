@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
-const API_URL = process.env.AUTH_API_URL || "http://localhost:8000/auth/";
+const API_URL = process.env.REACT_APP_AUTH_API_URL || "http://localhost:8000/auth/";
 
 const register = (fname, lname, email, password) => {
     return axios.post(API_URL + "signup", {
