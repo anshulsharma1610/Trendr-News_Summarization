@@ -36,7 +36,7 @@ const UserTable = () => {
 
   const handleDelete = (id) => {
     // Implement logic for deleting user with specified ID
-    fetch(`http://localhost:8000/api/users/${id}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/users/${id}`, {
       method: 'DELETE',
     })
     .then(response => {

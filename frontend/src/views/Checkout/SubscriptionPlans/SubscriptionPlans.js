@@ -17,7 +17,7 @@ function SubscriptionPlans() {
     useEffect(() => {
         const fetchPlans = async () => {
             const response = await fetch(
-                "http://localhost:8000/api/subscriptions",
+                `${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/subscriptions`,
                 {
                     method: "GET",
                     headers: {
@@ -52,7 +52,7 @@ function SubscriptionPlans() {
         };
 
         const response = await fetch(
-            "http://localhost:8000/api/checkout",
+            `${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/checkout`,
             {
                 method: "POST",
                 headers: headers,

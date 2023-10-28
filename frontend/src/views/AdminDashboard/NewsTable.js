@@ -62,7 +62,7 @@ const NewsTable = () => {
 
   const handleDelete = (id) => {
     // Implement logic for deleting news with specified ID
-    fetch(`http://localhost:8000/api/news/${id}`, {
+    fetch(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/news/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -93,7 +93,7 @@ const NewsTable = () => {
 
   const updateNews = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/news/${updatedNews._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/news/${updatedNews._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

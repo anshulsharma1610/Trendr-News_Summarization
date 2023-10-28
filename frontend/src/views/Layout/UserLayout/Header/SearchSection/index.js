@@ -34,7 +34,7 @@ const SearchSection = () => {
     }
     // Fetch categories on component mount
     useEffect(() => {
-        axios.get('http://localhost:8000/api/preferences')
+        axios.get(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/preferences`)
             .then((response) => {
                 setCategories(response.data.map((category) => `Category: ${category.prefernceName}`));
             })
@@ -48,7 +48,7 @@ const SearchSection = () => {
         // Filter out the "Category: " prefix from selected categories
         const selectedCategoriesCleaned = selectedCategories.map((category) => category.replace('Category: ', '').toLowerCase());
 
-        axios.get('http://localhost:8000/api/news/search', {
+        axios.get(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/news/search`, {
             params: {
                 userId: userId,
                 categories: selectedCategoriesCleaned.join(','),

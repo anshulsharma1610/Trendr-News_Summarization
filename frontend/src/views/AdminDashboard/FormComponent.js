@@ -11,7 +11,7 @@ import { addNews } from '../fetch.js';
 import axios from "axios";
 import { useEffect } from 'react';
 
-const NEWS_API_URL = "http://localhost:8000/api/news"
+const NEWS_API_URL = `${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/news`
 
 
 //  code defines a FormComponet that maintains a form state for collecting news data and updates 
@@ -95,7 +95,7 @@ const FormComponent = (props) => {
   
   const updateNews = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/news/${formData._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/news/${formData._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

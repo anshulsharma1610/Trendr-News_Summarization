@@ -12,7 +12,7 @@ import axios from "axios";
 import { useEffect } from 'react';
 // import { padding } from '@mui/system';
 
-const Add_Subscription_URL = "http://localhost:8000/api/subscriptions"
+const Add_Subscription_URL = `${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/subscriptions`
 
 
 
@@ -78,7 +78,7 @@ const FormSubscription = (props) => {
   
   const updateNews = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/subscriptions/${formData._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL || 'http://localhost:8000'}/api/subscriptions/${formData._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
