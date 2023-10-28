@@ -7,6 +7,7 @@ import {
     setnotFound
 } from '../util/statusCodes.js';
 import * as preferenceService from '../services/preference-service.js';
+import Tweets from '../models/twitter.js';
 import * as userService from '../services/user-service.js';
 import { query } from 'express';
 
@@ -51,19 +52,18 @@ export const get = async (req, res) => {
         query = 'latest news on world since:' + date;
     }
 
-    await twitter.get('search/tweets', { q: query, count: 17 }, (err, data, response) => {
-        if (err) {
-            setErrorResponse(err, res);
-        } else {
-            setSuccessfulResponse(data, res);
-        }
-    });
-
-    // await twitter.get('search/tweets', { q: 'latest news on sports since:2023-04-11', count: 20 }, (err, data, response) => {
+    // await twitter.get('search/tweets', { q: query, count: 17 }, (err, data, response) => {
     //     if (err) {
     //         setErrorResponse(err, res);
     //     } else {
     //         setSuccessfulResponse(data, res);
     //     }
     // });
+
+    try {
+        const randomTweets = await Tweets.aggregate([{ $sample: { size: 17 } }]);
+        setSuccessfulResponse(randomTweets, res);
+    } catch (error) {
+        setErrorResponse(error, res);
+    }
 }

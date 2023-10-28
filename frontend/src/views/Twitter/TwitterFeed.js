@@ -18,7 +18,7 @@ const TwitterFeed = () => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getTweets(userId);
-            setTweets(response.statuses);
+            setTweets(response);
             setLoading(false);
         };
         fetchData();
@@ -34,7 +34,7 @@ const TwitterFeed = () => {
     return (
         <>
             {tweets.map((tweet) => {
-                console.log('Rendering TweetCard for:', tweet.userHandle); // Debugging log
+                // console.log('Rendering TweetCard for:', tweet.userHandle); // Debugging log
                 const tweetText = tweet.retweeted_status ? tweet.retweeted_status.text : tweet.text;
                 return (
                     <TweetCard

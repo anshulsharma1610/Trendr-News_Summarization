@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import Prefernces from './prefernce.js';
 import Subscriptions from './subscriptions.js';
 import UserSubscriptions from './userSubscriptons.js';
+import Tweet from './twitter.js';
 
 dotenv.config()
 mongoose.Promise = Promise;
@@ -27,5 +28,6 @@ export default {
     Role,
     Prefernces,
     Subscriptions,
-    UserSubscriptions
+    UserSubscriptions,
+    Tweet
 };
