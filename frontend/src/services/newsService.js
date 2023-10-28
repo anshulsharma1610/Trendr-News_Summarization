@@ -1,7 +1,7 @@
 import axios from "axios";
-const NEWS_API_URL = "http://localhost:8000/api/news"
-const BOOKMARK_API_URL = "http://localhost:8000/api/bookmark";
-const TWEETS_API_URL = "http://localhost:8000/api/twitter";
+const NEWS_API_URL = process.env.REACT_APP_NEWS_API_URL || "http://localhost:8000/api/news"
+const BOOKMARK_API_URL = process.env.REACT_APP_BOOKMARK_API_URL || "http://localhost:8000/api/bookmark";
+const TWEETS_API_URL = process.env.REACT_APP_TWITTER_API_URL || "http://localhost:8000/api/twitter";
 
 export const fetchNews = async () => {
     const response = await axios.get(NEWS_API_URL);
