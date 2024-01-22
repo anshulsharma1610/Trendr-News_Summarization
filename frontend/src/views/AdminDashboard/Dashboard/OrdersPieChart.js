@@ -21,6 +21,24 @@ const pieOptions = {
     }]
 };
 
+const getLast6MonthsNames = () => {
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const currentDate = new Date();
+    const last6Months = [];
+
+    for (let i = 0; i < 6; i++) {
+        const monthIndex = (currentDate.getMonth() - i + 12) % 12; // Handle wrapping around to the previous year
+        const monthName = months[monthIndex];
+        last6Months.push(monthName);
+    }
+
+    return last6Months.reverse(); // Reverse the array to have the most recent month first
+};
+
 const OrdersPieChart = (props) => {
     console.log('===', props)
     const theme = useTheme();
@@ -32,13 +50,14 @@ const OrdersPieChart = (props) => {
     const primaryMain = theme.palette.primary.main;
     const successDark = theme.palette.success.dark;
 
-    const [series] = useState([44, 55, 41, 17, 15]);
+    const [purchases] = useState([15, 24, 62, 45, 122, 80]);
 
     const [options, setOptions] = useState(pieOptions);
 
     useEffect(() => {
         setOptions((prevState) => ({
             ...prevState,
+            labels: getLast6MonthsNames(),
             options: {
                 chart: {
                     type: 'donut',
@@ -60,7 +79,7 @@ const OrdersPieChart = (props) => {
 
     return (
         <div id="chart">
-            <ReactApexChart options={options} series={series} type="donut" />
+            <ReactApexChart options={options} series={purchases} type="donut" />
         </div>
     );
 }

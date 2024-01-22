@@ -167,7 +167,8 @@ const Dashboard = () => {
                     </List>
                 </MainCard>
             </Grid>
-            {/* <Grid item xs={12} md={5} lg={4} sx={{ mt: 1 }}>
+            
+            <Grid item xs={12} md={5} lg={4} sx={{ mt: 1 }}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item >
                         <Typography variant="h5">Income Overview</Typography>
@@ -178,31 +179,31 @@ const Dashboard = () => {
                     <Box sx={{ p: 3, pb: 2 }}>
                         <Stack spacing={2}>
                             <Typography variant="h6" color="textSecondary">
-                                This Week Statistics
+                                Last 6 Months Statistics
                             </Typography>
-                            <Typography variant="h3">$7,650</Typography>
+                            <Typography variant="h3">$2,650</Typography>
                         </Stack>
                     </Box>
                     <OrdersPieChart data={analytics[4]?.pieChart} />
                 </MainCard>
-            </Grid> */}
+            </Grid>
 
             {/* row 3 */}
-            <Grid item xs={12} md={7} lg={8}>
+            <Grid item xs={12} md={7} lg={8} sx={{ mt: 1 }}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
                         <Typography variant="h5">Sales Report</Typography>
                     </Grid>
                 </Grid>
-                <MainCard content={false} sx={{ mt: 1.5 }}>
-                    <Box sx={{ pt: 1 }}>
+                <MainCard content={false} sx={{ mt: 2 }}>
+                    <Box sx={{ pt: 4 }}>
                         <GrowthLineColoumn data={analytics[5]?.getSalesAndGrowth} />
                     </Box>
                 </MainCard>
             </Grid>
 
 
-            <Grid item xs={12} md={5} lg={4} sx={{ mt: 1 }}>
+            {/* <Grid item xs={12} md={5} lg={4} sx={{ mt: 1 }}>
                 <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
                         <Typography variant="h5">Transaction History</Typography>
@@ -211,7 +212,8 @@ const Dashboard = () => {
                 {analytics[2]?.prevPurchases.map((item, index) => {
                     return <RecentPurchases key={index} item={item} />
                 })}
-            </Grid>
+            </Grid> */}
+            
             {/* row 4 */}
             <Grid item xs={12} md={12} lg={12}>
                 <Grid container alignItems="center" justifyContent="space-between">

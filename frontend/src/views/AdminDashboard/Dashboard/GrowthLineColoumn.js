@@ -51,13 +51,23 @@ const GrowthLineColoumn = (props) => {
         {
             name: 'Sales',
             type: 'column',
-            data: [23, 50, 41, 11, 27, 13]
+            data: [15, 24, 62, 45, 122, 80]
         }, {
             name: '% change',
             type: 'line',
-            data: [15, 12, -13, 34, -14, 34]
+            data: calculatePercentageGrowth([15, 24, 62, 45, 122, 80])
         },
     ]);
+
+    // Function to calculate percentage growth based on sales data
+    function calculatePercentageGrowth(salesData) {
+        const percentageGrowth = [0];
+        for (let i = 1; i < salesData.length; i++) {
+            const growth = (((salesData[i] - salesData[i - 1]) / salesData[i - 1]) * 100).toFixed(2);
+            percentageGrowth.push(growth);
+        }
+        return percentageGrowth;
+    }
 
     const [options, setOptions] = useState(columnChartOptions);
 
